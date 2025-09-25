@@ -1,0 +1,14 @@
+[0;1;32m●[0m nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Mon 2025-09-08 01:28:06 UTC; 2 weeks 1 days ago
+       Docs: man:nginx(8)
+   Main PID: 442371 (nginx)
+      Tasks: 3 (limit: 2266)
+     Memory: 35.2M
+     CGroup: /system.slice/nginx.service
+             ├─442371 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+             ├─442372 nginx: worker process
+             └─442373 nginx: worker process
+
+Sep 08 01:28:06 polaris-launchpad-main systemd[1]: Starting A high performance web server and a reverse proxy server...
+Sep 08 01:28:06 polaris-launchpad-main systemd[1]: Started A high performance web server and a reverse proxy server.

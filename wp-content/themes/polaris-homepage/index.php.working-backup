@@ -1,0 +1,387 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" 
+  />
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="<?php echo get_template_directory_uri();
+   ?>/globals.css" />
+      <link rel="stylesheet" href="<?php echo get_template_directory_uri();
+   ?>/styleguide.css" />
+      <link rel="stylesheet" href="<?php echo get_template_directory_uri();
+   ?>/style.css?v=<?php echo time(); ?>" />
+    </head>
+    <body>
+      <div class="homepage" data-model-id="603:4711">
+        <div class="hero">
+          <div class="overlap">
+            <div class="ellipse"></div>
+            <img class="rocket-smoke" src="<?php echo 
+  get_template_directory_uri(); ?>/img/rocket-smoke-1-1.png" />
+            <img class="hero-copy" src="<?php echo 
+  get_template_directory_uri(); ?>/img/hero-copy-2.png" />
+            <div class="frame">
+              <p class="text-wrapper">Launch AI Marketing That Truly
+  Understands Your Business.</p>
+              <p class="polaris-launchpad-AI">
+                Polaris Launchpad AI centralises your unique business data
+  to create a &#39;Base Camp&#39; that fuels
+                every AI tool for more effective, on-brand content and
+  strategies.
+              </p>
+              <div class="group">
+                <div class="large-button">
+                  <div class="overlap-group">
+                    <div class="div"></div>
+                    <button class="button">Start 14-Day Free Trial</button>
+                  </div>
+                </div>
+                <p class="p">No payment details required. Set up in
+  minutes.</p>
+              </div>
+            </div>
+            <header class="header">
+              <img class="polaris-logo" src="<?php echo 
+  get_template_directory_uri(); ?>/img/polaris-logo-1.png" />
+              <div class="group-2">
+                <div class="frame-2">
+                  <div class="div-wrapper"><div 
+  class="text-wrapper-2">HOME</div></div>
+                  <div class="div-wrapper"><div 
+  class="text-wrapper-2">FEATURES</div></div>
+                  <div class="div-wrapper"><div 
+  class="text-wrapper-2">PRICING</div></div>
+                  <div class="div-wrapper"><div 
+  class="text-wrapper-2">ABOUT</div></div>
+                  <div class="div-wrapper"><div 
+  class="text-wrapper-2">CONTACT US</div></div>
+                  <div class="div-wrapper"><div 
+  class="text-wrapper-2">BLOG</div></div>
+                </div>
+                <div class="small-button">
+                  <button class="button-2" type="button">Login</button>
+                </div>
+                <div class="button-wrapper"><button class="button-2">Start
+  14-day Free Trial</button></div>
+              </div>
+            </header>
+            <img class="img" src="<?php echo get_template_directory_uri(); 
+  ?>/img/group-249.png" />
+            <img class="group-3" src="<?php echo 
+  get_template_directory_uri(); ?>/img/group-248.png" />
+            <img class="logo-icon-white" src="<?php echo 
+  get_template_directory_uri(); ?>/img/logo-icon-white-1.png" />
+          </div>
+        </div>
+        <div class="marketing-not-easy">
+          <div class="frame-3">
+            <p class="marketing-even-with">Marketing (even with AI)<br />is
+   not easy to get right</p>
+            <div class="frame-4">
+              <div class="frame-5">
+                <img class="vector" src="<?php echo 
+  get_template_directory_uri(); ?>/img/vector.png" />
+                <div class="text-wrapper-3">Generic Content</div>
+                <p class="text-wrapper-4">
+                  You spend time feeding your AI details, but the blog
+  posts and social media updates it creates sound
+                  generic and lack your brand&#39;s unique personality.
+                </p>
+              </div>
+              <div class="frame-5">
+                <div class="group-wrapper"><img class="group-4" src="<?php 
+  echo get_template_directory_uri(); ?>/img/group-269.jpg" /></div>
+                <div class="text-wrapper-3">Inconsistent Voice</div>
+                <p class="text-wrapper-4">
+                  You use one tool for ad copy and another for emails, and
+  they end up with completely different tones,
+                  confusing your customers.
+                </p>
+              </div>
+              <div class="frame-5">
+                <div class="vector-wrapper"><img class="vector-2" 
+  src="<?php echo get_template_directory_uri(); ?>/img/vector-1.png" 
+  /></div>
+                <div class="text-wrapper-3">Repetitive Work</div>
+                <p class="text-wrapper-4">
+                  You find yourself explaining the same core information
+  about your business, your customers, and your
+                  products to every new AI tool you try.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="how-it-works">
+          <div class="overlap-2">
+            <div class="ellipse-2"></div>
+            <img class="rectangle-2" src="<?php echo 
+  get_template_directory_uri(); ?>/img/rectangle-4.png" />
+            <img class="image-2" src="<?php echo 
+  get_template_directory_uri(); ?>/img/image-2-1.png" />
+            <img class="group-5" src="<?php echo 
+  get_template_directory_uri(); ?>/img/group-270.png" />
+            <p class="text-wrapper-5">A Smarter Foundation for Your AI in
+  Three Steps.</p>
+            <div class="group-6">
+              <div class="overlap-group-2">
+                <img class="vector-3" src="<?php echo 
+  get_template_directory_uri(); ?>/img/vector-7.png" />
+                <div class="ellipse-3"></div>
+                <div class="ellipse-4"></div>
+                <div class="ellipse-5"></div>
+              </div>
+              <img class="logo-icon-white-2" src="<?php echo 
+  get_template_directory_uri(); ?>/img/logo-icon-white-1-1.png" />
+            </div>
+            <div class="group-7">
+              <div class="text-wrapper-6">Build Your Base Camp</div>
+              <p class="text-wrapper-7">
+                We guide you through centralising your key business
+  knowledge. Our Smart Crawler helps by automatically
+                finding information from your website and the wider
+  internet to get you started.
+              </p>
+              <img class="line" src="<?php echo 
+  get_template_directory_uri(); ?>/img/line-20.svg" />
+              <div class="overlap-group-wrapper">
+                <div class="overlap-group-3"><div 
+  class="text-wrapper-8">1</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="core-benefits">
+          <div class="group-8">
+            <div class="frame-6">
+              <div class="frame-7">
+                <p class="div-2">
+                  <span class="span">All Your Marketing Knowledge, In
+  </span>
+                  <span class="text-wrapper-9">One Place</span>
+                </p>
+                <p class="text-wrapper-10">
+                  Stop repeating yourself. From your brand colours and core
+   values to customer pain points and competitor
+                  insights, your Base Camp keeps all your essential
+  marketing data organised and ready. This ensures
+                  consistency across every piece of AI-generated content.
+                </p>
+              </div>
+              <div class="frame-7">
+                <p class="div-2">
+                  <span class="span">Let Our Smart Crawler Do the </span>
+                  <span class="text-wrapper-9">Heavy Lifting</span>
+                </p>
+                <p class="text-wrapper-10">
+                  Getting started is simple. Just provide your website URL
+  along with some of your competitors URLs, and
+                  our crawler will help find and populate your profile with
+   key text, social media links, and other
+                  publicly available information, saving you hours of
+  manual data entry.
+                </p>
+              </div>
+            </div>
+            <div class="frame-8">
+              <div class="frame-7">
+                <p class="div-2">
+                  <span class="span">Develop a<br /></span> <span 
+  class="text-wrapper-9">Unique Voice</span>
+                </p>
+                <p class="text-wrapper-10">
+                  Move beyond generic AI tones. Our unique Brand Voice
+  Inspirations engine helps you define a distinctive
+                  personality, allowing you to generate content that sounds
+   authentically yours and connects with your
+                  audience.
+                </p>
+              </div>
+              <div class="frame-7">
+                <p class="div-2">
+                  <span class="span">Generate AI Content That </span> <span
+   class="text-wrapper-9">Actually Works</span>
+                </p>
+                <p class="text-wrapper-10">
+                  Use your completed Base Camp to power our suite of
+  applications, including a LinkedIn Post Generator and
+                  Instagram &amp; Facebook Post Builder. Create marketing
+  materials that are not just well-written, but
+                  are strategically aligned with your business goals and
+  customer needs.
+                </p>
+              </div>
+            </div>
+            <div class="market-knowledge-wrapper"><img class="img-2" 
+  src="<?php echo get_template_directory_uri(); 
+  ?>/img/market-knowledge-1.png" /></div>
+            <div class="voice-wrapper"><img class="img-2" src="<?php echo 
+  get_template_directory_uri(); ?>/img/voice-1.png" /></div>
+            <div class="crawler-wrapper"><img class="img-2" src="<?php echo
+   get_template_directory_uri(); ?>/img/crawler-1.png" /></div>
+            <div class="logo-icon-white-wrapper"><img 
+  class="logo-icon-white-3" src="<?php echo get_template_directory_uri(); 
+  ?>/img/logo-icon-white-2.png" /></div>
+          </div>
+        </div>
+        <div class="fuel">
+          <div class="group-9">
+            <p class="div-3">
+              <span class="text-wrapper-11">Fuel Your Launchpad for </span>
+              <span class="text-wrapper-12">Maximum Performance</span>
+            </p>
+            <p class="the-more">
+              The more comprehensive your business data, the more
+  intelligent and effective your AI becomes. Our
+              &#39;Launchpad Fuel&#39; indicator gives you a clear, visual
+  guide to your data completeness, motivating you
+              to build a powerful foundation that delivers the best
+  possible marketing results.
+            </p>
+          </div>
+          <img class="mask-group" src="<?php echo 
+  get_template_directory_uri(); ?>/img/mask-group.png" />
+          <img class="fuel-tank" src="<?php echo 
+  get_template_directory_uri(); ?>/img/fuel-tank-5-1.png" />
+        </div>
+        <div class="founder">
+          <div class="overlap-3">
+            <img class="vector-4" src="<?php echo 
+  get_template_directory_uri(); ?>/img/vector-2.svg" />
+            <img class="vector-5" src="<?php echo 
+  get_template_directory_uri(); ?>/img/vector-3.svg" />
+            <img class="vector-6" src="<?php echo 
+  get_template_directory_uri(); ?>/img/vector-4.svg" />
+            <div class="group-10">
+              <p class="div-3">
+                <span class="text-wrapper-11">A Tool Built for Small
+  Business Owners, by </span>
+                <span class="text-wrapper-12">People Who Understand
+  Them</span>
+              </p>
+              <p class="as-someone-with">
+                <span class="text-wrapper-13"
+                  >"As someone with years of experience in digital
+  marketing, I see countless small businesses struggle to
+                  get marketing right for their unique brand. I created
+  Polaris Launchpad AI to solve this problem – to
+                  provide a simple, powerful foundation that allows any
+  business to harness the true potential of AI. Our
+                  goal is to empower you with tools that deliver clear,
+  measurable results and support your sustainable
+                  growth."<br /><br /><br
+                /></span>
+                <span class="text-wrapper-14">– Joel Chudleigh, Founder,
+  Polaris Launchpad AI</span>
+              </p>
+            </div>
+            <img class="vector-7" src="<?php echo 
+  get_template_directory_uri(); ?>/img/vector-8.svg" />
+            <img class="logo-icon" src="<?php echo 
+  get_template_directory_uri(); ?>/img/logo-icon-1.png" />
+            <img class="element" src="<?php echo 
+  get_template_directory_uri(); ?>/img/2asdf-1.png" />
+          </div>
+        </div>
+        <div class="CTA">
+          <div class="overlap-4">
+            <div class="group-11">
+              <p class="text-wrapper-15">Ready to See the Difference Better
+   Data Makes?</p>
+              <p class="stop-getting-generic">
+                Stop getting generic results. Start generating AI marketing
+   content that is deeply informed by your<br />unique
+                business, brand, and customers. It takes just minutes to
+  get started.
+              </p>
+              <div class="group-12">
+                <div class="large-button">
+                  <div class="overlap-group">
+                    <div class="div"></div>
+                    <div class="text-wrapper-16">Start 14-Day Free
+  Trial</div>
+                  </div>
+                </div>
+                <p class="text-wrapper-17">No payment details required. Set
+   up in minutes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="overlap-5">
+            <div class="overlap-6">
+              <img class="rocket-smoke-2" src="<?php echo 
+  get_template_directory_uri(); ?>/img/rocket-smoke-1-1.png" />
+              <img class="group-13" src="<?php echo 
+  get_template_directory_uri(); ?>/img/group-249-1.png" />
+              <img class="group-14" src="<?php echo 
+  get_template_directory_uri(); ?>/img/group-248-1.png" />
+              <img class="logo-icon-white-4" src="<?php echo 
+  get_template_directory_uri(); ?>/img/logo-icon-white-1-2.png" />
+              <p class="element-www-polaris">
+                <span class="text-wrapper-18">© 2025</span>
+                <span class="text-wrapper-19">&nbsp;</span>
+                <span 
+  class="text-wrapper-18">www.polaris-launchpad.com</span>
+              </p>
+              <div class="group-15">
+                <div class="overlap-group-4">
+                  <div class="frame-9"><div class="text-wrapper-20">Terms
+  of Service</div></div>
+                  <div class="frame-10"><div 
+  class="text-wrapper-20">Privacy Policy</div></div>
+                  <div class="text-wrapper-21">|</div>
+                </div>
+              </div>
+            </div>
+            <img class="polaris-logo-2" src="<?php echo 
+  get_template_directory_uri(); ?>/img/polaris-logo-1-1.png" />
+            <div class="group-16">
+              <div class="group-17">
+                <div class="text-wrapper-22">Customers</div>
+                <div class="group-18">
+                  <p class="text-wrapper-23">
+                    Ecommerce <br />Real Estate Agents <br />Travel Agents
+  and Businesses <br />Nonprofits <br />Local
+                    Services <br />Education
+                  </p>
+                  <p class="fitness-life-coaches">
+                    Fitness &amp; Life Coaches <br />Agency <br />Freelance
+   <br />Creators <br />Startups
+                  </p>
+                </div>
+              </div>
+              <div class="group-19">
+                <div class="text-wrapper-22">What you can do</div>
+                <div class="group-20">
+                  <p class="text-wrapper-23">
+                    Rank #1 on SEO <br />Get more followers on social media
+   <br />Get started with online marketing
+                    <br />Learn how to use AI <br />Collaborate with your
+  team <br />Engage with customers
+                  </p>
+                  <p class="produce-great-ads">
+                    Produce great ads <br />Sell your products online <br 
+  />AI Brand Voice <br />AI Brand Style <br />AI
+                    Blog Post Generator <br />AI Images
+                  </p>
+                </div>
+              </div>
+              <div class="group-21">
+                <div class="text-wrapper-22">Company</div>
+                <div class="pricing-customer-wrapper">
+                  <p class="text-wrapper-23">
+                    Pricing <br />Customer Stories <br />About Polaris
+  Launchpad <br />Polaris Launchpad&#39;s Team
+                  </p>
+                </div>
+              </div>
+            </div>
+            <img class="socmed" src="<?php echo 
+  get_template_directory_uri(); ?>/img/socmed-1.png" />
+          </div>
+        </footer>
+      </div>
+    </body>
+  </html>

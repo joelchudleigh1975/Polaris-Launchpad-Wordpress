@@ -1,0 +1,75 @@
+ <?php
+  // Prevent direct access
+  if (!defined('ABSPATH')) {
+      exit;
+  }
+
+  // Register Polaris Block Category
+  function polaris_block_categories($categories) {
+      return array_merge(
+          $categories,
+          array(
+              array(
+                  'slug'  => 'polaris-blocks',
+                  'title' => 'Polaris Blocks',
+                  'icon'  => 'star-filled',
+              ),
+          )
+      );
+  }
+  add_filter('block_categories_all', 'polaris_block_categories', 10, 2);
+
+  // Enqueue block editor assets
+  function polaris_enqueue_block_editor_assets() {
+      wp_enqueue_script(
+          'polaris-header-block',
+          get_template_directory_uri() . '/header-block.js',
+          array('wp-blocks', 'wp-element', 'wp-block-editor'),
+          '1.0.0',
+          true
+      );
+  }
+  add_action('enqueue_block_editor_assets',
+  'polaris_enqueue_block_editor_assets');
+
+  // Register Header Block
+  function polaris_header_block_init() {
+      register_block_type('polaris/header', array(
+          'render_callback' => 'polaris_header_block_render',
+          'attributes' => array()
+      ));
+  }
+  add_action('init', 'polaris_header_block_init');
+
+  function polaris_header_block_render($attributes) {
+      ob_start();
+      ?>
+      <header class="header polaris-header-block">
+          <img class="polaris-logo" src="<?php echo
+  get_template_directory_uri(); ?>/img/polaris-logo-1.png" />
+          <div class="group-2">
+              <div class="frame-2">
+                  <div class="div-wrapper"><div class="text-wrapper-2"><a
+  href="<?php echo home_url('/'); ?>">HOME</a></div></div>
+                  <div class="div-wrapper"><div class="text-wrapper-2"><a
+  href="<?php echo home_url('/features'); ?>">FEATURES</a></div></div>
+                  <div class="div-wrapper"><div class="text-wrapper-2"><a
+  href="<?php echo home_url('/pricing'); ?>">PRICING</a></div></div>
+                  <div class="div-wrapper"><div class="text-wrapper-2"><a
+  href="<?php echo home_url('/about'); ?>">ABOUT</a></div></div>
+                  <div class="div-wrapper"><div class="text-wrapper-2"><a
+  href="<?php echo home_url('/contact'); ?>">CONTACT US</a></div></div>
+                  <div class="div-wrapper"><div class="text-wrapper-2"><a
+  href="<?php echo home_url('/blog'); ?>">BLOG</a></div></div>
+              </div>
+              <button class="small-button"><button class="button-2"><a
+  href="<?php echo home_url('/login'); ?>">Login</a></button></button>
+              <div class="button-wrapper"><button class="button-2"><a
+  href="<?php echo home_url('/signup'); ?>">Start 14-day Free
+  Trial</a></button></div>
+          </div>
+      </header>
+      <?php
+      return ob_get_clean();
+  }
+  ?>

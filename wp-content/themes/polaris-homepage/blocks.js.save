@@ -1,0 +1,603 @@
+console.log('Polaris blocks.js is loading');
+console.log('WordPress blocks available:', typeof window.wp.blocks);
+console.log('WordPress blockEditor available:', typeof window.wp.blockEditor);
+
+(function( blocks, element, blockEditor, components ) {
+    // Check if required WordPress objects are available
+    if (!blocks || !element || !blockEditor || !components) {
+        console.error('WordPress block editor dependencies not loaded');
+        return;
+    }
+
+    var el = element.createElement;
+    var useBlockProps = blockEditor.useBlockProps;
+    var InspectorControls = blockEditor.InspectorControls;
+    var PanelBody = components.PanelBody;
+    var TextControl = components.TextControl;
+    var TextareaControl = components.TextareaControl;
+
+    console.log('Registering Polaris blocks...');
+
+    // HEADER BLOCK
+    blocks.registerBlockType('polaris/header', {
+        title: 'Polaris Header',
+        icon: 'admin-site-alt3',
+        category: 'design',
+        attributes: {
+            logoUrl: {
+                type: 'string',
+                default: ''
+            },
+            loginButtonText: {
+                type: 'string',
+                default: 'Login'
+            },
+            trialButtonText: {
+                type: 'string',
+                default: 'Start 14-day Free Trial'
+            }
+        },
+        edit: function(props) {
+            var attributes = props.attributes;
+            var setAttributes = props.setAttributes;
+
+            return el('div', useBlockProps(),
+                el(InspectorControls, {},
+                    el(PanelBody, { title: 'Header Settings' },
+                        el(TextControl, {
+                            label: 'Login Button Text',
+                            value: attributes.loginButtonText,
+                            onChange: function(value) {
+                                setAttributes({ loginButtonText: value });
+                            }
+                        }),
+                        el(TextControl, {
+                            label: 'Trial Button Text',
+                            value: attributes.trialButtonText,
+                            onChange: function(value) {
+                                setAttributes({ trialButtonText: value });
+                            }
+                        })
+                    )
+                ),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        backgroundColor: '#f0f0f0',
+                        border: '2px dashed #ccc',
+                        textAlign: 'center'
+                    }
+                }, 'Polaris Header Block (Preview)')
+            );
+        },
+        save: function() {
+            return null; // Dynamic block, rendered by PHP
+        }
+    });
+
+    console.log('Header block registered');
+
+    // HERO BLOCK
+    blocks.registerBlockType('polaris/hero', {
+        title: 'Polaris Hero Section',
+        icon: 'star-filled',
+        category: 'design',
+        attributes: {
+            title: {
+                type: 'string',
+                default: 'Launch AI Marketing That Truly Understands Your Business.'
+            },
+            subtitle: {
+                type: 'string',
+                default: 'Polaris Launchpad AI centralises your unique business data to create a "Base Camp" that fuels every AI tool for more effective, on-brand content and strategies.'
+            },
+            ctaText: {
+                type: 'string',
+                default: 'Start 14-Day Free Trial'
+            },
+            ctaSubtext: {
+                type: 'string',
+                default: 'No payment details required. Set up in minutes.'
+            },
+            ctaUrl: {
+                type: 'string',
+                default: '/signup'
+            }
+        },
+        edit: function(props) {
+            var attributes = props.attributes;
+            var setAttributes = props.setAttributes;
+
+            return el('div', useBlockProps(),
+                el(InspectorControls, {},
+                    el(PanelBody, { title: 'Hero Settings' },
+                        el(TextareaControl, {
+                            label: 'Title',
+                            value: attributes.title,
+                            onChange: function(value) {
+                                setAttributes({ title: value });
+                            }
+                        }),
+                        el(TextareaControl, {
+                            label: 'Subtitle',
+                            value: attributes.subtitle,
+                            onChange: function(value) {
+                                setAttributes({ subtitle: value });
+                            }
+                        }),
+                        el(TextControl, {
+                            label: 'CTA Button Text',
+                            value: attributes.ctaText,
+                            onChange: function(value) {
+                                setAttributes({ ctaText: value });
+                            }
+                        }),
+                        el(TextControl, {
+                            label: 'CTA Subtext',
+                            value: attributes.ctaSubtext,
+                            onChange: function(value) {
+                                setAttributes({ ctaSubtext: value });
+                            }
+                        }),
+                        el(TextControl, {
+                            label: 'CTA URL',
+                            value: attributes.ctaUrl,
+                            onChange: function(value) {
+                                setAttributes({ ctaUrl: value });
+                            }
+                        })
+                    )
+                ),
+                el('div', {
+                    style: {
+                        background: 'linear-gradient(180deg, rgba(44, 62, 80, 1) 20%, rgba(26, 188, 156, 1) 50%, rgba(208, 243, 236, 1) 100%)',
+                        padding: '40px 20px',
+                        borderRadius: '8px',
+                        color: 'white',
+                        textAlign: 'center',
+                        minHeight: '200px'
+                    }
+                },
+                    el('h1', {
+                        style: {
+                            fontSize: '1.8rem',
+                            marginBottom: '15px',
+                            margin: '0 0 15px 0'
+                        }
+                    }, attributes.title),
+                    el('p', {
+                        style: {
+                            fontSize: '1rem',
+                            marginBottom: '20px',
+                            margin: '0 0 20px 0'
+                        }
+                    }, attributes.subtitle),
+                    el('div', {
+                        style: {
+                            backgroundColor: '#ff6b35',
+                            padding: '10px 20px',
+                            borderRadius: '6px',
+                            display: 'inline-block',
+                            marginBottom: '10px'
+                        }
+                    }, attributes.ctaText),
+                    el('p', {
+                        style: {
+                            fontSize: '0.9rem',
+                            opacity: '0.9',
+                            margin: '10px 0 0 0'
+                        }
+                    }, attributes.ctaSubtext)
+                )
+            );
+        },
+        save: function() {
+            return null; // Dynamic block, rendered by PHP
+        }
+    });
+
+    console.log('Hero block registered');
+
+    // MARKETING NOT EASY BLOCK
+    blocks.registerBlockType('polaris/marketing-not-easy', {
+        title: 'Polaris Marketing Not Easy',
+        icon: 'warning',
+        category: 'design',
+        edit: function() {
+            return el('div', useBlockProps(),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        backgroundColor: '#fff3cd',
+                        border: '2px dashed #ffeaa7',
+                        textAlign: 'center'
+                    }
+                }, 'Marketing Problems Section (Preview)')
+            );
+        },
+        save: function() {
+            return null;
+        }
+    });
+
+    console.log('Marketing Not Easy block registered');
+
+    // HOW IT WORKS BLOCK
+    blocks.registerBlockType('polaris/how-it-works', {
+        title: 'Polaris How It Works',
+        icon: 'list-view',
+        category: 'design',
+        edit: function() {
+            return el('div', useBlockProps(),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        background: 'linear-gradient(90deg, #2c3e50 0%, #1abc9c 100%)',
+                        color: 'white',
+                        border: '2px dashed #1abc9c',
+                        textAlign: 'center'
+                    }
+                }, 'How It Works Section (Preview)')
+            );
+        },
+        save: function() {
+            return null;
+        }
+    });
+
+    console.log('How It Works block registered');
+
+    // CORE BENEFITS BLOCK
+    blocks.registerBlockType('polaris/core-benefits', {
+        title: 'Polaris Core Benefits',
+        icon: 'awards',
+        category: 'design',
+        edit: function() {
+            return el('div', useBlockProps(),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        backgroundColor: '#f8f9fa',
+                        border: '2px dashed #dee2e6',
+                        textAlign: 'center'
+                    }
+                }, 'Core Benefits Section (Preview)')
+            );
+        },
+        save: function() {
+            return null;
+        }
+    });
+
+    console.log('Core Benefits block registered');
+
+    // FUEL BLOCK
+    blocks.registerBlockType('polaris/fuel', {
+        title: 'Polaris Fuel',
+        icon: 'dashboard',
+        category: 'design',
+        edit: function() {
+            return el('div', useBlockProps(),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        backgroundColor: '#e8f5e8',
+                        border: '2px dashed #28a745',
+                        textAlign: 'center'
+                    }
+                }, 'Fuel Tank Section (Preview)')
+            );
+        },
+        save: function() {
+            return null;
+        }
+    });
+
+    console.log('Fuel block registered');
+
+    // FOUNDER BLOCK
+    blocks.registerBlockType('polaris/founder', {
+        title: 'Polaris Founder',
+        icon: 'businessman',
+        category: 'design',
+        edit: function() {
+            return el('div', useBlockProps(),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        backgroundColor: '#e3f2fd',
+                        border: '2px dashed #2196f3',
+                        textAlign: 'center'
+                    }
+                }, 'Founder Testimonial Section (Preview)')
+            );
+        },
+        save: function() {
+            return null;
+        }
+    });
+
+    console.log('Founder block registered');
+
+    // CTA BLOCK
+    blocks.registerBlockType('polaris/cta', {
+        title: 'Polaris CTA',
+        icon: 'megaphone',
+        category: 'design',
+        edit: function() {
+            return el('div', useBlockProps(),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        background: 'linear-gradient(90deg, rgba(44, 62, 80, 1) 0%, rgba(26, 188, 156, 1) 100%)',
+                        color: 'white',
+                        border: '2px dashed #1abc9c',
+                        textAlign: 'center'
+                    }
+                }, 'Call-to-Action Section (Preview)')
+            );
+        },
+        save: function() {
+            return null;
+        }
+    });
+
+    console.log('CTA block registered');
+
+    // FOOTER BLOCK
+    blocks.registerBlockType('polaris/footer', {
+        title: 'Polaris Footer',
+        icon: 'editor-insertmore',
+        category: 'design',
+        edit: function() {
+            return el('div', useBlockProps(),
+                el('div', {
+                    style: {
+                        padding: '20px',
+                        backgroundColor: '#343a40',
+                        color: 'white',
+                        border: '2px dashed #6c757d',
+                        textAlign: 'center'
+                    }
+                }, 'Footer Section (Preview)')
+            );
+        },
+        save: function() {
+            return null;
+        }
+    });
+
+    console.log('Footer block registered');
+    console.log('All Polaris blocks registered successfully');
+
+})(
+    window.wp.blocks,
+    window.wp.element,
+    window.wp.blockEditor,
+    window.wp.components
+);
+ // Header White Block
+  wp.blocks.registerBlockType('polaris/header-white', {
+      title: 'Header - White Background',
+      icon: 'admin-site',
+      category: 'design',
+      edit: function(props) {
+          return wp.element.createElement('div', {
+              style: { padding: '20px', border: '2px dashed #ccc',
+  textAlign: 'center' }
+          }, 'Header - White Background (Inner Pages)');
+      },
+      save: function() {
+          return null; // Rendered by PHP
+      }
+  });
+
+  // Pricing Plans Block
+  wp.blocks.registerBlockType('polaris/pricing-plans', {
+      title: 'Pricing Plans',
+      icon: 'money',
+      category: 'design',
+      edit: function(props) {
+          return wp.element.createElement('div', {
+              style: { padding: '20px', border: '2px dashed #ccc',
+  textAlign: 'center' }
+          }, 'Pricing Plans Section');
+      },
+      save: function() {
+          return null; // Rendered by PHP
+      }
+  });
+
+  // Pricing Fuel Block
+  wp.blocks.registerBlockType('polaris/pricing-fuel', {
+      title: 'Pricing Fuel Section',
+      icon: 'performance',
+      category: 'design',
+      edit: function(props) {
+          return wp.element.createElement('div', {
+              style: { padding: '20px', border: '2px dashed #ccc',
+  textAlign: 'center' }
+          }, 'Fuel Your Launchpad Section');
+      },
+      save: function() {
+          return null; // Rendered by PHP
+      }
+  });
+
+  // Pricing FAQ Block
+  wp.blocks.registerBlockType('polaris/pricing-faq', {
+      title: 'Pricing FAQ',
+      icon: 'editor-help',
+      category: 'design',
+      edit: function(props) {
+          return wp.element.createElement('div', {
+              style: { padding: '20px', border: '2px dashed #ccc',
+  textAlign: 'center' }
+          }, 'Frequently Asked Questions');
+      },
+      save: function() {
+          return null; // Rendered by PHP
+      }
+  });
+
+ // Contact Us Form Block
+  wp.blocks.registerBlockType('polaris/contact-us-form', {
+      title: 'Contact Us Form',
+      icon: 'email-alt',
+      category: 'design',
+      edit: function(props) {
+          return wp.element.createElement('div', {
+              style: { padding: '20px', border: '2px dashed #ccc',
+  textAlign: 'center' }
+          }, 'Contact Us Form Section');
+      },
+      save: function() {
+          return null; // Rendered by PHP
+      }
+  });
+
+ // About Us Block
+    wp.blocks.registerBlockType('polaris/about-us', {
+        title: 'About Us',
+        icon: 'groups',
+        category: 'design',
+        edit: function(props) {
+            return wp.element.createElement('div', {
+                style: {
+                    padding: '20px',
+                    border: '2px dashed #2c3e50',
+                    textAlign: 'center',
+                    backgroundColor: '#f8f9fa'
+                }
+            }, 'About Us Section (Our Background + Our Mission)');
+        },
+        save: function() {
+            return null; // Rendered by PHP
+        }
+    });
+ // Features Section 1 Block
+    wp.blocks.registerBlockType('polaris/features-section1', {
+        title: 'Polaris Features Section 1',
+        icon: 'star-filled',
+        category: 'design',
+        edit: function(props) {
+            return wp.element.createElement('div', {
+                style: {
+                    padding: '20px',
+                    border: '2px dashed #1abc9c',
+                    textAlign: 'center',
+                    backgroundColor: '#e8f6f3'
+                }
+            }, 'Polaris Features Section 1 (Your Business Hub)');
+        },
+        save: function() {
+            return null; // Rendered by PHP
+        }
+    });
+
+    // Features Section 2 Block
+    wp.blocks.registerBlockType('polaris/features-section2', {
+        title: 'Polaris Features Section 2',
+        icon: 'screenoptions',
+        category: 'design',
+        edit: function(props) {
+            return wp.element.createElement('div', {
+                style: {
+                    padding: '20px',
+                    border: '2px dashed #3498db',
+                    textAlign: 'center',
+                    backgroundColor: '#ebf3fd'
+                }
+            }, 'Polaris Features Section 2');
+        },
+        save: function() {
+            return null; // Rendered by PHP
+        }
+    });
+
+    // Features Section 3 Block
+    wp.blocks.registerBlockType('polaris/features-section3', {
+        title: 'Polaris Features Section 3',
+        icon: 'laptop',
+        category: 'design',
+        edit: function(props) {
+            return wp.element.createElement('div', {
+                style: {
+                    padding: '20px',
+                    border: '2px dashed #9b59b6',
+                    textAlign: 'center',
+                    backgroundColor: '#f4ecf7'
+                }
+            }, 'Polaris Features Section 3');
+        },
+        save: function() {
+            return null; // Rendered by PHP
+        }
+    });
+
+    // Features Section 4 Block
+    wp.blocks.registerBlockType('polaris/features-section4', {
+        title: 'Polaris Features Section 4',
+        icon: 'welcome-learn-more',
+        category: 'design',
+        edit: function(props) {
+            return wp.element.createElement('div', {
+                style: {
+                    padding: '20px',
+                    border: '2px dashed #e67e22',
+                    textAlign: 'center',
+                    backgroundColor: '#fdf2e9'
+                }
+            }, 'Polaris Features Section 4 (Learning)');
+        },
+        save: function() {
+            return null; // Rendered by PHP
+        }
+    });
+ // Blog Listing Block
+  wp.blocks.registerBlockType('polaris/blog-listing', {
+      title: 'Blog Listing',
+      icon: 'admin-post',
+      category: 'design',
+      attributes: {
+          postsPerPage: {
+              type: 'number',
+              default: 4
+          }
+      },
+      edit: function(props) {
+          var attributes = props.attributes;
+          var setAttributes = props.setAttributes;
+
+          return wp.element.createElement('div',
+  wp.blockEditor.useBlockProps(),
+              wp.element.createElement(wp.blockEditor.InspectorControls, {},
+                  wp.element.createElement(wp.components.PanelBody, { title:
+   'Blog Settings' },
+                      wp.element.createElement(wp.components.RangeControl, {
+                          label: 'Posts Per Page',
+                          value: attributes.postsPerPage,
+                          onChange: function(value) {
+                              setAttributes({ postsPerPage: value });
+                          },
+                          min: 1,
+                          max: 12
+                      })
+                  )
+              ),
+              wp.element.createElement('div', {
+                  style: {
+                      padding: '20px',
+                      backgroundColor: '#f8f9fa',
+                      border: '2px dashed #dee2e6',
+                      textAlign: 'center'
+                  }
+              }, 'Blog Listing (Preview) - Shows ' + attributes.postsPerPage
+   + ' posts')
+          );
+      },
+      save: function() {
+          return null; // Dynamic block, rendered by PHP
+      }
+  });
+
