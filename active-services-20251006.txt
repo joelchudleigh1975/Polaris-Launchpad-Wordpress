@@ -1,0 +1,4 @@
+  mysql.service               loaded active running MySQL Community Server
+  nginx.service               loaded active running A high performance web server and a reverse proxy server
+  php7.4-fpm.service          loaded active running The PHP 7.4 FastCGI Process Manager
+  php8.4-fpm.service          loaded active running The PHP 8.4 FastCGI Process Manager

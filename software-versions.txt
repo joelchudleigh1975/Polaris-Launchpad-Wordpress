@@ -1,0 +1,7 @@
+PHP 8.4.12 (cli) (built: Aug 29 2025 06:47:47) (NTS)
+Copyright (c) The PHP Group
+Built by Debian
+Zend Engine v4.4.12, Copyright (c) Zend Technologies
+    with Zend OPcache v8.4.12, Copyright (c), by Zend Technologies
+nginx version: nginx/1.18.0 (Ubuntu)
+mysql  Ver 8.0.43-0ubuntu0.22.04.2 for Linux on x86_64 ((Ubuntu))
