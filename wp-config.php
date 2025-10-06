@@ -85,8 +85,8 @@ $table_prefix = 'wp_';
  *
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
+define('WP_DEBUG', false);
+define('WP_DEBUG_LOG', false);
 
 /* Add any custom values between this line and the "stop editing" line. */
 
@@ -103,6 +103,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 
-define("DISALLOW_FILE_EDIT", false);
+define("DISALLOW_FILE_EDIT", true);
 define("WP_HTTP_BLOCK_EXTERNAL", false);
 define("WP_ACCESSIBLE_HOSTS", "polaris-launchpad.com,*.polaris-launchpad.com");
