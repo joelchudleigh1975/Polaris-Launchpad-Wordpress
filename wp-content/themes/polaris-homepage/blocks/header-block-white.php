@@ -72,14 +72,14 @@
                       </div>
 
                       <div class="small-button">
-                          <a href="<?php echo esc_url(home_url('/login'));
+                          <a href="<?php echo esc_url("https://app.polaris-launchpad.com/login");
   ?>" class="button">
                               Login
                           </a>
                       </div>
 
                       <div class="button-wrapper">
-                          <a href="<?php echo esc_url(home_url('/signup'));
+                          <a href="<?php echo esc_url("https://app.polaris-launchpad.com/register");
   ?>" class="button">
                               Start 14-day Free Trial
                           </a>
