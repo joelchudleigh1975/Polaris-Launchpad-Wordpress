@@ -2075,21 +2075,15 @@
     position: relative;
     width: fit-content;
     font-family: "Montserrat", Helvetica;
-    font-weight: 500;
+    font-weight: bold;
     color: var(--dark-grey);
-    font-size: 10px;
+    font-size: 12px;
     text-align: center;
     letter-spacing: 0;
     line-height: 18px;
     white-space: nowrap;
     cursor: pointer;
-
-  .wp-block-polaris-pricing-plans .pricing-page .button:hover {
-    background-color: var(--nebula-teal) !important;
-    color: white !important;
-    transition: all 0.3s ease;
   }
-
 
   .wp-block-polaris-pricing-plans .pricing-page .overlap-group-wrapper {
     top: 0;
@@ -5212,3 +5206,18 @@
   body.privacy-policy .page-content ol {
       list-style-type: decimal !important;
   }
+
+/* Hover effects for pricing buttons */
+.wp-block-polaris-pricing-plans .pricing-page .small-button:hover,
+.wp-block-polaris-pricing-plans .pricing-page .button-wrapper:hover {
+  background-color: var(--nebula-teal) !important;
+  border-radius: 6px !important;
+  transition: all 0.3s ease !important;
+}
+
+.wp-block-polaris-pricing-plans .pricing-page .small-button:hover .button,
+.wp-block-polaris-pricing-plans .pricing-page .button-wrapper:hover .button {
+  color: white !important;
+  font-weight: bold !important;
+  font-size: 12px !important;
+}
