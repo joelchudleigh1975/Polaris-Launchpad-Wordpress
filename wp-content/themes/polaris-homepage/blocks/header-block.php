@@ -84,17 +84,16 @@
               </div>
 
               <div class="small-button">
-                  <a href="<?php echo esc_url(home_url('/login')); ?>"
+                  <a href="https://app.polaris-launchpad.com/login"
   class="button-2">
                       Login
                   </a>
               </div>
 
               <div class="button-wrapper">
-                  <a href="<?php echo esc_url(home_url('/signup')); ?>"
-  class="button-2">
+                  <button id="start-trial-btn" class="button-2" onclick="startTrial()">
                       Start 14-day Free Trial
-                  </a>
+                  </button>
               </div>
           </div>
       </header>
@@ -103,6 +102,57 @@
               </div>
           </div>
       <?php endif; ?>
+
+      <script>
+      async function startTrial() {
+          try {
+              // Show loading state
+              const button = document.getElementById('start-trial-btn');
+              const originalText = button.textContent;
+              button.textContent = 'Starting Trial...';
+              button.disabled = true;
+              
+              // Get user email (you may want to collect this with a modal)
+              const email = prompt('Please enter your email address to start your free trial:');
+              if (!email || !email.includes('@')) {
+                  alert('Please enter a valid email address.');
+                  button.textContent = originalText;
+                  button.disabled = false;
+                  return;
+              }
+              
+              // Create checkout session
+              const response = await fetch('https://app.polaris-launchpad.com/stripe/create-checkout-session', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      plan: 'monthly',
+                      email: email
+                  })
+              });
+              
+              const data = await response.json();
+              
+              if (data.status === 'success' && data.checkout_url) {
+                  // Redirect to Stripe Checkout
+                  window.location.href = data.checkout_url;
+              } else {
+                  throw new Error(data.message || 'Failed to create checkout session');
+              }
+              
+          } catch (error) {
+              console.error('Error starting trial:', error);
+              alert('Sorry, there was an error starting your trial. Please try again or contact support.');
+              
+              // Restore button state
+              const button = document.getElementById('start-trial-btn');
+              button.textContent = originalText;
+              button.disabled = false;
+          }
+      }
+      </script>
 
       <?php
       return ob_get_clean();
