@@ -2128,7 +2128,7 @@
     font-family: "Montserrat", Helvetica;
     font-weight: 500;
     color: var(--white);
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 0;
     line-height: normal;
     text-align: right;
@@ -2503,7 +2503,7 @@
     font-family: "Montserrat", Helvetica;
     font-weight: 400;
     color: #999999;
-    font-size: 10px;
+    font-size: 14px;
     text-align: center;
     letter-spacing: 0;
     line-height: 24px;
@@ -2542,11 +2542,11 @@
   .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-9 {
     position: absolute;
     top: 16px;
-    left: 0;
+    left: 26px;
     font-family: "Montserrat", Helvetica;
     font-weight: 400;
     color: var(--white);
-    font-size: 10px;
+    font-size: 14px;
     text-align: center;
     letter-spacing: 0;
     line-height: 24px;
@@ -2573,9 +2573,9 @@
     top: 151px;
     left: 292px;
     font-family: var(--polaris-small-text-regular-font-family);
-    font-weight: var(--polaris-small-text-regular-font-weight);
+    font-weight: bold;
     color: var(--dark-grey);
-    font-size: var(--polaris-small-text-regular-font-size);
+    font-size: 16px;
     text-align: center;
     letter-spacing: var(--polaris-small-text-regular-letter-spacing);
     line-height: var(--polaris-small-text-regular-line-height);
