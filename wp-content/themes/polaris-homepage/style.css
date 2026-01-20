@@ -2083,7 +2083,13 @@
     line-height: 18px;
     white-space: nowrap;
     cursor: pointer;
+
+  .wp-block-polaris-pricing-plans .pricing-page .button:hover {
+    background-color: var(--nebula-teal) !important;
+    color: white !important;
+    transition: all 0.3s ease;
   }
+
 
   .wp-block-polaris-pricing-plans .pricing-page .overlap-group-wrapper {
     top: 0;
