@@ -45,14 +45,14 @@
                       <div class="frame">
                           <!-- MONTHLY CARD -->
                           <div class="div">
-                              <div class="small-button"><button
-  class="button">Start Free Trial</button></div>
+                              <div class="small-button"><a
+  class="button" href="https://app.polaris-launchpad.com/register">Start Free Trial</a></div>
                               <div class="overlap-group-wrapper">
                                   <div class="overlap-group">
                                       <div
   class="text-wrapper">Monthly</div>
                                       <div
-  class="text-wrapper-2">£49.99/month</div>
+  class="text-wrapper-2">£99.99/month</div>
                                   </div>
                               </div>
                               <div class="features-list">
@@ -115,14 +115,14 @@
 
                           <!-- ANNUAL CARD -->
                           <div class="div">
-                              <div class="button-wrapper"><button
-  class="button">Start Free Trial</button></div>
+                              <div class="button-wrapper"><a
+  class="button" href="https://app.polaris-launchpad.com/register">Start Free Trial</a></div>
                               <div class="overlap-group-wrapper">
                                   <div class="overlap-group-5">
                                       <div
   class="text-wrapper">Annually</div>
                                       <div
-  class="text-wrapper-2">£39.99/month but paid annually</div>
+  class="text-wrapper-2">£999/year</div>
                                   </div>
                               </div>
                               <div class="features-list">
@@ -190,22 +190,20 @@
                                   <div class="text-wrapper-6">Monthly Pro
   Plan</div>
                                   <div
-  class="text-wrapper-7">£49.99/month</div>
+  class="text-wrapper-7">£99.99/month</div>
                               </div>
                           </div>
                           <div class="group-18">
                               <div class="overlap-5">
                                   <div class="text-wrapper-8">Annual Pro
   Plan</div>
-                                  <div class="text-wrapper-9">£39.99/month
-  paid annually</div>
+                                  <div class="text-wrapper-9">£999/year</div>
                               </div>
                           </div>
                       </div>
                       <p class="text-wrapper-10">Let your aspirations point
   towards the sky</p>
-                      <p class="text-wrapper-11">Save 25% monthly with
-  annual billing</p>
+                      <p class="text-wrapper-11">Save 20% with annual pricing</p>
                   </div>
               </div>
           </div>
