@@ -3891,7 +3891,408 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ---
 
-#### Current Partial Mobile CSS (lines 5529-5699):
+## 🎯 CALL-TO-ACTION SECTION ANALYSIS
+
+### Visual Component Identification
+Based on code analysis of `cta-block.php`, the Call-to-Action Section (gradient background) contains these components:
+
+#### Component 1: Gradient Background System
+- **Current Structure**: Dual-layer gradient with background image overlay
+- **Elements**: 
+  - Primary gradient: Dark blue to teal (`linear-gradient(90deg, rgba(44, 62, 80, 1) 0%, rgba(26, 188, 156, 1) 100%)`)
+  - Overlay gradient with pattern: Semi-transparent overlay with texture (`image-2.png`)
+- **Current CSS**: Lines 1034-1056 - fixed width and height
+- **Issues**: Fixed 1440px width, absolute overlay positioning
+
+#### Component 2: Content Container
+- **Current Structure**: Centered text content with heading, description, and CTA button
+- **Content**:
+  - Heading: "Ready to See the Difference Better Data Makes?"
+  - Description: Marketing copy about AI-generated content
+  - CTA Button: "Start 14-Day Free Trial"
+  - Subtext: "No payment details required. Set up in minutes."
+- **Current CSS**: Lines 1060-1132 - absolute positioning throughout
+- **Issues**: Fixed positioning, non-responsive typography, fixed button positioning
+
+#### Component 3: CTA Button System  
+- **Current Structure**: Large prominent button with subtext
+- **Elements**: Button wrapper with overlap styling and descriptive subtext
+- **Current CSS**: Lines 1098-1132 - absolute positioned button group
+- **Issues**: Fixed button dimensions, absolute positioning breaks mobile interaction
+
+### Current Problems Analysis
+
+#### Desktop CSS Issues (Lines 1034-1132)
+1. **Fixed Container Width**: `.CTA` set to 1440px (line 1036)
+2. **Absolute Overlay Positioning**: Background overlay uses fixed positioning  
+3. **Absolute Content Positioning**: All text and button elements positioned absolutely
+4. **Fixed Button Dimensions**: CTA button group has fixed width and positioning
+5. **Non-Responsive Typography**: Text sizing doesn't adapt to screen size
+
+#### Mobile Incompatibility
+1. **No Responsive Design**: No mobile-specific CSS exists
+2. **Content Overlap**: Absolute positioning will cause content overlap
+3. **Button Usability**: Fixed button positioning breaks mobile interaction
+4. **Typography Issues**: Large text will be unreadable on mobile
+5. **Background Problems**: Complex background system needs mobile optimization
+
+### Responsive Strategy: Component Transformation
+
+#### Desktop → Mobile Transformation Plan
+**Desktop**: Wide centered content with horizontal layout
+**Mobile**: Vertical stacking with prominent mobile-optimized CTA
+
+#### Mobile Component Stack (Top → Bottom)
+1. **Main Heading** - Responsive typography, center-aligned
+2. **Description Text** - Mobile-optimized line spacing and sizing
+3. **CTA Button** - Large, touch-friendly, prominently positioned
+4. **Subtext** - Clear, readable supporting text
+5. **Simplified Background** - Mobile-optimized gradient without complex overlays
+
+### Three-Phase Implementation Plan
+
+#### Phase 1: Desktop CSS Foundation Fixes
+**Target**: Convert absolute positioning to flexible layout
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+
+**Step 1.1: Container Flexibility (Lines 1034-1042)**
+```css
+/* REPLACE CURRENT */
+.homepage .CTA {
+  position: relative;
+  width: 1440px; /* ← REMOVE FIXED WIDTH */
+  height: 379px;
+  margin-top: -1px;
+  background: linear-gradient(90deg, rgba(44, 62, 80, 1) 0%, rgba(26, 188, 156, 1) 100%);
+}
+
+/* WITH RESPONSIVE */
+.homepage .CTA {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 379px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, rgba(44, 62, 80, 1) 0%, rgba(26, 188, 156, 1) 100%);
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+```
+
+**Step 1.2: Background Overlay Flexibility (Lines 1044-1056)**  
+```css
+/* REPLACE CURRENT */
+.homepage .overlap-4 {
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  top: 0;
+  left: 0;
+  width: 1440px; /* ← REMOVE FIXED WIDTH */
+  height: 379px;
+  background: linear-gradient(90deg, rgba(44, 62, 80, 0.5) 0%, rgba(26, 188, 156, 0.5) 100%), url(./img/image-2.png);
+  background-size: cover, cover;
+  background-position: 50% 50%, 50% 50%;
+}
+
+/* WITH RESPONSIVE */
+.homepage .overlap-4 {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  background: linear-gradient(90deg, rgba(44, 62, 80, 0.3) 0%, rgba(26, 188, 156, 0.3) 100%), url(./img/image-2.png);
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+```
+
+**Step 1.3: Content Layout Flexibility (Lines 1060-1132)**
+```css
+/* REPLACE CURRENT */
+.homepage .group-11 {
+  position: relative; /* ← KEEP RELATIVE BUT REMOVE FIXED DIMENSIONS */
+  width: 1042px; /* ← REMOVE FIXED WIDTH */
+  height: 259px;
+  top: 60px;
+  left: 201px; /* ← REMOVE FIXED POSITIONING */
+}
+
+/* WITH RESPONSIVE */
+.homepage .group-11 {
+  position: relative;
+  width: 100%;
+  max-width: 1042px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  padding: 60px 40px;
+}
+```
+
+#### Phase 2: Mobile Component Stacking (Add New CSS)
+**Target**: Create mobile-first CTA layout
+**Location**: Add after line 1132 in style.css
+
+```css
+/* =============================== */
+/* CTA SECTION - MOBILE RESPONSIVE */
+/* =============================== */
+
+@media screen and (max-width: 768px) {
+  .homepage .CTA {
+    min-height: auto;
+    padding: 60px 20px;
+  }
+  
+  .homepage .overlap-4 {
+    background: linear-gradient(90deg, rgba(44, 62, 80, 0.8) 0%, rgba(26, 188, 156, 0.8) 100%);
+    border-radius: 8px;
+  }
+  
+  .homepage .group-11 {
+    padding: 40px 20px;
+    gap: 25px;
+  }
+  
+  /* Mobile heading */
+  .homepage .text-wrapper-15 {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: var(--polaris-mobile-h1-font-size);
+    line-height: var(--polaris-mobile-h1-line-height);
+    text-align: center;
+  }
+  
+  /* Mobile description */
+  .homepage .stop-getting-generic {
+    position: static;
+    width: 100%;
+    font-size: var(--polaris-mobile-medium-text-font-size);
+    line-height: var(--polaris-mobile-medium-text-line-height);
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Mobile CTA button group */
+  .homepage .group-12 {
+    position: static;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* Mobile button styling */
+  .homepage .large-button {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    min-height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .homepage .large-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .homepage .text-wrapper-16 {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 56px;
+    font-size: var(--polaris-mobile-medium-text-font-size);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0 20px;
+  }
+  
+  /* Mobile subtext */
+  .homepage .text-wrapper-17 {
+    position: static;
+    font-size: var(--polaris-mobile-small-text-font-size);
+    line-height: var(--polaris-mobile-small-text-line-height);
+    text-align: center;
+    opacity: 0.9;
+    white-space: normal;
+  }
+  
+  /* Mobile CTA animations */
+  .homepage .group-11 > * {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .homepage .text-wrapper-15 { animation-delay: 0.2s; }
+  .homepage .stop-getting-generic { animation-delay: 0.4s; }
+  .homepage .group-12 { animation-delay: 0.6s; }
+}
+
+@media screen and (max-width: 480px) {
+  .homepage .CTA {
+    padding: 40px 15px;
+  }
+  
+  .homepage .group-11 {
+    padding: 30px 15px;
+    gap: 20px;
+  }
+  
+  .homepage .text-wrapper-15 {
+    font-size: var(--polaris-mobile-small-h1-font-size);
+  }
+  
+  .homepage .large-button {
+    max-width: 280px;
+    min-height: 50px;
+  }
+  
+  .homepage .text-wrapper-16 {
+    height: 50px;
+    font-size: var(--polaris-mobile-small-text-font-size);
+  }
+}
+```
+
+#### Phase 3: Advanced Mobile Enhancements  
+**Target**: Add interactive elements and accessibility
+
+**Step 3.1: Enhanced Mobile Button Interactions**
+```css
+/* Advanced mobile CTA styling */
+@media screen and (max-width: 768px) {
+  .homepage .large-button {
+    background: linear-gradient(45deg, var(--flare-orange), #e67e22);
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .homepage .large-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .homepage .large-button:hover::before {
+    left: 100%;
+  }
+  
+  .homepage .large-button:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  /* Accessibility improvements */
+  .homepage .text-wrapper-16:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+  }
+  
+  /* Pulse effect for emphasis */
+  .homepage .large-button {
+    animation: ctaPulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes ctaPulse {
+    0%, 100% { 
+      box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+    }
+    50% { 
+      box-shadow: 0 6px 25px rgba(243, 156, 18, 0.5);
+    }
+  }
+}
+```
+
+**Step 3.2: Mobile-Specific JavaScript Enhancement (Optional)**
+```javascript
+// Add to cta-block.php for enhanced interaction
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 768) {
+    const ctaButton = document.querySelector('.homepage .text-wrapper-16');
+    const ctaSection = document.querySelector('.homepage .CTA');
+    
+    if (ctaButton && ctaSection) {
+      // Enhanced click tracking
+      ctaButton.addEventListener('click', function(e) {
+        // Add click animation
+        const button = e.target.closest('.large-button');
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          button.style.transform = '';
+        }, 150);
+      });
+      
+      // Intersection observer for scroll-based animation trigger
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, { threshold: 0.3 });
+      
+      observer.observe(ctaSection);
+    }
+  }
+});
+```
+
+### Testing Checklist
+
+#### Desktop Testing (1200px+)
+- [ ] Section maintains gradient background properly
+- [ ] Content centered and properly aligned
+- [ ] CTA button displays prominently
+- [ ] Typography maintains proper hierarchy
+- [ ] Background overlay renders correctly
+- [ ] Button hover effects work smoothly
+
+#### Tablet Testing (768px-1199px)  
+- [ ] Layout scales down proportionally
+- [ ] Content remains centered and readable
+- [ ] CTA button remains prominent and touchable
+- [ ] Background gradients maintain quality
+- [ ] Touch interactions work properly
+
+#### Mobile Testing (320px-767px)
+- [ ] Content stacks vertically in logical order
+- [ ] Heading uses mobile typography variables
+- [ ] CTA button is prominently displayed and touch-friendly
+- [ ] Button animations enhance user experience
+- [ ] Subtext clearly readable
+- [ ] Background simplified but still attractive
+- [ ] Touch targets appropriately sized (minimum 44px)
+- [ ] Content readable without horizontal scrolling
+
+#### Cross-Device Testing
+- [ ] Layout transitions smoothly between breakpoints
+- [ ] Typography scales appropriately
+- [ ] CTA button remains functional across devices
+- [ ] Gradient backgrounds consistent
+- [ ] Interactive elements work across touch and mouse
+- [ ] Accessibility features function properly
+
+**STATUS**: ✅ Complete - Call-to-Action Section component breakdown and responsive plan ready
+
+---
 ```css
 /* Mobile Pricing Plans */
 .wp-block-polaris-pricing-plans .pricing-page {
