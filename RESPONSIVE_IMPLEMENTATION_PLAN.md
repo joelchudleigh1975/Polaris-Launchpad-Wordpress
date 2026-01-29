@@ -1741,9 +1741,991 @@ Based on the visual design, the hero block has these **visual components**:
 
 ---
 
-## 🎯 PRICING BLOCK ANALYSIS
+## 🎯 FEATURES SECTION 1 - COMPREHENSIVE RESPONSIVE COMPONENT BREAKDOWN PLAN
 
-### PRICING BLOCK STATUS: ⚠️ PARTIAL IMPLEMENTATION
+### **CURRENT DESKTOP STRUCTURE ANALYSIS:**
+
+**Visual Components:**
+1. **Text Content Component** (Left side)
+   - Heading: "Your Business Hub:" (blue) + "The AI's Knowledge Center" (orange)
+   - Description paragraph about AI brain concept
+
+2. **Main Illustration Component** (Right side)  
+   - Business Hub illustration showing AI-powered devices
+   - Width: 738px, positioned absolutely
+
+3. **Background Decoration Components**
+   - Background vectors (full width decorative elements)
+   - Logo icon in bottom right
+   - Decorative vector elements
+
+### **CRITICAL CURRENT PROBLEMS:**
+
+**Desktop CSS Issues:**
+```css
+.features-section {
+  position: relative;
+  width: 1440px;         /* ← FIXED WIDTH */
+  height: 647px;         /* ← FIXED HEIGHT */
+  background-color: #ffffff;
+}
+
+.features-section .hero-copy {
+  position: absolute;    /* ← BREAKS RESPONSIVE */
+  width: 738px;         /* ← FIXED WIDTH */
+  height: 629px;        /* ← FIXED HEIGHT */
+  top: 0;
+  left: 702px;          /* ← FIXED POSITIONING */
+}
+
+.features-section .group {
+  position: absolute;    /* ← FIXED POSITIONING */
+  width: 532px;         /* ← FIXED WIDTH */
+  top: 189px;
+  left: 100px;
+}
+```
+
+### **MOBILE RESPONSIVE COMPONENT STRATEGY:**
+
+#### **Component 1: Text Content Block**
+- **Desktop**: Left-aligned, fixed width (532px)
+- **Mobile**: Full width, centered, top position
+- **Responsive Strategy**: Convert from absolute to relative positioning
+
+#### **Component 2: Main Illustration**
+- **Desktop**: Right-aligned, large (738px)
+- **Mobile**: Centered, responsive width (max 350px)
+- **Responsive Strategy**: Stack below text, maintain aspect ratio
+
+#### **Component 3: Background Elements**
+- **Desktop**: Full-width decorative vectors
+- **Mobile**: Hidden for clean experience
+- **Responsive Strategy**: Hide decorative vectors, keep clean background
+
+### **DETAILED IMPLEMENTATION PLAN:**
+
+## **PHASE 1: DESKTOP CSS FOUNDATION FIXES**
+
+### **Step 1: Fix Container Issues**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 3388-3393**: Fix fixed width container
+
+**CURRENT BROKEN CSS:**
+```css
+.features-section {
+  position: relative;
+  width: 1440px;        /* ← FIXED WIDTH */
+  height: 647px;        /* ← FIXED HEIGHT */
+  background-color: #ffffff;
+}
+```
+
+**REPLACE WITH:**
+```css
+.features-section {
+  position: relative;
+  width: 100%;          /* ← RESPONSIVE WIDTH */
+  max-width: 1440px;    /* ← REASONABLE CONSTRAINT */
+  height: auto;         /* ← FLEXIBLE HEIGHT */
+  min-height: 647px;    /* ← MAINTAIN DESKTOP HEIGHT */
+  margin: 0 auto;       /* ← CENTER CONTAINER */
+  padding: 80px 60px;   /* ← RESPONSIVE PADDING */
+  background-color: #ffffff;
+  box-sizing: border-box;
+  display: flex;        /* ← ENABLE FLEXBOX LAYOUT */
+  align-items: center;  /* ← VERTICAL CENTERING */
+}
+```
+
+### **Step 2: Convert Text Component to Flexible**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 3426-3432**: Fix text group positioning
+
+**CURRENT BROKEN CSS:**
+```css
+.features-section .group {
+  position: absolute;   /* ← FIXED POSITIONING */
+  width: 532px;        /* ← FIXED WIDTH */
+  height: 192px;       /* ← FIXED HEIGHT */
+  top: 189px;
+  left: 100px;
+}
+```
+
+**REPLACE WITH:**
+```css
+.features-section .group {
+  position: relative;   /* ← FLEXIBLE POSITIONING */
+  width: 100%;         /* ← FLEXIBLE WIDTH */
+  max-width: 600px;    /* ← REASONABLE MAX */
+  height: auto;        /* ← FLEXIBLE HEIGHT */
+  margin-right: 60px;  /* ← SPACING FROM IMAGE */
+  flex-shrink: 0;      /* ← PREVENT SHRINKING */
+  z-index: 10;         /* ← ABOVE BACKGROUND */
+}
+```
+
+### **Step 3: Convert Illustration to Flexible**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 3416-3424**: Fix hero image positioning
+
+**CURRENT BROKEN CSS:**
+```css
+.features-section .hero-copy {
+  position: absolute;   /* ← BREAKS RESPONSIVE */
+  width: 738px;        /* ← FIXED WIDTH */
+  height: 629px;       /* ← FIXED HEIGHT */
+  top: 0;
+  left: 702px;         /* ← FIXED POSITIONING */
+  aspect-ratio: 1.07;
+  object-fit: cover;
+}
+```
+
+**REPLACE WITH:**
+```css
+.features-section .hero-copy {
+  position: relative;   /* ← FLEXIBLE POSITIONING */
+  width: 100%;         /* ← RESPONSIVE WIDTH */
+  max-width: 600px;    /* ← REASONABLE MAX */
+  height: auto;        /* ← MAINTAIN ASPECT RATIO */
+  object-fit: contain; /* ← PRESERVE ASPECT RATIO */
+  flex-shrink: 1;      /* ← ALLOW SHRINKING */
+  z-index: 2;          /* ← ABOVE BACKGROUND */
+}
+```
+
+## **PHASE 2: MOBILE COMPONENT STACKING**
+
+### **Mobile Layout Strategy: Clean 2-Component Stack**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**REPLACE existing mobile CSS (lines 3499-3548)**
+
+```css
+/* FEATURES SECTION 1 MOBILE - Component Stacking */
+@media (max-width: 768px) {
+  
+  /* CONTAINER: Stack Components Vertically */
+  .features-section {
+    display: flex;
+    flex-direction: column;     /* ← STACK COMPONENTS */
+    align-items: center;        /* ← CENTER ALIGNMENT */
+    padding: 60px 20px;
+    text-align: center;
+    min-height: auto;
+    gap: 40px;                  /* ← SPACING BETWEEN COMPONENTS */
+  }
+  
+  .features-section .overlap-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  /* COMPONENT 1: Text Content Block */
+  .features-section .group {
+    order: 1;                   /* ← TEXT COMES FIRST */
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.95);  /* ← CLEAN BACKGROUND */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+    z-index: 10;
+  }
+  
+  /* COMPONENT 2: Main Illustration */
+  .features-section .hero-copy {
+    order: 2;                   /* ← IMAGE COMES SECOND */
+    position: relative;
+    width: 100%;
+    max-width: 350px;           /* ← MOBILE-OPTIMIZED SIZE */
+    height: auto;
+    margin: 0 auto;
+    z-index: 5;
+  }
+  
+  /* COMPONENT 3: Background Decorations - Hidden */
+  .features-section .vector,
+  .features-section .img,
+  .features-section .vector-2,
+  .features-section .logo-icon {
+    display: none;              /* ← CLEAN MOBILE EXPERIENCE */
+  }
+  
+  /* Typography Scaling */
+  .features-section .your-business-hub {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  
+  .features-section .text-wrapper {
+    display: block;             /* ← ALLOW LINE BREAKS */
+    margin-bottom: 8px;
+  }
+  
+  .features-section .span {
+    display: block;             /* ← STACK ORANGE TEXT */
+  }
+  
+  .features-section .think-of-your {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.9;
+  }
+}
+```
+
+## **PHASE 3: ADVANCED MOBILE ENHANCEMENTS**
+
+### **Step 1: Progressive Loading & Animation**
+```css
+@media (max-width: 768px) {
+  /* Optimize image loading for mobile */
+  .features-section .hero-copy {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  
+  /* Add staggered animations */
+  .features-section .group {
+    animation: slideInLeft 0.6s ease-out;
+  }
+  
+  .features-section .hero-copy {
+    animation: slideInRight 0.6s ease-out 0.2s both;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+```
+
+### **TESTING CHECKLIST**
+
+#### **Desktop Tests:**
+- [ ] Text content displays on left side
+- [ ] Main illustration displays on right side  
+- [ ] Background elements don't interfere with content
+- [ ] No horizontal scrolling
+- [ ] Components don't overlap
+
+#### **Mobile Component Stacking Tests:**
+- [ ] Text component appears first (top)
+- [ ] Main illustration appears second (bottom)
+- [ ] Background elements are hidden
+- [ ] No horizontal scrolling on any mobile device
+- [ ] Proper text scaling and readability
+- [ ] Clean visual hierarchy
+
+#### **Responsive Transition Tests:**
+- [ ] Smooth transition from desktop to mobile layout
+- [ ] No jarring jumps during resize
+- [ ] Components reflow properly at breakpoints
+- [ ] Typography scales appropriately
+
+**STATUS**: ✅ Complete - Features Section 1 component breakdown and responsive plan ready
+
+---
+
+## 🎯 MARKETING PROBLEMS SECTION - COMPREHENSIVE RESPONSIVE COMPONENT BREAKDOWN PLAN
+
+### **CURRENT DESKTOP STRUCTURE ANALYSIS:**
+
+**Visual Components:**
+1. **Main Heading Component** (Top)
+   - "Marketing (even with AI) is not easy to get right"
+   - Centered heading text
+
+2. **3-Column Problems Grid** (Main content)
+   - **Problem 1**: Generic Content (with icon)
+   - **Problem 2**: Inconsistent Voice (with icon)  
+   - **Problem 3**: Repetitive Work (with icon)
+   - Each column: Icon + Title + Description
+
+3. **Background Component**
+   - Light beige/tan background color
+   - Clean, minimal styling
+
+### **CRITICAL CURRENT PROBLEMS:**
+
+**Desktop CSS Issues:**
+```css
+.homepage .marketing-not-easy {
+  padding: 56px 104px;        /* ← FIXED PADDING */
+  position: relative;
+  width: 100%;               /* Good - responsive width */
+  background-color: #ffffff; /* Should be beige from screenshot */
+}
+
+.homepage .frame-4 {
+  display: flex;
+  align-items: center;
+  gap: 80px;                 /* ← LARGE GAP FOR MOBILE */
+}
+
+.homepage .frame-5 {
+  width: 357px;              /* ← FIXED WIDTH */
+  align-items: center;
+}
+```
+
+### **MOBILE RESPONSIVE COMPONENT STRATEGY:**
+
+#### **Component 1: Main Heading**
+- **Desktop**: Centered, normal size
+- **Mobile**: Centered, slightly reduced size
+- **Responsive Strategy**: Maintain as single component, adjust typography
+
+#### **Component 2: 3-Column Problems Grid**
+- **Desktop**: 3 columns side-by-side (357px each)
+- **Mobile**: Stack vertically, full width cards
+- **Responsive Strategy**: Convert flex-direction from row to column
+
+#### **Component 3: Problem Cards**
+- **Desktop**: Fixed width (357px), centered content
+- **Mobile**: Full width, maintain card structure
+- **Responsive Strategy**: Convert to flexible width with consistent spacing
+
+### **DETAILED IMPLEMENTATION PLAN:**
+
+## **PHASE 1: DESKTOP CSS FOUNDATION FIXES**
+
+### **Step 1: Fix Container Padding & Background**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 363-375**: Fix padding and background color
+
+**CURRENT CSS:**
+```css
+.homepage .marketing-not-easy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 56px 104px;       /* ← FIXED PADDING */
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  margin-top: -1px;
+  background-color: #ffffff; /* ← SHOULD BE BEIGE */
+}
+```
+
+**REPLACE WITH:**
+```css
+.homepage .marketing-not-easy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* ← CENTER ALIGNMENT */
+  gap: 40px;                 /* ← INCREASED GAP */
+  padding: 80px 60px;        /* ← RESPONSIVE PADDING */
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  max-width: 1440px;         /* ← CONSTRAIN WIDTH */
+  margin: 0 auto;            /* ← CENTER CONTAINER */
+  flex: 0 0 auto;
+  background-color: #f5f2e8; /* ← BEIGE BACKGROUND FROM SCREENSHOT */
+  box-sizing: border-box;
+}
+```
+
+### **Step 2: Fix Grid Container**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 402-410**: Make grid responsive
+
+**CURRENT CSS:**
+```css
+.homepage .frame-4 {
+  display: flex;
+  align-items: center;
+  gap: 80px;               /* ← TOO LARGE FOR MOBILE */
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+```
+
+**REPLACE WITH:**
+```css
+.homepage .frame-4 {
+  display: flex;
+  align-items: stretch;      /* ← EQUAL HEIGHT CARDS */
+  justify-content: center;   /* ← CENTER GRID */
+  gap: 40px;                /* ← REASONABLE GAP */
+  position: relative;
+  width: 100%;
+  flex-wrap: wrap;          /* ← ALLOW WRAPPING */
+  max-width: 1200px;        /* ← CONSTRAIN GRID WIDTH */
+}
+```
+
+### **Step 3: Fix Problem Cards**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 412+**: Make cards flexible
+
+**CURRENT CSS:**
+```css
+.homepage .frame-5 {
+  display: flex;
+  flex-direction: column;
+  width: 357px;             /* ← FIXED WIDTH */
+  align-items: center;
+  gap: 24px;
+}
+```
+
+**REPLACE WITH:**
+```css
+.homepage .frame-5 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;              /* ← FLEXIBLE WIDTH */
+  max-width: 350px;         /* ← MAX WIDTH CONSTRAINT */
+  min-width: 300px;         /* ← MIN WIDTH FOR DESKTOP */
+  align-items: center;
+  gap: 24px;
+  padding: 30px 20px;       /* ← INTERNAL PADDING */
+  background: rgba(255, 255, 255, 0.8); /* ← SUBTLE CARD BACKGROUND */
+  border-radius: 12px;      /* ← ROUNDED CORNERS */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* ← SUBTLE SHADOW */
+  flex: 1;                  /* ← EQUAL FLEX GROWTH */
+}
+```
+
+## **PHASE 2: MOBILE COMPONENT STACKING**
+
+### **Mobile Layout Strategy: Vertical Card Stack**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**INSERT new mobile CSS section:**
+
+```css
+/* MARKETING PROBLEMS SECTION MOBILE */
+@media (max-width: 768px) {
+  
+  /* CONTAINER: Adjust for mobile */
+  .homepage .marketing-not-easy {
+    padding: 60px 20px;      /* ← MOBILE PADDING */
+    gap: 30px;               /* ← REDUCED GAP */
+    text-align: center;      /* ← CENTER ALL CONTENT */
+  }
+  
+  /* MAIN HEADING: Responsive typography */
+  .homepage .marketing-even-with {
+    font-size: 24px;         /* ← REDUCED FROM DESKTOP */
+    line-height: 1.3;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* GRID: Stack vertically */
+  .homepage .frame-4 {
+    flex-direction: column;   /* ← STACK CARDS VERTICALLY */
+    align-items: center;      /* ← CENTER CARDS */
+    gap: 25px;               /* ← CONSISTENT SPACING */
+    width: 100%;
+  }
+  
+  /* PROBLEM CARDS: Full width mobile cards */
+  .homepage .frame-5 {
+    width: 100%;             /* ← FULL WIDTH */
+    max-width: 400px;        /* ← MOBILE MAX WIDTH */
+    min-width: auto;         /* ← REMOVE MIN WIDTH */
+    padding: 25px 20px;      /* ← MOBILE PADDING */
+    margin: 0 auto;          /* ← CENTER EACH CARD */
+  }
+  
+  /* CARD ICONS: Responsive sizing */
+  .homepage .vector,
+  .homepage .group-4,
+  .homepage .vector-2 {
+    width: 48px;             /* ← MOBILE ICON SIZE */
+    height: 48px;
+    margin-bottom: 8px;
+  }
+  
+  /* CARD TITLES: Mobile typography */
+  .homepage .text-wrapper-3 {
+    font-size: 18px;         /* ← MOBILE TITLE SIZE */
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  
+  /* CARD DESCRIPTIONS: Mobile typography */
+  .homepage .text-wrapper-4 {
+    font-size: 14px;         /* ← MOBILE DESCRIPTION SIZE */
+    line-height: 1.4;
+    text-align: center;
+    margin: 0;
+  }
+}
+```
+
+## **PHASE 3: ADVANCED MOBILE ENHANCEMENTS**
+
+### **Step 1: Card Animations & Polish**
+```css
+@media (max-width: 768px) {
+  /* Staggered card animations */
+  .homepage .frame-5:nth-child(1) {
+    animation: slideInUp 0.6s ease-out 0.1s both;
+  }
+  
+  .homepage .frame-5:nth-child(2) {
+    animation: slideInUp 0.6s ease-out 0.2s both;
+  }
+  
+  .homepage .frame-5:nth-child(3) {
+    animation: slideInUp 0.6s ease-out 0.3s both;
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Subtle hover effects for mobile */
+  .homepage .frame-5:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+}
+```
+
+### **TESTING CHECKLIST**
+
+#### **Desktop Tests:**
+- [ ] 3 cards display side-by-side
+- [ ] Beige background color matches screenshot
+- [ ] Cards have equal height and spacing
+- [ ] Icons and text are properly aligned
+- [ ] No horizontal scrolling
+
+#### **Mobile Card Stacking Tests:**
+- [ ] Cards stack vertically in logical order
+- [ ] Each card takes full available width
+- [ ] Proper spacing between stacked cards
+- [ ] Icons scale appropriately for mobile
+- [ ] Text remains readable and well-spaced
+- [ ] No horizontal scrolling on any device
+
+#### **Responsive Transition Tests:**
+- [ ] Smooth transition from 3-column to stacked layout
+- [ ] Cards maintain aspect ratio during resize
+- [ ] Typography scales appropriately
+- [ ] Background color consistency across breakpoints
+
+**STATUS**: ✅ Complete - Marketing Problems Section component breakdown and responsive plan ready
+
+---
+
+## 🎯 HOW IT WORKS SECTION ANALYSIS
+
+### Visual Component Identification
+Based on the homepage screenshots and code analysis of `how-it-works-block.php`, the How It Works Section (teal/dark colored section) contains these components:
+
+#### Component 1: Main Heading
+- **Current Structure**: `<p class="text-wrapper-5">` at lines 57-58 
+- **Content**: "A Smarter Foundation for Your AI in Three Steps."
+- **Current CSS**: Lines 552-565 in style.css - fixed positioning and width
+- **Issues**: Fixed 574px width, absolute positioning breaks mobile
+
+#### Component 2: Animated Journey Path 
+- **Current Structure**: Three-step animation system with complex positioning
+- **Elements**:
+  - Journey path line (`vector-3`) at lines 63-65
+  - Three dots (`ellipse-3`, `ellipse-4`, `ellipse-5`) marking steps
+  - Polaris logo icon (`logo-icon-white-2`)
+- **Current CSS**: Lines 567-628 - all absolute positioned
+- **Issues**: Fixed 794px width container, absolute positioning breaks stacking
+
+#### Component 3: Animated Content Areas
+- **Current Structure**: Three synchronized animation zones
+- **Left Zone**: Step text content (`group-7`) - lines 133-162
+- **Middle Zone**: Step illustrations (`animated-step-images`) - lines 76-102  
+- **Right Zone**: Step descriptions (`animated-right-images`) - lines 105-129
+- **Animation**: JavaScript-controlled 4-second intervals with hover pause
+- **Issues**: Complex absolute positioning system not responsive
+
+### Current Problems Analysis
+
+#### Desktop CSS Issues (Lines 491-705)
+1. **Fixed Container Width**: `.how-it-works` set to 1440px (line 493)
+2. **Fixed Content Areas**: All positioned absolutely with fixed pixel values
+3. **Absolute Positioning Overuse**: Every element uses absolute positioning
+4. **Fixed Typography**: Text sizing doesn't respond to screen changes
+5. **Complex Animation Constraints**: Three-zone system relies on exact pixel positioning
+
+#### Mobile Incompatibility 
+1. **No Responsive Design**: No mobile-specific CSS exists
+2. **Animation Breakdown**: Absolute positioning breaks on small screens  
+3. **Content Overlap**: Three zones will overlap on mobile without stacking
+4. **Typography Scale**: Text remains desktop-sized on mobile
+5. **Touch Interaction**: No mobile gesture support for animation control
+
+### Responsive Strategy: Component Transformation
+
+#### Desktop → Mobile Transformation Plan
+**Desktop**: Three-zone horizontal animation layout
+**Mobile**: Single-column vertical stepped content flow
+
+#### Mobile Component Stack (Top → Bottom)
+1. **Main Heading** - Centered, responsive typography
+2. **Step 1 Content** - Build Your Base Camp (text + number badge)
+3. **Step 1 Visual** - Background decoration simplified
+4. **Step 2 Content** - Fuel Your AI (text + number badge + astronaut image)
+5. **Step 3 Content** - Launch Marketing (text + number badge + fuel tank)
+6. **Simplified Progress Indicator** - Three dots showing current step
+
+### Three-Phase Implementation Plan
+
+#### Phase 1: Desktop CSS Foundation Fixes
+**Target**: Fix existing desktop layout for better baseline
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+
+**Step 1.1: Container Flexibility (Lines 491-498)**
+```css
+/* REPLACE CURRENT */
+.homepage .how-it-works {
+  position: relative;
+  width: 1440px; /* ← REMOVE FIXED WIDTH */
+  height: 679px;
+  margin-top: -1px;
+  background: linear-gradient(90deg, #2c3e50 0%, #1abc9c 100%) !important;
+}
+
+/* WITH RESPONSIVE */  
+.homepage .how-it-works {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 679px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #2c3e50 0%, #1abc9c 100%) !important;
+  overflow: hidden;
+}
+```
+
+**Step 1.2: Content Area Flexibility (Lines 500-508)**
+```css
+/* REPLACE CURRENT */
+.homepage .overlap-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px; /* ← REMOVE FIXED WIDTH */
+  height: 679px;
+}
+
+/* WITH RESPONSIVE */
+.homepage .overlap-2 {
+  position: relative;
+  width: 100%;
+  min-height: 679px;
+  padding: 60px 20px;
+}
+```
+
+**Step 1.3: Heading Flexibility (Lines 552-565)**
+```css
+/* REPLACE CURRENT */
+.homepage .text-wrapper-5 {
+  position: absolute;
+  width: 574px; /* ← REMOVE FIXED WIDTH */
+  top: 59px;
+  left: 433px; /* ← REMOVE ABSOLUTE POSITIONING */
+  /* ... rest of styles */
+}
+
+/* WITH RESPONSIVE */
+.homepage .text-wrapper-5 {
+  display: block;
+  max-width: 574px;
+  margin: 0 auto 60px;
+  text-align: center;
+  /* ... keep typography styles */
+}
+```
+
+#### Phase 2: Mobile Component Stacking (Add New CSS)
+**Target**: Create mobile-first vertical layout
+**Location**: Add after line 705 in style.css
+
+```css
+/* ================================= */
+/* HOW IT WORKS - MOBILE RESPONSIVE */
+/* ================================= */
+
+@media screen and (max-width: 768px) {
+  .homepage .how-it-works {
+    min-height: auto;
+    padding: 40px 0;
+  }
+  
+  .homepage .overlap-2 {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  /* Hide complex desktop animations */
+  .homepage .group-6,
+  .homepage .animated-step-images,
+  .homepage .animated-right-images,
+  .homepage .ellipse-2,
+  .homepage .rectangle-2,
+  .homepage .image-2,
+  .homepage .group-5 {
+    display: none;
+  }
+  
+  /* Mobile heading */
+  .homepage .text-wrapper-5 {
+    position: static;
+    width: 100%;
+    margin-bottom: 30px;
+    font-size: var(--polaris-mobile-h1-font-size);
+    line-height: var(--polaris-mobile-h1-line-height);
+  }
+  
+  /* Mobile step content */
+  .homepage .group-7 {
+    position: static;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .homepage .step-content {
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Mobile step layout */
+  .homepage .step-content .text-wrapper-6 {
+    position: static;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: var(--polaris-mobile-h3-font-size);
+    text-align: left;
+  }
+  
+  .homepage .step-content .text-wrapper-7 {
+    position: static;
+    width: 100%;
+    font-size: var(--polaris-mobile-medium-text-font-size);
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  /* Mobile number badges */
+  .homepage .overlap-group-wrapper {
+    position: static;
+    margin-bottom: 15px;
+  }
+  
+  .homepage .line {
+    display: none;
+  }
+  
+  /* Mobile step indicators */
+  .mobile-step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .mobile-step-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .mobile-step-dot.active {
+    background: var(--flare-orange);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .homepage .overlap-2 {
+    padding: 15px;
+    gap: 25px;
+  }
+  
+  .homepage .step-content {
+    padding: 15px;
+  }
+  
+  .homepage .text-wrapper-5 {
+    font-size: var(--polaris-mobile-small-h1-font-size);
+  }
+}
+```
+
+#### Phase 3: Advanced Mobile Enhancements
+**Target**: Polish mobile experience with interactions
+
+**Step 3.1: Mobile-Specific JavaScript (Add to how-it-works-block.php after line 350)**
+```javascript
+// Mobile-specific adaptations
+function initMobileAdaptations() {
+  if (window.innerWidth <= 768) {
+    // Disable complex animations on mobile
+    const container = document.querySelector('.polaris-how-it-works-section');
+    if (container) {
+      container.classList.add('mobile-mode');
+    }
+    
+    // Add mobile step indicators
+    const stepIndicator = document.createElement('div');
+    stepIndicator.className = 'mobile-step-indicator';
+    stepIndicator.innerHTML = `
+      <div class="mobile-step-dot active"></div>
+      <div class="mobile-step-dot"></div>
+      <div class="mobile-step-dot"></div>
+    `;
+    
+    const overlap = document.querySelector('.overlap-2');
+    if (overlap) {
+      overlap.appendChild(stepIndicator);
+    }
+    
+    // Simplified mobile interaction
+    let currentMobileStep = 0;
+    const mobileDots = document.querySelectorAll('.mobile-step-dot');
+    
+    function updateMobileIndicator() {
+      mobileDots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentMobileStep);
+      });
+    }
+    
+    // Tap to advance steps on mobile
+    container.addEventListener('click', () => {
+      currentMobileStep = (currentMobileStep + 1) % 3;
+      updateMobileIndicator();
+    });
+  }
+}
+
+// Add to existing DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+  // ... existing code ...
+  initMobileAdaptations();
+  
+  // Update on resize
+  window.addEventListener('resize', initMobileAdaptations);
+});
+```
+
+**Step 3.2: Enhanced Mobile Styling (Add to mobile CSS section)**
+```css
+/* Enhanced mobile interactions */
+@media screen and (max-width: 768px) {
+  .homepage.mobile-mode .how-it-works {
+    cursor: pointer;
+  }
+  
+  .homepage .step-content {
+    transition: all 0.3s ease;
+  }
+  
+  .homepage .step-content:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+}
+```
+
+### Testing Checklist
+
+#### Desktop Testing (1200px+)
+- [ ] Section maintains teal gradient background
+- [ ] Main heading centered and readable  
+- [ ] Three-zone animation system works smoothly
+- [ ] Content doesn't overflow container
+- [ ] Animation pauses on hover
+- [ ] Typography scales with container
+
+#### Tablet Testing (768px-1199px)  
+- [ ] Container scales down proportionally
+- [ ] Animation zones stack appropriately
+- [ ] Content remains readable
+- [ ] Touch interactions work properly
+- [ ] Background maintains gradient
+
+#### Mobile Testing (320px-767px)
+- [ ] Complex animations hidden/simplified
+- [ ] Content stacks in logical order
+- [ ] Step content clearly separated
+- [ ] Typography uses mobile variables
+- [ ] Touch targets appropriately sized
+- [ ] Step indicators functional
+- [ ] Smooth scrolling between steps
+
+#### Cross-Device Testing
+- [ ] Layout transitions smoothly between breakpoints
+- [ ] No content cutoff or overlap
+- [ ] Typography scales appropriately
+- [ ] Animation performance acceptable across devices
+- [ ] Background gradients consistent
+
+**STATUS**: ✅ Complete - How It Works Section component breakdown and responsive plan ready
+
+---
 **File:** `/wp-content/themes/polaris-homepage/blocks/pricing-plans-block.php`
 
 #### CRITICAL FINDINGS:
