@@ -2726,9 +2726,394 @@ document.addEventListener('DOMContentLoaded', function() {
 **STATUS**: ✅ Complete - How It Works Section component breakdown and responsive plan ready
 
 ---
-**File:** `/wp-content/themes/polaris-homepage/blocks/pricing-plans-block.php`
 
-#### CRITICAL FINDINGS:
+## 🎯 CORE BENEFITS SECTION ANALYSIS
+
+### Visual Component Identification  
+Based on code analysis of `core-benefits-block.php`, the Core Benefits Section (white background section) contains these components:
+
+#### Component 1: Four Benefit Cards Layout
+- **Current Structure**: 2x2 grid of benefit cards with orange accent color
+- **Content**: 
+  - Card 1: "All Your Marketing Knowledge, **In One Place**" 
+  - Card 2: "Let Our Smart Crawler Do the **Heavy Lifting**"
+  - Card 3: "Develop a **Unique Voice**"
+  - Card 4: "Generate AI Content That **Actually Works**"
+- **Current CSS**: Lines 723-793 - uses inline-flex with fixed gaps
+- **Issues**: Fixed 543px width per card, fixed 146px gaps break mobile
+
+#### Component 2: Icon System
+- **Current Structure**: Four orange rounded square icons positioned absolutely
+- **Elements**:
+  - Market Knowledge icon (`market-knowledge-wrapper`) - top left
+  - Smart Crawler icon (`crawler-wrapper`) - top right  
+  - Voice icon (`voice-wrapper`) - bottom left
+  - Polaris Logo icon (`logo-icon-white-wrapper`) - bottom right
+- **Current CSS**: Lines 795-851 - all absolute positioned with fixed pixels
+- **Issues**: Absolute positioning breaks responsive flow
+
+#### Component 3: Content Structure  
+- **Current Structure**: Each card contains title with color highlights + description text
+- **Typography**: H2 headings with orange highlights, medium text descriptions
+- **Current CSS**: Lines 741-784 - fixed widths and positioning
+- **Issues**: Fixed 413px width for headings, no mobile typography scaling
+
+### Current Problems Analysis
+
+#### Desktop CSS Issues (Lines 707-851)
+1. **Fixed Container Width**: `.core-benefits` set to 1440px (line 709)
+2. **Inflexible Grid System**: Uses inline-flex with fixed 146px gaps
+3. **Absolute Icon Positioning**: Icons positioned with fixed pixel coordinates
+4. **Fixed Card Widths**: Each benefit card locked to 543px width
+5. **No Responsive Typography**: Text sizes don't adapt to screen size
+
+#### Mobile Incompatibility
+1. **No Responsive Design**: No mobile-specific CSS exists
+2. **Grid Breakdown**: 2x2 layout will overflow on mobile screens
+3. **Icon Misalignment**: Absolute positioned icons will overlap content
+4. **Typography Issues**: Large desktop text unreadable on mobile
+5. **Touch Interaction**: No mobile-optimized card interactions
+
+### Responsive Strategy: Component Transformation
+
+#### Desktop → Mobile Transformation Plan
+**Desktop**: 2x2 grid layout with floating icons
+**Mobile**: Single-column vertical card stack with integrated icons
+
+#### Mobile Component Stack (Top → Bottom)
+1. **Card 1** - Knowledge icon + title + description (stacked vertically)
+2. **Card 2** - Crawler icon + title + description (stacked vertically)
+3. **Card 3** - Voice icon + title + description (stacked vertically)  
+4. **Card 4** - Content icon + title + description (stacked vertically)
+
+### Three-Phase Implementation Plan
+
+#### Phase 1: Desktop CSS Foundation Fixes
+**Target**: Convert grid to flexible layout system
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+
+**Step 1.1: Container Flexibility (Lines 707-713)**
+```css
+/* REPLACE CURRENT */
+.homepage .core-benefits {
+  position: relative;
+  width: 1440px; /* ← REMOVE FIXED WIDTH */
+  height: 810px;
+  margin-top: -1px;
+  background-color: #ffffff;
+}
+
+/* WITH RESPONSIVE */
+.homepage .core-benefits {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 810px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 60px 20px;
+}
+```
+
+**Step 1.2: Content Grid Flexibility (Lines 715-721)**
+```css
+/* REPLACE CURRENT */  
+.homepage .group-8 {
+  position: relative;
+  width: 1232px; /* ← REMOVE FIXED WIDTH */
+  height: 690px;
+  top: 60px;
+  left: 104px; /* ← REMOVE FIXED POSITIONING */
+}
+
+/* WITH RESPONSIVE */
+.homepage .group-8 {
+  position: relative;
+  width: 100%;
+  max-width: 1232px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 60px 146px;
+  min-height: 690px;
+}
+```
+
+**Step 1.3: Card Layout Flexibility (Lines 723-739)**  
+```css
+/* REPLACE CURRENT */
+.homepage .frame-6 {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 146px; /* ← FIXED GAP */
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  top: 125px;
+  left: 0;
+}
+
+.homepage .frame-8 {
+  display: inline-flex;
+  align-items: flex-start;  
+  gap: 146px; /* ← FIXED GAP */
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  top: 506px;
+  left: 0;
+}
+
+/* WITH RESPONSIVE */
+.homepage .frame-6,
+.homepage .frame-8 {
+  display: contents; /* Let grid handle layout */
+}
+
+.homepage .frame-7 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  position: relative;
+  padding: 40px 20px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.homepage .frame-7:hover {
+  transform: translateY(-5px);
+}
+```
+
+#### Phase 2: Mobile Component Stacking (Add New CSS)
+**Target**: Create mobile-first vertical card layout
+**Location**: Add after line 851 in style.css
+
+```css
+/* ================================== */
+/* CORE BENEFITS - MOBILE RESPONSIVE */
+/* ================================== */
+
+@media screen and (max-width: 768px) {
+  .homepage .core-benefits {
+    min-height: auto;
+    padding: 40px 20px;
+  }
+  
+  .homepage .group-8 {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    grid-template-columns: none;
+    grid-template-rows: none;
+  }
+  
+  .homepage .frame-7 {
+    width: 100%;
+    padding: 30px 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid var(--flare-orange);
+    position: relative;
+  }
+  
+  /* Mobile card headings */
+  .homepage .div-2 {
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: var(--polaris-mobile-h2-font-size);
+    line-height: var(--polaris-mobile-h2-line-height);
+  }
+  
+  /* Mobile card descriptions */
+  .homepage .text-wrapper-10 {
+    font-size: var(--polaris-mobile-medium-text-font-size);
+    line-height: var(--polaris-mobile-medium-text-line-height);
+  }
+  
+  /* Hide desktop absolute positioned icons */
+  .homepage .market-knowledge-wrapper,
+  .homepage .voice-wrapper, 
+  .homepage .crawler-wrapper,
+  .homepage .logo-icon-white-wrapper {
+    display: none;
+  }
+  
+  /* Mobile integrated icons */
+  .homepage .frame-7:nth-of-type(1)::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--flare-orange) url('/wp-content/themes/polaris-homepage/img/market-knowledge-1.png') center/24px no-repeat;
+    border-radius: 8px;
+  }
+  
+  .homepage .frame-7:nth-of-type(2)::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--flare-orange) url('/wp-content/themes/polaris-homepage/img/crawler-1.png') center/24px no-repeat;
+    border-radius: 8px;
+  }
+  
+  .homepage .frame-7:nth-of-type(3)::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--flare-orange) url('/wp-content/themes/polaris-homepage/img/voice-1.png') center/24px no-repeat;
+    border-radius: 8px;
+  }
+  
+  .homepage .frame-7:nth-of-type(4)::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--flare-orange) url('/wp-content/themes/polaris-homepage/img/logo-icon-white-2.png') center/24px no-repeat;
+    border-radius: 8px;
+  }
+  
+  /* Mobile card animation */
+  .homepage .frame-7 {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .homepage .frame-7:nth-child(1) { animation-delay: 0.1s; }
+  .homepage .frame-7:nth-child(2) { animation-delay: 0.2s; }  
+  .homepage .frame-7:nth-child(3) { animation-delay: 0.3s; }
+  .homepage .frame-7:nth-child(4) { animation-delay: 0.4s; }
+}
+
+@media screen and (max-width: 480px) {
+  .homepage .core-benefits {
+    padding: 30px 15px;
+  }
+  
+  .homepage .frame-7 {
+    padding: 25px 15px;
+    gap: 20px;
+  }
+  
+  .homepage .div-2 {
+    font-size: var(--polaris-mobile-small-h2-font-size);
+  }
+  
+  .homepage .frame-7::before {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+```
+
+#### Phase 3: Advanced Mobile Enhancements  
+**Target**: Add interactive elements and accessibility
+
+**Step 3.1: Enhanced Mobile Styling**
+```css
+/* Advanced mobile interactions */
+@media screen and (max-width: 768px) {
+  .homepage .frame-7 {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .homepage .frame-7:hover,
+  .homepage .frame-7:focus {
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.15);
+    border-left-color: #e67e22;
+  }
+  
+  .homepage .frame-7:active {
+    transform: scale(0.98);
+  }
+  
+  /* Accessibility improvements */
+  .homepage .frame-7 {
+    role: 'article';
+    tabindex: '0';
+  }
+  
+  .homepage .frame-7:focus {
+    outline: 2px solid var(--flare-orange);
+    outline-offset: 2px;
+  }
+}
+```
+
+**Step 3.2: Mobile Card Expansion (Optional Enhancement)**
+```javascript
+// Add to core-benefits-block.php if interactive expansion desired
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 768) {
+    const cards = document.querySelectorAll('.frame-7');
+    
+    cards.forEach(card => {
+      card.addEventListener('click', function() {
+        card.classList.toggle('expanded');
+      });
+    });
+  }
+});
+```
+
+### Testing Checklist
+
+#### Desktop Testing (1200px+)
+- [ ] Section maintains white background
+- [ ] 2x2 grid layout displays properly
+- [ ] Orange accent icons positioned correctly
+- [ ] Card hover effects work smoothly
+- [ ] Typography maintains proper hierarchy
+- [ ] Color highlights (orange text) render correctly
+
+#### Tablet Testing (768px-1199px)
+- [ ] Grid scales down proportionally
+- [ ] Cards maintain readability
+- [ ] Icons remain properly positioned
+- [ ] Touch interactions responsive
+- [ ] Content doesn't overflow container
+
+#### Mobile Testing (320px-767px)
+- [ ] Cards stack in single column
+- [ ] Integrated icons appear in card corners
+- [ ] Typography uses mobile variables
+- [ ] Card animations trigger properly
+- [ ] Border accent styling works
+- [ ] Touch targets appropriately sized
+- [ ] Content readable without scrolling
+
+#### Cross-Device Testing  
+- [ ] Layout transitions smoothly between breakpoints
+- [ ] No content cutoff or overlap
+- [ ] Typography scales appropriately
+- [ ] Interactive elements work across devices
+- [ ] Orange accent color consistent
+
+**STATUS**: ✅ Complete - Core Benefits Section component breakdown and responsive plan ready
+
+---
 - **PARTIAL MOBILE CSS**: Lines 5529-5699 in style.css contain incomplete pricing mobile CSS
 - **COMPLEX ABSOLUTE POSITIONING**: Multiple nested groups with absolute positioning
 - **PRICING CARDS**: Three-column layout needs mobile stacking
