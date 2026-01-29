@@ -1391,6 +1391,356 @@ The theme already has mobile typography variables defined. Implement them:
 
 ---
 
+## 🎯 HERO BLOCK - COMPREHENSIVE RESPONSIVE COMPONENT BREAKDOWN PLAN
+
+### **CURRENT DESKTOP STRUCTURE ANALYSIS:**
+
+Based on the visual design, the hero block has these **visual components**:
+
+1. **Text Content Component** (Left side)
+   - Main heading: "Launch AI Marketing That Truly Understands Your Business."
+   - Subtitle paragraph
+   - Orange CTA button: "Start 14-Day Free Trial"
+   - Subtext: "No payment details required. Set up in minutes."
+
+2. **Main Illustration Component** (Right side)
+   - Central dashboard/device illustrations
+   - Connected by dotted lines
+   - Shows AI marketing tools interface
+
+3. **Background Decoration Components**
+   - Rocket smoke trails
+   - Gradient background (dark to teal to light)
+   - Arrow elements
+   - Floating decorative elements
+
+### **CRITICAL CURRENT PROBLEMS:**
+
+**Desktop CSS Issues:**
+```css
+.homepage .overlap {
+  width: 2910px;          /* ← MASSIVELY OVERSIZED */
+  height: 766px;
+  top: -6px;
+  left: -735px;           /* ← NEGATIVE POSITIONING */
+}
+
+.homepage .hero-copy {
+  position: absolute;      /* ← BREAKS RESPONSIVE */
+  width: 797px;           /* ← FIXED WIDTH */
+  top: 6px;
+  left: 1377px;           /* ← FIXED POSITIONING */
+}
+
+.homepage .frame {
+  width: 419px;           /* ← FIXED WIDTH */
+  position: absolute;      /* ← FIXED POSITIONING */
+  top: 141px;
+  left: 178px;
+}
+```
+
+### **MOBILE RESPONSIVE COMPONENT STRATEGY:**
+
+#### **Component 1: Text Content Block**
+- **Desktop**: Left-aligned, fixed width (419px)
+- **Mobile**: Full width, centered, top position
+- **Responsive Strategy**: Convert from absolute to relative positioning
+
+#### **Component 2: Main Illustration**  
+- **Desktop**: Right-aligned, large (797px)
+- **Mobile**: Centered, responsive width (max 350px)
+- **Responsive Strategy**: Stack below text, maintain aspect ratio
+
+#### **Component 3: Background Elements**
+- **Desktop**: Complex layered absolute positioning
+- **Mobile**: Simplified, hidden non-essential elements
+- **Responsive Strategy**: Hide smoke trails, keep gradient
+
+### **DETAILED IMPLEMENTATION PLAN:**
+
+## **PHASE 1: DESKTOP CSS FOUNDATION FIXES**
+
+### **Step 1: Fix Oversized Container**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 71-77**: Fix massive width issue
+
+**CURRENT BROKEN CSS:**
+```css
+.homepage .overlap {
+  position: relative;
+  width: 2910px;          /* ← BREAKS LAYOUT */
+  height: 766px;
+  top: -6px;
+  left: -735px;           /* ← NEGATIVE POSITIONING */
+}
+```
+
+**REPLACE WITH:**
+```css
+.homepage .overlap {
+  position: relative;
+  width: 100%;            /* ← RESPONSIVE WIDTH */
+  max-width: 1440px;      /* ← REASONABLE CONSTRAINT */
+  height: auto;           /* ← FLEXIBLE HEIGHT */
+  min-height: 760px;      /* ← MAINTAIN DESKTOP HEIGHT */
+  margin: 0 auto;         /* ← CENTER CONTAINER */
+  padding: 0 60px;        /* ← RESPONSIVE PADDING */
+  box-sizing: border-box;
+  display: flex;          /* ← ENABLE FLEXBOX LAYOUT */
+  align-items: center;    /* ← VERTICAL CENTERING */
+}
+```
+
+### **Step 2: Convert Text Component to Flexible**
+**File**: `/wp-content/themes/polaris-homepage/style.css**
+**Lines 138-145**: Fix text frame positioning
+
+**CURRENT BROKEN CSS:**
+```css
+.homepage .frame {
+  display: flex;
+  flex-direction: column;
+  width: 419px;           /* ← FIXED WIDTH */
+  align-items: flex-start;
+  gap: 32px;
+  position: absolute;     /* ← FIXED POSITIONING */
+  top: 141px;
+  left: 178px;
+}
+```
+
+**REPLACE WITH:**
+```css
+.homepage .frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;            /* ← FLEXIBLE WIDTH */
+  max-width: 500px;       /* ← REASONABLE MAX */
+  align-items: flex-start;
+  gap: 32px;
+  position: relative;     /* ← FLEXIBLE POSITIONING */
+  z-index: 10;            /* ← ABOVE BACKGROUND */
+  margin-right: 40px;     /* ← SPACING FROM IMAGE */
+  flex-shrink: 0;         /* ← PREVENT SHRINKING */
+}
+```
+
+### **Step 3: Convert Illustration to Flexible**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 129-136**: Fix hero image positioning
+
+**CURRENT BROKEN CSS:**
+```css
+.homepage .hero-copy {
+  position: absolute;     /* ← BREAKS RESPONSIVE */
+  width: 797px;           /* ← FIXED WIDTH */
+  height: 730px;          /* ← FIXED HEIGHT */
+  top: 6px;
+  left: 1377px;           /* ← FIXED POSITIONING */
+  object-fit: cover;
+}
+```
+
+**REPLACE WITH:**
+```css
+.homepage .hero-copy {
+  position: relative;     /* ← FLEXIBLE POSITIONING */
+  width: 100%;            /* ← RESPONSIVE WIDTH */
+  max-width: 600px;       /* ← REASONABLE MAX */
+  height: auto;           /* ← MAINTAIN ASPECT RATIO */
+  object-fit: contain;    /* ← PRESERVE ASPECT RATIO */
+  flex-shrink: 1;         /* ← ALLOW SHRINKING */
+  z-index: 2;             /* ← ABOVE BACKGROUND */
+}
+```
+
+## **PHASE 2: MOBILE COMPONENT STACKING**
+
+### **Mobile Layout Strategy: 3-Component Stack**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**INSERT after existing mobile CSS**
+
+```css
+/* HERO BLOCK MOBILE - Component Stacking */
+@media (max-width: 768px) {
+  
+  /* STEP 1: Container - Stack Components Vertically */
+  .homepage .overlap,
+  .polaris-hero-section .overlap {
+    display: flex;
+    flex-direction: column;     /* ← STACK COMPONENTS */
+    align-items: center;        /* ← CENTER ALIGNMENT */
+    padding: 40px 20px;
+    text-align: center;
+    min-height: auto;
+    gap: 40px;                  /* ← SPACING BETWEEN COMPONENTS */
+  }
+  
+  /* COMPONENT 1: Text Content Block */
+  .homepage .frame,
+  .polaris-hero-section .frame {
+    order: 1;                   /* ← TEXT COMES FIRST */
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.95);  /* ← READABLE BACKGROUND */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+  
+  /* COMPONENT 2: Main Illustration */
+  .homepage .hero-copy,
+  .polaris-hero-section .hero-copy {
+    order: 2;                   /* ← IMAGE COMES SECOND */
+    position: relative;
+    width: 100%;
+    max-width: 350px;           /* ← MOBILE-OPTIMIZED SIZE */
+    height: auto;
+    margin: 0 auto;
+    transform: none;
+    opacity: 1;                 /* ← FULL OPACITY ON MOBILE */
+    z-index: 5;
+  }
+  
+  /* COMPONENT 3: Background Decorations - Simplified */
+  .homepage .rocket-smoke,
+  .polaris-hero-section .rocket-smoke {
+    display: none;              /* ← HIDE COMPLEX DECORATIONS */
+  }
+  
+  .homepage .ellipse,
+  .polaris-hero-section .ellipse {
+    display: none;              /* ← HIDE DECORATIVE ELEMENTS */
+  }
+  
+  /* Hide other decorative elements on mobile */
+  .homepage .img,
+  .homepage .group-3,
+  .homepage .logo-icon-white,
+  .polaris-hero-section .img,
+  .polaris-hero-section .group-3,
+  .polaris-hero-section .logo-icon-white {
+    display: none;              /* ← CLEAN MOBILE EXPERIENCE */
+  }
+  
+  /* Typography Scaling */
+  .homepage .text-wrapper,
+  .polaris-hero-section .text-wrapper {
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .homepage .polaris-launchpad-AI,
+  .polaris-hero-section .polaris-launchpad-AI {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* CTA Button Mobile Optimization */
+  .homepage .group,
+  .polaris-hero-section .group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .homepage .large-button,
+  .polaris-hero-section .large-button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .homepage .button,
+  .polaris-hero-section .button {
+    width: 100%;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    min-height: 44px;           /* ← TOUCH-FRIENDLY */
+    box-sizing: border-box;
+  }
+  
+  .homepage .p,
+  .polaris-hero-section .p {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+    opacity: 0.8;
+  }
+}
+```
+
+## **PHASE 3: ADVANCED MOBILE ENHANCEMENTS**
+
+### **Step 1: Progressive Image Loading**
+```css
+@media (max-width: 768px) {
+  /* Optimize image loading for mobile */
+  .homepage .hero-copy,
+  .polaris-hero-section .hero-copy {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  /* Add subtle animation */
+  .homepage .frame,
+  .polaris-hero-section .frame {
+    animation: slideInUp 0.6s ease-out;
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+```
+
+### **TESTING CHECKLIST**
+
+#### **Desktop Tests:**
+- [ ] Text content displays on left side
+- [ ] Main illustration displays on right side  
+- [ ] Background gradient flows properly
+- [ ] No horizontal scrolling
+- [ ] Components don't overlap
+
+#### **Mobile Component Stacking Tests:**
+- [ ] Text component appears first (top)
+- [ ] Main illustration appears second (middle)
+- [ ] Background elements are hidden/simplified
+- [ ] No horizontal scrolling on any mobile device
+- [ ] Touch-friendly button sizing (min 44px)
+- [ ] Readable text contrast
+
+#### **Responsive Transition Tests:**
+- [ ] Smooth transition from desktop to mobile layout
+- [ ] No jarring jumps during resize
+- [ ] Components reflow properly at breakpoints
+
+**STATUS**: ✅ Complete - Hero block component breakdown and responsive plan ready
+
+---
+
 ## 🎯 PRICING BLOCK ANALYSIS
 
 ### PRICING BLOCK STATUS: ⚠️ PARTIAL IMPLEMENTATION
