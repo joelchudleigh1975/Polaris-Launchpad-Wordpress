@@ -3114,7 +3114,391 @@ document.addEventListener('DOMContentLoaded', function() {
 **STATUS**: ✅ Complete - Core Benefits Section component breakdown and responsive plan ready
 
 ---
-- **PARTIAL MOBILE CSS**: Lines 5529-5699 in style.css contain incomplete pricing mobile CSS
+
+## 🎯 FUEL TANK SECTION ANALYSIS
+
+### Visual Component Identification
+Based on code analysis of `fuel-block.php`, the Fuel Tank Section (off-white background section) contains these components:
+
+#### Component 1: Text Content Area
+- **Current Structure**: Heading with orange accent + description text  
+- **Content**:
+  - Heading: "Fuel Your Launchpad for **Maximum Performance**"
+  - Description: Details about data completeness and AI effectiveness
+- **Current CSS**: Lines 862-915 - absolute positioning with fixed dimensions
+- **Issues**: Fixed 440px width container, absolute positioning breaks mobile
+
+#### Component 2: Dashboard Preview Image
+- **Current Structure**: Large dashboard interface preview (`mask-group`)
+- **Elements**: Shows application interface preview
+- **Current CSS**: Lines 917-923 - absolute positioned at right side  
+- **Issues**: Fixed 817px width, absolute positioning causes overflow on mobile
+
+#### Component 3: Fuel Tank Indicator
+- **Current Structure**: Visual fuel gauge showing data completeness
+- **Elements**: Interactive fuel tank graphic (`fuel-tank-5-1.png`)
+- **Current CSS**: Lines 925-932 - absolute positioned below text
+- **Issues**: Fixed positioning breaks responsive stacking
+
+### Current Problems Analysis
+
+#### Desktop CSS Issues (Lines 853-932)
+1. **Fixed Container Width**: `.fuel` set to 1440px (line 855)
+2. **Absolute Text Positioning**: Content positioned with fixed coordinates
+3. **Absolute Image Positioning**: Large dashboard image positioned absolutely
+4. **Fixed Element Dimensions**: All components have fixed pixel dimensions
+5. **No Responsive Typography**: Text sizes don't adapt to screen size
+
+#### Mobile Incompatibility  
+1. **No Responsive Design**: No mobile-specific CSS exists
+2. **Content Overlap**: Text and image will overlap on smaller screens
+3. **Image Overflow**: Large dashboard preview will cause horizontal scrolling
+4. **Touch Interaction**: Fuel tank indicator not optimized for mobile interaction
+5. **Typography Scale**: Large H1 text unreadable on mobile
+
+### Responsive Strategy: Component Transformation
+
+#### Desktop → Mobile Transformation Plan
+**Desktop**: Side-by-side layout with text left, images right
+**Mobile**: Vertical stacking with optimized image scaling
+
+#### Mobile Component Stack (Top → Bottom)
+1. **Main Heading** - Responsive typography with orange accent
+2. **Description Text** - Mobile-optimized line spacing
+3. **Fuel Tank Indicator** - Centered and touch-optimized
+4. **Dashboard Preview** - Scaled down with proper aspect ratio
+
+### Three-Phase Implementation Plan
+
+#### Phase 1: Desktop CSS Foundation Fixes
+**Target**: Convert absolute positioning to flexible layout
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+
+**Step 1.1: Container Flexibility (Lines 853-859)**
+```css
+/* REPLACE CURRENT */
+.homepage .fuel {
+  position: relative;
+  width: 1440px; /* ← REMOVE FIXED WIDTH */
+  height: 606px;
+  margin-top: -1px;
+  background-color: var(--off-white);
+}
+
+/* WITH RESPONSIVE */
+.homepage .fuel {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 606px;
+  margin: 0 auto;
+  background-color: var(--off-white);
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+```
+
+**Step 1.2: Text Content Flexibility (Lines 861-867)**  
+```css
+/* REPLACE CURRENT */
+.homepage .group-9 {
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  width: 440px; /* ← REMOVE FIXED WIDTH */
+  height: 212px;
+  top: 143px;
+  left: 104px; /* ← REMOVE FIXED POSITIONING */
+}
+
+/* WITH RESPONSIVE */
+.homepage .group-9 {
+  position: relative;
+  flex: 1;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+```
+
+**Step 1.3: Image Layout Flexibility (Lines 917-932)**
+```css  
+/* REPLACE CURRENT */
+.homepage .mask-group {
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  width: 817px; /* ← REMOVE FIXED WIDTH */
+  height: 606px;
+  top: 0;
+  left: 623px; /* ← REMOVE FIXED POSITIONING */
+}
+
+.homepage .fuel-tank {
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  width: 432px; /* ← REMOVE FIXED WIDTH */
+  height: 49px;
+  top: 387px;
+  left: 104px; /* ← REMOVE FIXED POSITIONING */
+  object-fit: cover;
+}
+
+/* WITH RESPONSIVE */
+.homepage .fuel-content-wrapper {
+  flex: 1;
+  position: relative;
+  max-width: 817px;
+  min-height: 606px;
+}
+
+.homepage .mask-group {
+  width: 100%;
+  height: auto;
+  max-width: 817px;
+  object-fit: contain;
+}
+
+.homepage .fuel-tank {
+  width: 100%;
+  max-width: 432px;
+  height: auto;
+  margin-top: 32px;
+}
+```
+
+#### Phase 2: Mobile Component Stacking (Add New CSS)
+**Target**: Create mobile-first vertical layout
+**Location**: Add after line 932 in style.css
+
+```css
+/* =============================== */
+/* FUEL TANK - MOBILE RESPONSIVE  */
+/* =============================== */
+
+@media screen and (max-width: 768px) {
+  .homepage .fuel {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    padding: 60px 20px;
+    min-height: auto;
+  }
+  
+  .homepage .group-9 {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Mobile heading */
+  .homepage .div-3 {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: var(--polaris-mobile-h1-font-size);
+    line-height: var(--polaris-mobile-h1-line-height);
+    text-align: center;
+  }
+  
+  /* Mobile description */
+  .homepage .the-more {
+    position: static;
+    width: 100%;
+    font-size: var(--polaris-mobile-medium-text-font-size);
+    line-height: var(--polaris-mobile-medium-text-line-height);
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Mobile fuel tank - prominent display */
+  .homepage .fuel-tank {
+    order: 2;
+    max-width: 300px;
+    margin: 0 auto 30px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+  }
+  
+  .homepage .fuel-tank:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Mobile dashboard preview - scaled down */
+  .homepage .fuel-content-wrapper {
+    order: 3;
+    max-width: 100%;
+  }
+  
+  .homepage .mask-group {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Mobile fuel tank interaction */
+  .homepage .fuel-tank {
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .homepage .fuel-tank:active {
+    transform: scale(0.95);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .homepage .fuel {
+    padding: 40px 15px;
+    gap: 30px;
+  }
+  
+  .homepage .div-3 {
+    font-size: var(--polaris-mobile-small-h1-font-size);
+  }
+  
+  .homepage .fuel-tank {
+    max-width: 280px;
+  }
+  
+  .homepage .mask-group {
+    border-radius: 8px;
+  }
+}
+```
+
+#### Phase 3: Advanced Mobile Enhancements
+**Target**: Add interactive fuel tank and accessibility  
+
+**Step 3.1: HTML Structure Enhancement (Add to fuel-block.php)**
+```php
+// Add wrapper div around images (lines 71-81)
+<div class="fuel-content-wrapper">
+    <img class="mask-group" 
+         src="<?php echo esc_url(get_template_directory_uri()); ?>/img/mask-group.png"
+         alt="Dashboard interface preview showing AI-powered marketing tools and analytics"
+         loading="lazy" />
+    <img class="fuel-tank"
+         src="<?php echo esc_url(get_template_directory_uri()); ?>/img/fuel-tank-5-1.png"
+         alt="Launchpad Fuel indicator showing current data completeness level"
+         loading="lazy"
+         role="button"
+         tabindex="0"
+         aria-label="View fuel tank indicator details" />
+</div>
+```
+
+**Step 3.2: Enhanced Mobile Interactions**
+```css
+/* Advanced mobile styling */
+@media screen and (max-width: 768px) {
+  /* Fuel tank pulse animation */
+  .homepage .fuel-tank {
+    animation: fuelPulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes fuelPulse {
+    0%, 100% { 
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15)); 
+    }
+    50% { 
+      filter: drop-shadow(0 6px 20px rgba(243, 156, 18, 0.3)); 
+    }
+  }
+  
+  /* Dashboard preview hover effect */
+  .homepage .mask-group {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .homepage .mask-group:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  }
+  
+  /* Accessibility improvements */
+  .homepage .fuel-tank:focus {
+    outline: 3px solid var(--flare-orange);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+  
+  /* Content animation on scroll */
+  .homepage .group-9 > * {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .homepage .div-3 { animation-delay: 0.2s; }
+  .homepage .the-more { animation-delay: 0.4s; }
+  .homepage .fuel-tank { animation-delay: 0.6s; }
+  .homepage .mask-group { animation-delay: 0.8s; }
+}
+```
+
+**Step 3.3: Mobile-Specific JavaScript Enhancement (Optional)**
+```javascript
+// Add to fuel-block.php for enhanced interaction
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 768) {
+    const fuelTank = document.querySelector('.fuel-tank');
+    
+    if (fuelTank) {
+      fuelTank.addEventListener('click', function() {
+        // Optional: Show fuel level details
+        fuelTank.style.animation = 'none';
+        setTimeout(() => {
+          fuelTank.style.animation = 'fuelPulse 3s ease-in-out infinite';
+        }, 100);
+      });
+      
+      fuelTank.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          fuelTank.click();
+        }
+      });
+    }
+  }
+});
+```
+
+### Testing Checklist
+
+#### Desktop Testing (1200px+)
+- [ ] Section maintains off-white background  
+- [ ] Text and images display side-by-side properly
+- [ ] Fuel tank indicator positioned correctly below text
+- [ ] Dashboard preview scales appropriately
+- [ ] Typography maintains proper hierarchy
+- [ ] Orange accent color renders correctly
+
+#### Tablet Testing (768px-1199px)
+- [ ] Layout scales down proportionally
+- [ ] Content remains readable and well-spaced  
+- [ ] Images maintain aspect ratio
+- [ ] Touch interactions work properly
+- [ ] No horizontal overflow
+
+#### Mobile Testing (320px-767px)
+- [ ] Content stacks vertically in logical order
+- [ ] Heading uses mobile typography variables
+- [ ] Fuel tank displays prominently and responds to interaction
+- [ ] Dashboard preview scales appropriately
+- [ ] Touch targets appropriately sized
+- [ ] Animations enhance user experience
+- [ ] Content readable without horizontal scrolling
+
+#### Cross-Device Testing
+- [ ] Layout transitions smoothly between breakpoints
+- [ ] Images maintain quality at different sizes
+- [ ] Typography scales appropriately 
+- [ ] Interactive elements work across devices
+- [ ] Orange accent color consistent
+- [ ] Accessibility features function properly
+
+**STATUS**: ✅ Complete - Fuel Tank Section component breakdown and responsive plan ready
+
+---
 - **COMPLEX ABSOLUTE POSITIONING**: Multiple nested groups with absolute positioning
 - **PRICING CARDS**: Three-column layout needs mobile stacking
 - **EXISTING PARTIAL CSS**: Some mobile styles exist but are incomplete
