@@ -85,65 +85,669 @@ Transform the current fixed-width (1440px) WordPress site into a fully responsiv
 
 ## DETAILED BLOCK ANALYSIS & IMPLEMENTATION
 
-### 🔍 Header Blocks - DETAILED AUDIT
+## 🎯 COMPREHENSIVE HEADER BLOCKS IMPLEMENTATION PLAN
 
-#### Header Block (Dark) - `header-block.php`
-**Current State**: BROKEN - Modified with conflicting inline CSS  
-**Complexity**: Medium-High  
-**Used on**: Homepage (dark starry background)
+### CURRENT STATE ANALYSIS:
 
-**Current Structure Issues**:
-- ❌ Broken inline CSS overrides in PHP file
-- ❌ Complex absolute positioning: `position: absolute; top: 30px; left: 804px`
-- ❌ Fixed widths: `width: 939.8px`, `gap: 94px`
-- ❌ Burger menu HTML exists but CSS is broken
-- ❌ Conflicting mobile CSS in main stylesheet
+#### **Dark Header (homepage)** - `header-block.php` 
+- **BROKEN**: Lines 191-312 contain conflicting inline CSS
+- **BROKEN**: Lines 5353-5686 in style.css contain broken mobile CSS  
+- **DESKTOP CSS**: Lines 235-243 use absolute positioning (`position: absolute; top: 30px; left: 804px`)
+- **JAVASCRIPT**: Working burger menu functionality exists
+- **HTML STRUCTURE**: Proper burger menu elements exist
 
-**HTML Structure Analysis**:
+#### **White Header (inner pages)** - `header-block-white.php`
+- **CLEAN STATE**: No broken CSS
+- **MISSING**: No mobile functionality - no burger menu HTML or JavaScript
+- **DESKTOP CSS**: Lines 1857-1975 use relative positioning but fixed widths
+
+### DETAILED IMPLEMENTATION PLAN:
+
+## **PHASE 1: EMERGENCY CLEANUP (Dark Header)**
+
+### **Step 1: Remove Broken Inline CSS**
+**File**: `/wp-content/themes/polaris-homepage/blocks/header-block.php`
+**Lines to DELETE**: 191-312
+**ACTION**: Remove entire `<style>@media (max-width: 768px)...entire section...</style>` block
+
+### **Step 2: Remove Broken Mobile CSS Section** 
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines to DELETE**: 5353-5686
+**FIND**: `/* Mobile Header and Navigation */`
+**DELETE**: Everything from line 5353 to line 5686
+
+## **PHASE 2: DESKTOP CSS FOUNDATION FIXES**
+
+### **Dark Header Desktop Fix**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 235-243**: Replace absolute positioning
+
+**CURRENT BROKEN CSS:**
+```css
+.homepage .header {
+  display: inline-flex;
+  align-items: center;
+  gap: 94px;
+  position: absolute;    /* ← BREAKS RESPONSIVE */
+  top: 30px;            /* ← FIXED POSITION */
+  left: 804px;          /* ← FIXED POSITION */
+  background-color: transparent;
+}
+```
+
+**REPLACE WITH:**
+```css
+.homepage .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;      /* ← RESPONSIVE FRIENDLY */
+  padding: 30px 60px;     /* ← FLEXIBLE PADDING */
+  max-width: 1440px;      /* ← CONSTRAIN WIDTH */
+  margin: 0 auto;         /* ← CENTER CONTENT */
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+}
+```
+
+### **White Header Desktop Fix**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**Lines 1857-1875**: Fix fixed width and positioning
+
+**CURRENT CSS:**
+```css
+.header-innerpage {
+  position: relative;
+  width: 1440px;          /* ← FIXED WIDTH */
+  height: 138px;
+  background-color: #ffffff;
+}
+
+.header-innerpage .header {
+  display: inline-flex;
+  align-items: center;
+  gap: 94px;
+  position: relative;
+  top: 24px;              /* ← FIXED POSITION */
+  left: 69px;             /* ← FIXED POSITION */
+  background-color: transparent;
+}
+```
+
+**REPLACE WITH:**
+```css
+.header-innerpage {
+  position: relative;
+  width: 100%;            /* ← RESPONSIVE WIDTH */
+  min-height: 138px;
+  background-color: #ffffff;
+  padding: 0 20px;        /* ← RESPONSIVE PADDING */
+  box-sizing: border-box;
+}
+
+.header-innerpage .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  padding: 24px 60px;     /* ← FLEXIBLE PADDING */
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+```
+
+## **PHASE 3: MOBILE CSS IMPLEMENTATION**
+
+### **Dark Header Mobile CSS**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**INSERT after line 5351** (after existing hero mobile CSS)
+
+```css
+/* DARK HEADER MOBILE - Homepage */
+@media (max-width: 768px) {
+  .homepage .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+    height: auto;
+    min-height: 80px;
+  }
+  
+  /* Logo - responsive sizing */
+  .homepage .polaris-logo {
+    width: 180px;
+    height: auto;
+    order: 1;
+  }
+  
+  /* Hide desktop navigation completely */
+  .homepage .group-2 {
+    display: none;
+  }
+  
+  /* Show and style mobile burger menu */
+  .homepage .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    order: 3;
+    position: relative;
+    z-index: 10000;
+  }
+  
+  .homepage .burger-line {
+    width: 100%;
+    height: 3px;
+    background-color: white;        /* White lines for dark background */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Mobile dropdown overlay */
+  .homepage .group-2.mobile-menu-open {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(44, 62, 80, 0.98);   /* Dark overlay */
+    z-index: 9999;
+    padding: 100px 20px 20px;
+    overflow-y: auto;
+  }
+  
+  /* Mobile navigation structure */
+  .homepage .group-2.mobile-menu-open .frame-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  
+  .homepage .group-2.mobile-menu-open .div-wrapper {
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .homepage .group-2.mobile-menu-open .text-wrapper-2 a {
+    color: white;                   /* White text for dark background */
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+  }
+  
+  /* Mobile CTA buttons */
+  .homepage .group-2.mobile-menu-open .small-button,
+  .homepage .group-2.mobile-menu-open .button-wrapper {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .homepage .group-2.mobile-menu-open .button-2 {
+    width: 100%;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    display: block;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  /* Button styling - Login */
+  .homepage .group-2.mobile-menu-open .small-button .button-2 {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  
+  /* Button styling - Start Trial */
+  .homepage .group-2.mobile-menu-open .button-wrapper .button-2 {
+    background: var(--flare-orange);
+    color: white;
+    border: none;
+  }
+  
+  /* Burger menu animation */
+  .homepage .mobile-menu-toggle.active .burger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .homepage .mobile-menu-toggle.active .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .homepage .mobile-menu-toggle.active .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+}
+```
+
+### **White Header Mobile CSS**
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+**INSERT after dark header mobile CSS**
+
+```css
+/* WHITE HEADER MOBILE - Inner Pages */
+@media (max-width: 768px) {
+  .header-innerpage {
+    min-height: auto;
+    padding: 0;
+  }
+  
+  .header-innerpage .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  /* Logo responsive sizing */
+  .header-innerpage .polaris-logo {
+    width: 180px;
+    height: auto;
+  }
+  
+  /* Hide desktop navigation */
+  .header-innerpage .group {
+    display: none;
+  }
+  
+  /* Show mobile burger menu */
+  .header-innerpage .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10000;
+  }
+  
+  .header-innerpage .burger-line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--dark-grey);     /* Dark lines for light background */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Mobile dropdown menu */
+  .header-innerpage .group.mobile-menu-open {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);  /* Light overlay */
+    z-index: 9999;
+    padding: 100px 20px 20px;
+    overflow-y: auto;
+  }
+  
+  .header-innerpage .group.mobile-menu-open .frame {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    position: relative;
+  }
+  
+  .header-innerpage .group.mobile-menu-open .div-wrapper {
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .header-innerpage .group.mobile-menu-open .text-wrapper a {
+    color: var(--dark-grey);        /* Dark text for light background */
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+  }
+  
+  /* Mobile buttons */
+  .header-innerpage .group.mobile-menu-open .small-button,
+  .header-innerpage .group.mobile-menu-open .button-wrapper {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .header-innerpage .group.mobile-menu-open .button {
+    width: 100%;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    display: block;
+    text-decoration: none;
+  }
+  
+  /* Burger menu animation */
+  .header-innerpage .mobile-menu-toggle.active .burger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .header-innerpage .mobile-menu-toggle.active .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .header-innerpage .mobile-menu-toggle.active .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+}
+```
+
+## **PHASE 4: HTML STRUCTURE FIXES**
+
+### **White Header HTML Addition**
+**File**: `/wp-content/themes/polaris-homepage/blocks/header-block-white.php`
+**Add burger menu HTML after line 58**:
+
 ```php
-<header class="header">
-    <img class="polaris-logo" src="..." />
-    <button class="mobile-menu-toggle"> <!-- EXISTS BUT BROKEN -->
-        <span class="burger-line"></span> × 3
-    </button>
-    <div class="group-2" id="main-navigation">
-        <div class="frame-2"> <!-- Navigation items -->
-        <div class="small-button"> <!-- Login button -->
-        <div class="button-wrapper"> <!-- Start Trial button -->
-    </div>
-</header>
+<!-- Mobile burger menu button -->
+<button class="mobile-menu-toggle" id="mobile-menu-toggle-white" aria-label="Toggle navigation menu">
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+</button>
 ```
 
-**Required Components**:
-1. **Header Container** - Flexible wrapper (remove absolute positioning)
-2. **Logo Component** - Responsive sizing (268px→200px→150px)  
-3. **Navigation Component** - Desktop horizontal → Mobile dropdown
-4. **Button Group** - Always visible Login + Start Trial
-5. **Burger Menu** - Mobile toggle (repair existing functionality)
-
-**Implementation Strategy**:
+**Update navigation div with ID (line 60)**:
+```php
+<div class="group" id="main-navigation-white">
 ```
-PHASE 1: Emergency cleanup
-- Remove ALL inline CSS from header-block.php
-- Remove broken mobile CSS from style.css lines 5352-5686
-- Restore clean HTML-only structure
 
-PHASE 2: Build responsive foundation in style.css
-- Add mobile-first CSS to .homepage .header section
-- Implement flexbox layout system  
-- Proper media queries: <768px, 768-1024px, >1024px
+## **PHASE 5: JAVASCRIPT IMPLEMENTATION**
 
-PHASE 3: Component implementation
-- Header: flex container with responsive padding
-- Logo: 150px mobile, 200px tablet, 268px desktop
-- Navigation: hidden mobile, horizontal desktop
-- Burger: visible mobile, hidden desktop  
-- Buttons: stacked mobile, inline desktop
+### **White Header JavaScript**
+**File**: `/wp-content/themes/polaris-homepage/blocks/header-block-white.php`
+**Add before closing `?>` tag**:
 
-PHASE 4: JavaScript functionality
-- Repair burger menu toggle
-- Smooth mobile menu animations
-- Touch-friendly interactions
+```javascript
+<script>
+// Mobile menu toggle functionality for white header
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle-white');
+    const mainNavigation = document.getElementById('main-navigation-white');
+    
+    if (mobileMenuToggle && mainNavigation) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenuToggle.classList.toggle('active');
+            mainNavigation.classList.toggle('mobile-menu-open');
+            
+            // Toggle aria-expanded for accessibility
+            const isOpen = mainNavigation.classList.contains('mobile-menu-open');
+            mobileMenuToggle.setAttribute('aria-expanded', isOpen);
+            
+            // Prevent body scroll when menu is open
+            if (isOpen) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close menu when clicking navigation links
+        const navLinks = mainNavigation.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                mainNavigation.classList.remove('mobile-menu-open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Close menu when clicking overlay
+        mainNavigation.addEventListener('click', function(e) {
+            if (e.target === mainNavigation) {
+                mobileMenuToggle.classList.remove('active');
+                mainNavigation.classList.remove('mobile-menu-open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+});
+</script>
+```
+
+## **TESTING CHECKLIST**
+
+### **Desktop Tests:**
+- [ ] Dark header positions correctly on homepage
+- [ ] White header positions correctly on inner pages  
+- [ ] Logo sizes appropriately on both headers
+- [ ] Navigation items align properly
+- [ ] Buttons function correctly
+
+### **Mobile Tests:**
+- [ ] Burger menu appears on mobile
+- [ ] Dark header shows white burger lines
+- [ ] White header shows dark burger lines
+- [ ] Menu overlay covers full screen
+- [ ] Navigation links work in mobile menu
+- [ ] CTA buttons work in mobile menu
+- [ ] Menu closes when clicking links
+- [ ] Menu closes when clicking overlay
+- [ ] Burger animation works properly
+
+### **Cross-Browser Tests:**
+- [ ] Safari mobile
+- [ ] Chrome mobile
+- [ ] Firefox mobile
+- [ ] Desktop browsers at mobile widths
+
+**STEP 1: Emergency Cleanup (CRITICAL)**
+```php
+// FILE: /wp-content/themes/polaris-homepage/blocks/header-block.php
+// REMOVE lines 191-312 (all inline CSS)
+// DELETE everything from <style> to </style>
+
+// RESULT: Clean PHP file with only HTML structure
+```
+
+```css
+/* FILE: /wp-content/themes/polaris-homepage/style.css */
+/* DELETE lines 5353-5686 - Complete broken mobile CSS section */
+/* This removes all the conflicting mobile header CSS */
+
+/* FIND: "/* Mobile Header and Navigation */" */  
+/* DELETE: Everything from line 5353 to line 5686 */
+/* KEEP: Line 5687+ (Hide burger menu on desktop rule) */
+```
+
+**STEP 2: Fix Desktop CSS Foundation (Lines 235-336)**
+```css
+/* FILE: /wp-content/themes/polaris-homepage/style.css */
+/* MODIFY line 235-243: Change absolute positioning */
+
+/* CURRENT (BROKEN): */
+.homepage .header {
+  display: inline-flex;
+  align-items: center;
+  gap: 94px;
+  position: absolute;  /* ← BREAKS RESPONSIVE */
+  top: 30px;          /* ← FIXED POSITION */
+  left: 804px;        /* ← FIXED POSITION */
+  background-color: transparent;
+}
+
+/* REPLACE WITH: */
+.homepage .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;    /* ← RESPONSIVE FRIENDLY */
+  padding: 30px 60px;   /* ← FLEXIBLE PADDING */
+  max-width: 1440px;    /* ← CONSTRAIN WIDTH */
+  margin: 0 auto;       /* ← CENTER CONTENT */
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+}
+```
+
+**STEP 3: Add Mobile CSS (INSERT at line 5353)**
+```css
+/* FILE: /wp-content/themes/polaris-homepage/style.css */
+/* INSERT after line 5352 (after hero mobile CSS) */
+
+/* Mobile Header - Dark (Homepage) */
+@media (max-width: 768px) {
+  .homepage .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  /* Logo - responsive sizing */
+  .homepage .polaris-logo {
+    width: 180px;
+    height: auto;
+    align-self: flex-start;
+  }
+  
+  /* Hide desktop navigation */
+  .homepage .group-2 {
+    display: none;
+  }
+  
+  /* Show mobile burger menu */
+  .homepage .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .homepage .burger-line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Mobile dropdown menu */
+  .homepage .group-2.mobile-menu-open {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(44, 62, 80, 0.98);
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  }
+  
+  .homepage .group-2.mobile-menu-open .frame-2 {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+  
+  .homepage .group-2.mobile-menu-open .div-wrapper {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .homepage .group-2.mobile-menu-open .text-wrapper-2 a {
+    color: white;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+  }
+  
+  /* Mobile buttons */
+  .homepage .group-2.mobile-menu-open .small-button,
+  .homepage .group-2.mobile-menu-open .button-wrapper {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .homepage .group-2.mobile-menu-open .button-2 {
+    width: 100%;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  /* Burger menu animation */
+  .homepage .mobile-menu-toggle.active .burger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .homepage .mobile-menu-toggle.active .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .homepage .mobile-menu-toggle.active .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+}
+
+/* Hide burger menu on desktop */
+@media (min-width: 769px) {
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+}
+```
+
+**STEP 4: Fix JavaScript (Repair existing)**
+```javascript
+// FILE: /wp-content/themes/polaris-homepage/blocks/header-block.php  
+// CURRENT JavaScript is correct, just ensure it targets right elements
+
+// VERIFY lines 115-139 contain:
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const mobileNavigation = document.querySelector('.frame-2');
+
+// IF NOT, REPLACE with:
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const mobileNavigation = document.querySelector('#main-navigation');
 ```
 
 #### Header Block (White) - `header-block-white.php`
@@ -181,23 +785,239 @@ PHASE 4: JavaScript functionality
 3. **Ensure consistent mobile behavior** with dark header
 4. **Test on all inner pages** (pricing, about, contact, features)
 
-**Implementation Strategy**:
-```
-PHASE 1: Add mobile menu HTML
-- Copy burger menu structure from header-block.php
-- Add mobile menu toggle functionality
+**DETAILED IMPLEMENTATION STEPS**:
 
-PHASE 2: Responsive CSS for .header-innerpage  
-- Follow same patterns as dark header
-- Adjust colors for light background
-- Ensure proper contrast
+**STEP 1: Add Mobile Menu HTML**
+```php
+// FILE: /wp-content/themes/polaris-homepage/blocks/header-block-white.php
+// ADD after line 58 (after polaris-logo img tag):
 
-PHASE 3: Cross-page testing
-- Test pricing page
-- Test about page  
-- Test contact page
-- Test blog pages
+          <!-- Mobile burger menu button -->
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle-white" aria-label="Toggle navigation menu">
+              <span class="burger-line"></span>
+              <span class="burger-line"></span>
+              <span class="burger-line"></span>
+          </button>
+
+// MODIFY line 60 - ADD id attribute:
+          <div class="group" id="main-navigation-white">
 ```
+
+**STEP 2: Fix Desktop CSS (Lines 1857-1975)**
+```css
+/* FILE: /wp-content/themes/polaris-homepage/style.css */
+/* MODIFY lines 1857-1862: Fix container width */
+
+/* CURRENT (BROKEN): */
+.header-innerpage {
+  position: relative;
+  width: 1440px;        /* ← BREAKS ON SMALLER SCREENS */
+  height: 138px;
+  background-color: #ffffff;
+}
+
+/* REPLACE WITH: */
+.header-innerpage {
+  position: relative;
+  max-width: 1440px;    /* ← RESPONSIVE WIDTH */
+  width: 100%;
+  min-height: 138px;    /* ← FLEXIBLE HEIGHT */
+  background-color: #ffffff;
+  margin: 0 auto;       /* ← CENTER CONTENT */
+  box-sizing: border-box;
+}
+
+/* MODIFY lines 1864-1872: Fix header positioning */
+/* CURRENT (PROBLEMATIC): */
+.header-innerpage .header {
+  display: inline-flex;
+  align-items: center;
+  gap: 94px;
+  position: relative;
+  top: 24px;           /* ← FIXED POSITIONING */
+  left: 69px;          /* ← FIXED POSITIONING */
+  background-color: transparent;
+}
+
+/* REPLACE WITH: */
+.header-innerpage .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  padding: 24px 60px;  /* ← FLEXIBLE PADDING */
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+}
+```
+
+**STEP 3: Add Mobile CSS (INSERT after line 1975)**
+```css
+/* FILE: /wp-content/themes/polaris-homepage/style.css */
+/* INSERT after .header-innerpage .button-wrapper (around line 1975) */
+
+/* Mobile Header - White (Inner Pages) */
+@media (max-width: 768px) {
+  .header-innerpage {
+    min-height: auto;
+    padding: 0;
+  }
+  
+  .header-innerpage .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  /* Logo - responsive sizing */
+  .header-innerpage .polaris-logo {
+    width: 180px;
+    height: auto;
+    align-self: flex-start;
+  }
+  
+  /* Hide desktop navigation */
+  .header-innerpage .group {
+    display: none;
+  }
+  
+  /* Show mobile burger menu */
+  .header-innerpage .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .header-innerpage .burger-line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--dark-grey);  /* ← DARK LINES FOR LIGHT BG */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Mobile dropdown menu */
+  .header-innerpage .group.mobile-menu-open {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);  /* ← WHITE BACKGROUND */
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  
+  .header-innerpage .group.mobile-menu-open .frame {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    position: relative;
+    top: auto;
+    left: auto;
+  }
+  
+  .header-innerpage .group.mobile-menu-open .div-wrapper {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .header-innerpage .group.mobile-menu-open .text-wrapper a {
+    color: var(--dark-grey);  /* ← DARK TEXT FOR LIGHT BG */
+    font-size: 16px;
+    display: block;
+    width: 100%;
+  }
+  
+  /* Mobile buttons */
+  .header-innerpage .group.mobile-menu-open .small-button,
+  .header-innerpage .group.mobile-menu-open .button-wrapper {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .header-innerpage .group.mobile-menu-open .button {
+    width: 100%;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  /* Burger menu animation */
+  .header-innerpage .mobile-menu-toggle.active .burger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .header-innerpage .mobile-menu-toggle.active .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .header-innerpage .mobile-menu-toggle.active .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+}
+```
+
+**STEP 4: Add JavaScript Functionality**
+```php
+// FILE: /wp-content/themes/polaris-homepage/blocks/header-block-white.php
+// ADD before closing ?> tag (around line 95):
+
+      <script>
+      // Mobile menu toggle functionality for white header
+      document.addEventListener('DOMContentLoaded', function() {
+          const mobileMenuToggle = document.getElementById('mobile-menu-toggle-white');
+          const mainNavigation = document.getElementById('main-navigation-white');
+          
+          if (mobileMenuToggle && mainNavigation) {
+              mobileMenuToggle.addEventListener('click', function() {
+                  mobileMenuToggle.classList.toggle('active');
+                  mainNavigation.classList.toggle('mobile-menu-open');
+                  
+                  // Toggle aria-expanded for accessibility
+                  const isOpen = mainNavigation.classList.contains('mobile-menu-open');
+                  mobileMenuToggle.setAttribute('aria-expanded', isOpen);
+              });
+              
+              // Close menu when clicking on navigation links
+              const navLinks = mainNavigation.querySelectorAll('a');
+              navLinks.forEach(link => {
+                  link.addEventListener('click', function() {
+                      mobileMenuToggle.classList.remove('active');
+                      mainNavigation.classList.remove('mobile-menu-open');
+                      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                  });
+              });
+          }
+      });
+      </script>
+```
+
+**STEP 5: Testing Checklist**
+- ✅ Test pricing page (/pricing)
+- ✅ Test about page (/about)  
+- ✅ Test contact page (/contact)
+- ✅ Test features pages (/features)
+- ✅ Test blog pages (/blog)
+- ✅ Verify burger menu works on all pages
+- ✅ Check mobile menu dropdown styling
+- ✅ Test touch interactions on mobile devices
 
 ### 🔍 Hero Block - DETAILED AUDIT
 
@@ -568,6 +1388,346 @@ The theme already has mobile typography variables defined. Implement them:
 ```
 
 **Test Checkpoint**: Hero section should be clean and functional on mobile
+
+---
+
+## 🎯 PRICING BLOCK ANALYSIS
+
+### PRICING BLOCK STATUS: ⚠️ PARTIAL IMPLEMENTATION
+**File:** `/wp-content/themes/polaris-homepage/blocks/pricing-plans-block.php`
+
+#### CRITICAL FINDINGS:
+- **PARTIAL MOBILE CSS**: Lines 5529-5699 in style.css contain incomplete pricing mobile CSS
+- **COMPLEX ABSOLUTE POSITIONING**: Multiple nested groups with absolute positioning
+- **PRICING CARDS**: Three-column layout needs mobile stacking
+- **EXISTING PARTIAL CSS**: Some mobile styles exist but are incomplete
+
+#### Current Partial Mobile CSS (lines 5529-5699):
+```css
+/* Mobile Pricing Plans */
+.wp-block-polaris-pricing-plans .pricing-page {
+  width: 100% !important;
+  height: auto !important;
+  padding: 40px 20px !important;
+  /* ... partial implementation exists ... */
+}
+```
+
+#### REQUIRED COMPLETION:
+**File:** `/wp-content/themes/polaris-homepage/style.css`
+**MODIFY lines 5529-5699** - Complete the existing partial implementation:
+```css
+/* Complete Mobile Pricing Plans CSS */
+@media (max-width: 768px) {
+  .wp-block-polaris-pricing-plans .pricing-page {
+    width: 100% !important;
+    height: auto !important;
+    padding: 40px 20px !important;
+    overflow: visible !important;
+    position: relative !important;
+  }
+  
+  /* Hide all background decorative elements */
+  .wp-block-polaris-pricing-plans .pricing-page .vector,
+  .wp-block-polaris-pricing-plans .pricing-page .img,
+  .wp-block-polaris-pricing-plans .pricing-page .vector-2,
+  .wp-block-polaris-pricing-plans .pricing-page .logo-icon,
+  .wp-block-polaris-pricing-plans .pricing-page .group-2,
+  .wp-block-polaris-pricing-plans .pricing-page .group-3,
+  .wp-block-polaris-pricing-plans .pricing-page .group-4 {
+    display: none !important;
+  }
+  
+  /* Main pricing container */
+  .wp-block-polaris-pricing-plans .pricing-page .overlap {
+    position: relative !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+  
+  .wp-block-polaris-pricing-plans .pricing-page .group {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .wp-block-polaris-pricing-plans .pricing-page .frame {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 30px !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+  
+  /* Individual pricing cards - make them stack */
+  .wp-block-polaris-pricing-plans .pricing-page .div,
+  .wp-block-polaris-pricing-plans .pricing-page .overlap-4,
+  .wp-block-polaris-pricing-plans .pricing-page .overlap-3,
+  .wp-block-polaris-pricing-plans .pricing-page .div-2 {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 350px !important;
+    height: auto !important;
+    margin: 0 auto 20px auto !important;
+    padding: 30px 20px !important;
+    background: white !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+  }
+  
+  /* Plan headers and pricing */
+  .wp-block-polaris-pricing-plans .pricing-page .overlap-group,
+  .wp-block-polaris-pricing-plans .pricing-page .overlap-group-5,
+  .wp-block-polaris-pricing-plans .pricing-page .overlap-group-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .wp-block-polaris-pricing-plans .pricing-page .text-wrapper,
+  .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-4,
+  .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-6 {
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+    position: relative !important;
+  }
+  
+  .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-2,
+  .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-5,
+  .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-7 {
+    font-size: 28px !important;
+    color: var(--flare-orange) !important;
+    font-weight: bold !important;
+    position: relative !important;
+  }
+  
+  /* Buttons - make them full width */
+  .wp-block-polaris-pricing-plans .pricing-page .small-button,
+  .wp-block-polaris-pricing-plans .pricing-page .button-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    margin: 10px 0 !important;
+  }
+  
+  .wp-block-polaris-pricing-plans .pricing-page .button {
+    width: 100% !important;
+    padding: 15px 20px !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    border-radius: 8px !important;
+  }
+}
+```
+
+**STATUS**: ⚠️ Needs Completion - Expand existing partial mobile CSS
+
+---
+
+## 🎯 FEATURES BLOCKS ANALYSIS
+
+### FEATURES BLOCKS STATUS: ❌ NEEDS IMPLEMENTATION
+**Files:** 
+- `/wp-content/themes/polaris-homepage/blocks/features-section1-block.php`
+- `/wp-content/themes/polaris-homepage/blocks/features-section2-block.php` 
+- `/wp-content/themes/polaris-homepage/blocks/features-section3-block.php`
+- `/wp-content/themes/polaris-homepage/blocks/features-section4-block.php`
+
+#### CRITICAL FINDINGS:
+- **NO MOBILE CSS**: Features blocks have no responsive CSS implementation
+- **ABSOLUTE POSITIONING**: Uses complex absolute positioning that will break on mobile
+- **MULTIPLE DECORATIVE IMAGES**: Contains background vectors that need mobile handling
+- **COMPLEX LAYOUT**: Text + image combinations need mobile restructuring
+
+#### Features Section 1 Analysis:
+**Current Structure:**
+```php
+<section class="features-section">
+  <div class="overlap-group">
+    <img class="vector" />          <!-- Background decoration */
+    <img class="img" />            /* Background decoration */
+    <img class="hero-copy" />      /* Main illustration */
+    <div class="group">           /* Text content */
+      <h1 class="your-business-hub">Your Business Hub:<br />The AI's Knowledge Center</h1>
+      <p class="think-of-your">Think of your Business Hub as your AI's brain...</p>
+    </div>
+    <img class="vector-2" />       /* Background decoration */
+    <img class="logo-icon" />     /* Logo decoration */
+  </div>
+</section>
+```
+
+#### REQUIRED MOBILE CSS FOR FEATURES:
+**File:** `/wp-content/themes/polaris-homepage/style.css`
+**INSERT after hero mobile CSS (around line 5352):**
+```css
+/* Features Blocks Mobile CSS */
+@media (max-width: 768px) {
+  /* Features Section 1 */
+  .wp-block-polaris-features-section1 .features-section {
+    padding: 40px 20px;
+    min-height: auto;
+    overflow: visible;
+  }
+  
+  .wp-block-polaris-features-section1 .overlap-group {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Hide decorative background images on mobile */
+  .wp-block-polaris-features-section1 .vector,
+  .wp-block-polaris-features-section1 .img,
+  .wp-block-polaris-features-section1 .vector-2,
+  .wp-block-polaris-features-section1 .logo-icon {
+    display: none;
+  }
+  
+  /* Main illustration - make responsive */
+  .wp-block-polaris-features-section1 .hero-copy {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin-bottom: 30px;
+    z-index: 1;
+  }
+  
+  /* Text content container */
+  .wp-block-polaris-features-section1 .group {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  
+  /* Heading responsive */
+  .wp-block-polaris-features-section1 .your-business-hub {
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  
+  /* Paragraph responsive */
+  .wp-block-polaris-features-section1 .think-of-your {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  /* Similar patterns for Features Section 2, 3, 4 */
+  .wp-block-polaris-features-section2,
+  .wp-block-polaris-features-section3,
+  .wp-block-polaris-features-section4 {
+    /* Apply same mobile patterns */
+  }
+}
+```
+
+**STATUS**: ❌ Needs Implementation - Mobile CSS required for all 4 features sections
+
+---
+
+## 🦶 FOOTER BLOCK ANALYSIS
+
+### FOOTER BLOCK STATUS: ❌ NEEDS IMPLEMENTATION
+**File:** `/wp-content/themes/polaris-homepage/blocks/footer-block.php`
+
+#### CRITICAL FINDINGS:
+- **NO MOBILE CSS**: Footer has no responsive implementation
+- **COMPLEX GRID LAYOUT**: Multi-column footer with company info, links, social media
+- **ABSOLUTE POSITIONING**: Uses absolute positioning that breaks on mobile
+- **BACKGROUND ELEMENTS**: Contains decorative backgrounds that need mobile handling
+
+#### REQUIRED MOBILE CSS FOR FOOTER:
+**File:** `/wp-content/themes/polaris-homepage/style.css`
+**INSERT after pricing mobile CSS (around line 5700):**
+```css
+/* Footer Mobile CSS */
+@media (max-width: 768px) {
+  .wp-block-polaris-footer .footer {
+    padding: 40px 20px !important;
+    min-height: auto !important;
+    position: relative !important;
+  }
+  
+  /* Hide decorative background elements */
+  .wp-block-polaris-footer .vector,
+  .wp-block-polaris-footer .img,
+  .wp-block-polaris-footer .vector-2,
+  .wp-block-polaris-footer .logo-icon,
+  .wp-block-polaris-footer .ellipse {
+    display: none !important;
+  }
+  
+  /* Footer main container */
+  .wp-block-polaris-footer .overlap,
+  .wp-block-polaris-footer .overlap-group {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Footer content - stack vertically */
+  .wp-block-polaris-footer .group,
+  .wp-block-polaris-footer .frame {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 30px !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+  
+  /* Logo section */
+  .wp-block-polaris-footer .polaris-logo {
+    width: 200px !important;
+    height: auto !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Navigation links - stack vertically */
+  .wp-block-polaris-footer .div-wrapper {
+    width: 100% !important;
+    margin: 10px 0 !important;
+  }
+  
+  .wp-block-polaris-footer .text-wrapper a {
+    font-size: 16px !important;
+    display: block !important;
+    padding: 10px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  }
+  
+  /* Social media icons */
+  .wp-block-polaris-footer .social-icons {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    margin: 20px 0 !important;
+  }
+  
+  /* Copyright and legal */
+  .wp-block-polaris-footer .copyright {
+    font-size: 14px !important;
+    text-align: center !important;
+    margin-top: 30px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+  }
+}
+```
+
+**STATUS**: ❌ Needs Implementation - No mobile CSS exists
 
 ---
 
