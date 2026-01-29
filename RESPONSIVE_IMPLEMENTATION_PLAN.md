@@ -3499,9 +3499,397 @@ document.addEventListener('DOMContentLoaded', function() {
 **STATUS**: ✅ Complete - Fuel Tank Section component breakdown and responsive plan ready
 
 ---
-- **COMPLEX ABSOLUTE POSITIONING**: Multiple nested groups with absolute positioning
-- **PRICING CARDS**: Three-column layout needs mobile stacking
-- **EXISTING PARTIAL CSS**: Some mobile styles exist but are incomplete
+
+## 🎯 FOUNDER TESTIMONIAL SECTION ANALYSIS
+
+### Visual Component Identification
+Based on code analysis of `founder-block.php`, the Founder Testimonial Section (off-white background) contains these components:
+
+#### Component 1: Founder Photo
+- **Current Structure**: Large founder portrait image (`element` class)
+- **Elements**: Full-height founder photo (`2asdf-1.png`)
+- **Current CSS**: Lines 1025-1032 - absolute positioned covering left side
+- **Issues**: Fixed 802px width, absolute positioning breaks mobile flow
+
+#### Component 2: Testimonial Content Area  
+- **Current Structure**: Text content container (`group-10`) positioned on right
+- **Content**:
+  - Heading: "A Tool Built for Small Business Owners, by **People Who Understand Them**"
+  - Testimonial: Long founder quote with attribution
+  - Attribution: "– Joel Chudleigh, Founder, Polaris Launchpad AI"
+- **Current CSS**: Lines 971-1007 - absolute positioned at right side
+- **Issues**: Fixed 440px width, absolute positioning breaks mobile
+
+#### Component 3: Decorative Elements
+- **Current Structure**: Multiple background vector decorations
+- **Elements**:
+  - Vector-4 (line decoration) at lines 947-953
+  - Vector-5 (background pattern) at lines 955-961  
+  - Vector-6 (background overlay) at lines 963-969
+  - Polaris logo icon at lines 1016-1023
+- **Current CSS**: All absolutely positioned with fixed coordinates
+- **Issues**: Multiple overlapping decorative elements break mobile layout
+
+### Current Problems Analysis
+
+#### Desktop CSS Issues (Lines 934-1032)
+1. **Fixed Container Width**: `.founder` set to 1440px (line 936)
+2. **Absolute Image Positioning**: Large founder photo positioned absolutely
+3. **Absolute Content Positioning**: Text content positioned with fixed coordinates
+4. **Multiple Background Vectors**: Complex decoration system not responsive
+5. **Fixed Typography**: Quote text uses non-responsive font sizing
+
+#### Mobile Incompatibility
+1. **No Responsive Design**: No mobile-specific CSS exists
+2. **Content Overlap**: Photo and text will overlap on mobile screens
+3. **Image Overflow**: Large founder photo will cause layout issues
+4. **Typography Issues**: Long testimonial text needs mobile optimization
+5. **Decoration Clutter**: Multiple vectors will create visual noise on mobile
+
+### Responsive Strategy: Component Transformation
+
+#### Desktop → Mobile Transformation Plan
+**Desktop**: Side-by-side layout with photo left, testimonial right
+**Mobile**: Vertical stacking with simplified decorations
+
+#### Mobile Component Stack (Top → Bottom)
+1. **Main Heading** - Responsive typography with orange accent
+2. **Founder Photo** - Centered, circular crop, appropriate mobile size  
+3. **Testimonial Quote** - Mobile-optimized typography and spacing
+4. **Attribution** - Styled attribution with founder name
+5. **Simplified Logo** - Single Polaris logo decoration
+
+### Three-Phase Implementation Plan
+
+#### Phase 1: Desktop CSS Foundation Fixes
+**Target**: Convert absolute positioning to flexible layout
+**File**: `/wp-content/themes/polaris-homepage/style.css`
+
+**Step 1.1: Container Flexibility (Lines 934-940)**
+```css
+/* REPLACE CURRENT */
+.homepage .founder {
+  position: relative;
+  width: 1440px; /* ← REMOVE FIXED WIDTH */
+  height: 695px;
+  margin-top: -1px;
+  background-color: var(--off-white);
+}
+
+/* WITH RESPONSIVE */
+.homepage .founder {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 695px;
+  margin: 0 auto;
+  background-color: var(--off-white);
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+```
+
+**Step 1.2: Photo Layout Flexibility (Lines 1025-1032)**
+```css
+/* REPLACE CURRENT */
+.homepage .element {
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  width: 802px; /* ← REMOVE FIXED WIDTH */
+  height: 695px;
+  top: 0;
+  left: 1px; /* ← REMOVE FIXED POSITIONING */
+  object-fit: cover;
+}
+
+/* WITH RESPONSIVE */
+.homepage .founder-photo-wrapper {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+}
+
+.homepage .element {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+```
+
+**Step 1.3: Content Layout Flexibility (Lines 971-1007)**
+```css
+/* REPLACE CURRENT */
+.homepage .group-10 {
+  position: absolute; /* ← REMOVE ABSOLUTE */
+  width: 440px; /* ← REMOVE FIXED WIDTH */
+  height: 403px;
+  top: 115px;
+  left: 826px; /* ← REMOVE FIXED POSITIONING */
+}
+
+/* WITH RESPONSIVE */
+.homepage .group-10 {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+```
+
+#### Phase 2: Mobile Component Stacking (Add New CSS)
+**Target**: Create mobile-first vertical testimonial layout
+**Location**: Add after line 1032 in style.css
+
+```css
+/* ===================================== */
+/* FOUNDER TESTIMONIAL - MOBILE RESPONSIVE */
+/* ===================================== */
+
+@media screen and (max-width: 768px) {
+  .homepage .founder {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    padding: 60px 20px;
+    min-height: auto;
+  }
+  
+  /* Hide complex desktop decorations */
+  .homepage .vector-4,
+  .homepage .vector-5,
+  .homepage .vector-6,
+  .homepage .vector-7 {
+    display: none;
+  }
+  
+  /* Mobile founder photo */
+  .homepage .founder-photo-wrapper {
+    order: 2;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
+  .homepage .element {
+    border-radius: 50%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    max-height: 250px;
+  }
+  
+  /* Mobile content */
+  .homepage .group-10 {
+    order: 1;
+    max-width: 100%;
+    text-align: center;
+    gap: 25px;
+  }
+  
+  /* Mobile heading */
+  .homepage .div-3 {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: var(--polaris-mobile-h2-font-size);
+    line-height: var(--polaris-mobile-h2-line-height);
+    text-align: center;
+  }
+  
+  /* Mobile testimonial */
+  .homepage .as-someone-with {
+    position: static;
+    width: 100%;
+    font-size: var(--polaris-mobile-medium-text-font-size);
+    line-height: var(--polaris-mobile-medium-text-line-height);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 30px 25px;
+    border-radius: 12px;
+    border-left: 4px solid #1abc9c;
+  }
+  
+  .homepage .text-wrapper-13 {
+    font-style: italic;
+    color: #444444;
+  }
+  
+  .homepage .text-wrapper-14 {
+    display: block;
+    margin-top: 20px;
+    font-size: var(--polaris-mobile-small-text-font-size);
+    color: #1abc9c;
+    font-weight: 700;
+  }
+  
+  /* Mobile logo positioning */
+  .homepage .logo-icon {
+    position: static;
+    order: 3;
+    width: 40px;
+    height: 40px;
+    margin: 20px auto 0;
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .homepage .founder {
+    padding: 40px 15px;
+    gap: 30px;
+  }
+  
+  .homepage .founder-photo-wrapper {
+    max-width: 200px;
+  }
+  
+  .homepage .element {
+    max-height: 200px;
+  }
+  
+  .homepage .div-3 {
+    font-size: var(--polaris-mobile-small-h2-font-size);
+  }
+  
+  .homepage .as-someone-with {
+    padding: 25px 20px;
+  }
+}
+```
+
+#### Phase 3: Advanced Mobile Enhancements
+**Target**: Add interactive elements and scroll animations
+
+**Step 3.1: HTML Structure Enhancement (Add to founder-block.php)**
+```php
+// Wrap founder photo (around lines 93-98)
+<div class="founder-photo-wrapper">
+    <img class="element"
+         src="<?php echo esc_url(get_template_directory_uri()); ?>/img/2asdf-1.png"
+         alt="Joel Chudleigh, Founder of Polaris Launchpad AI - Digital marketing expert"
+         loading="lazy" />
+</div>
+```
+
+**Step 3.2: Enhanced Mobile Interactions**
+```css
+/* Advanced mobile styling */
+@media screen and (max-width: 768px) {
+  /* Photo interaction */
+  .homepage .founder-photo-wrapper {
+    transition: transform 0.3s ease;
+  }
+  
+  .homepage .founder-photo-wrapper:hover {
+    transform: scale(1.05);
+  }
+  
+  .homepage .element {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .homepage .element:hover {
+    box-shadow: 0 16px 50px rgba(26, 188, 156, 0.25);
+  }
+  
+  /* Testimonial reveal animation */
+  .homepage .group-10 > * {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .homepage .div-3 { animation-delay: 0.2s; }
+  .homepage .as-someone-with { animation-delay: 0.6s; }
+  .homepage .logo-icon { animation-delay: 1.0s; }
+  
+  /* Quote hover effect */
+  .homepage .as-someone-with {
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .homepage .as-someone-with:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 188, 156, 0.15);
+  }
+}
+```
+
+**Step 3.3: Mobile-Specific JavaScript Enhancement (Optional)**
+```javascript
+// Add to founder-block.php for enhanced interaction
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 768) {
+    const founderPhoto = document.querySelector('.element');
+    const testimonial = document.querySelector('.as-someone-with');
+    
+    if (founderPhoto && testimonial) {
+      founderPhoto.addEventListener('click', function() {
+        testimonial.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      });
+      
+      // Add accessibility
+      founderPhoto.setAttribute('tabindex', '0');
+      founderPhoto.setAttribute('role', 'button');
+      founderPhoto.setAttribute('aria-label', 'View founder testimonial');
+      
+      founderPhoto.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          founderPhoto.click();
+        }
+      });
+    }
+  }
+});
+```
+
+### Testing Checklist
+
+#### Desktop Testing (1200px+)
+- [ ] Section maintains off-white background
+- [ ] Founder photo displays prominently on left side
+- [ ] Testimonial content positioned correctly on right
+- [ ] Typography maintains proper hierarchy
+- [ ] Orange accent colors render correctly
+- [ ] Logo decoration positioned appropriately
+
+#### Tablet Testing (768px-1199px)
+- [ ] Layout scales down proportionally
+- [ ] Photo and content maintain readable proportions
+- [ ] Touch interactions work properly
+- [ ] Content doesn't overflow container
+- [ ] Background decorations remain tasteful
+
+#### Mobile Testing (320px-767px)
+- [ ] Content stacks vertically in logical order
+- [ ] Founder photo becomes circular and appropriately sized
+- [ ] Testimonial quote displays in styled card format
+- [ ] Typography uses mobile variables
+- [ ] Attribution clearly displayed
+- [ ] Touch targets appropriately sized
+- [ ] Animations enhance user experience
+- [ ] Complex decorations hidden for cleaner mobile experience
+
+#### Cross-Device Testing
+- [ ] Layout transitions smoothly between breakpoints
+- [ ] Photo maintains quality at different sizes
+- [ ] Typography scales appropriately
+- [ ] Interactive elements work across devices
+- [ ] Brand colors (teal, orange) consistent
+- [ ] Accessibility features function properly
+
+**STATUS**: ✅ Complete - Founder Testimonial Section component breakdown and responsive plan ready
+
+---
 
 #### Current Partial Mobile CSS (lines 5529-5699):
 ```css
