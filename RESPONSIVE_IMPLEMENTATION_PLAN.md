@@ -83,6 +83,241 @@ Transform the current fixed-width (1440px) WordPress site into a fully responsiv
 
 ---
 
+## DETAILED BLOCK ANALYSIS & IMPLEMENTATION
+
+### 🔍 Header Blocks - DETAILED AUDIT
+
+#### Header Block (Dark) - `header-block.php`
+**Current State**: BROKEN - Modified with conflicting inline CSS  
+**Complexity**: Medium-High  
+**Used on**: Homepage (dark starry background)
+
+**Current Structure Issues**:
+- ❌ Broken inline CSS overrides in PHP file
+- ❌ Complex absolute positioning: `position: absolute; top: 30px; left: 804px`
+- ❌ Fixed widths: `width: 939.8px`, `gap: 94px`
+- ❌ Burger menu HTML exists but CSS is broken
+- ❌ Conflicting mobile CSS in main stylesheet
+
+**HTML Structure Analysis**:
+```php
+<header class="header">
+    <img class="polaris-logo" src="..." />
+    <button class="mobile-menu-toggle"> <!-- EXISTS BUT BROKEN -->
+        <span class="burger-line"></span> × 3
+    </button>
+    <div class="group-2" id="main-navigation">
+        <div class="frame-2"> <!-- Navigation items -->
+        <div class="small-button"> <!-- Login button -->
+        <div class="button-wrapper"> <!-- Start Trial button -->
+    </div>
+</header>
+```
+
+**Required Components**:
+1. **Header Container** - Flexible wrapper (remove absolute positioning)
+2. **Logo Component** - Responsive sizing (268px→200px→150px)  
+3. **Navigation Component** - Desktop horizontal → Mobile dropdown
+4. **Button Group** - Always visible Login + Start Trial
+5. **Burger Menu** - Mobile toggle (repair existing functionality)
+
+**Implementation Strategy**:
+```
+PHASE 1: Emergency cleanup
+- Remove ALL inline CSS from header-block.php
+- Remove broken mobile CSS from style.css lines 5352-5686
+- Restore clean HTML-only structure
+
+PHASE 2: Build responsive foundation in style.css
+- Add mobile-first CSS to .homepage .header section
+- Implement flexbox layout system  
+- Proper media queries: <768px, 768-1024px, >1024px
+
+PHASE 3: Component implementation
+- Header: flex container with responsive padding
+- Logo: 150px mobile, 200px tablet, 268px desktop
+- Navigation: hidden mobile, horizontal desktop
+- Burger: visible mobile, hidden desktop  
+- Buttons: stacked mobile, inline desktop
+
+PHASE 4: JavaScript functionality
+- Repair burger menu toggle
+- Smooth mobile menu animations
+- Touch-friendly interactions
+```
+
+#### Header Block (White) - `header-block-white.php`
+**Current State**: CLEAN - Unmodified original  
+**Complexity**: Medium  
+**Used on**: Inner pages (pricing, about, contact, etc.)
+
+**Structure Analysis**:
+```php
+<div class="pricing-page">
+    <div class="header-innerpage">
+        <header class="header">
+            <img class="polaris-logo" src="polaris-logo-1.png" /> <!-- Different logo -->
+            <div class="group"> <!-- Same nav structure -->
+                <div class="frame"> <!-- Navigation items -->
+                <div class="small-button"> <!-- Login -->
+                <div class="button-wrapper"> <!-- Start Trial -->
+            </div>
+        </header>
+    </div>
+</div>
+```
+
+**Key Differences from Dark Header**:
+- ✅ Simpler structure (no background wrapper)
+- ✅ Uses `.header-innerpage` class instead of `.homepage .header`
+- ✅ Different logo file (polaris-logo-1.png vs polaris-logo-1-1.png)
+- ✅ White background, dark text
+- ❌ NO mobile burger menu HTML
+- ❌ NO responsive considerations
+
+**Required Work**:
+1. **Add burger menu HTML** (same as dark header)
+2. **Implement responsive CSS** for `.header-innerpage`
+3. **Ensure consistent mobile behavior** with dark header
+4. **Test on all inner pages** (pricing, about, contact, features)
+
+**Implementation Strategy**:
+```
+PHASE 1: Add mobile menu HTML
+- Copy burger menu structure from header-block.php
+- Add mobile menu toggle functionality
+
+PHASE 2: Responsive CSS for .header-innerpage  
+- Follow same patterns as dark header
+- Adjust colors for light background
+- Ensure proper contrast
+
+PHASE 3: Cross-page testing
+- Test pricing page
+- Test about page  
+- Test contact page
+- Test blog pages
+```
+
+### 🔍 Hero Block - DETAILED AUDIT
+
+#### Hero Block - `hero-block.php`
+**Current State**: PARTIALLY RESPONSIVE - Has some mobile CSS but complex issues  
+**Complexity**: VERY HIGH - Most complex block in the site  
+**Used on**: Homepage only
+
+**Structure Analysis**:
+```php
+<div class="homepage polaris-hero-section">
+    <div class="hero">
+        <div class="overlap"> <!-- MASSIVE 2910px width container -->
+            <div class="ellipse"></div> <!-- Decorative blur element -->
+            <img class="rocket-smoke" /> <!-- Decorative image -->
+            <img class="hero-copy" /> <!-- Main dashboard illustration -->
+            
+            <div class="frame"> <!-- TEXT CONTENT CONTAINER -->
+                <h1 class="text-wrapper">TITLE</h1>
+                <p class="polaris-launchpad-AI">SUBTITLE</p>
+                <div class="group"> <!-- CTA BUTTON GROUP -->
+                    <div class="large-button">
+                        <div class="overlap-group">
+                            <div class="div"></div> <!-- Button background -->
+                            <a class="button">CTA TEXT</a>
+                        </div>
+                    </div>
+                    <p class="p">CTA SUBTEXT</p>
+                </div>
+            </div>
+            
+            <!-- MORE DECORATIVE IMAGES -->
+            <img class="img" /> <!-- group-249.png -->
+            <img class="group-3" /> <!-- group-248.png -->
+            <img class="logo-icon-white" /> <!-- Small logo -->
+        </div>
+    </div>
+</div>
+```
+
+**Critical Issues**:
+- ❌ **Massive fixed width**: `.overlap { width: 2910px; left: -735px; }` - Causes horizontal scroll
+- ❌ **Complex layered positioning**: 7+ absolutely positioned elements  
+- ❌ **Fixed heights**: `height: 760px`, `height: 766px` don't adapt
+- ❌ **Background image issues**: Multiple background layers with fixed sizes
+- ✅ **SOME mobile CSS exists** (lines 5260-5351) but incomplete
+- ❌ **Images don't scale properly** on mobile
+
+**Existing Mobile CSS (PARTIAL)**:
+```css
+/* ALREADY EXISTS in style.css lines 5260-5351 */
+@media (max-width: 767px) {
+  .polaris-hero-section .hero {
+    height: auto !important;
+    min-height: 500px !important;
+    padding: 40px 20px !important;
+  }
+  
+  .polaris-hero-section .overlap {
+    width: 100% !important; /* FIXES the 2910px issue */
+    height: auto !important;
+  }
+  
+  .polaris-hero-section .frame {
+    /* Creates white card for content */
+    background: rgba(255,255,255,0.9) !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+  }
+  
+  /* Hides problematic decorative elements */
+  .polaris-hero-section .rocket-smoke { display: none !important; }
+  .polaris-hero-section .ellipse { display: none !important; }
+}
+```
+
+**What's Missing**:
+1. **Background image scaling** - Needs proper responsive background
+2. **Hero copy image positioning** - Main dashboard image positioning broken  
+3. **Typography scaling** - Text needs better mobile sizing
+4. **Button improvements** - CTA needs better mobile styling
+5. **Spacing adjustments** - Padding and margins need refinement
+
+**Required Components**:
+1. **Background System** - Responsive gradient + image background
+2. **Content Container** - Flexible content wrapper with proper centering
+3. **Typography Component** - Properly scaled mobile typography  
+4. **CTA Button Component** - Touch-friendly mobile button
+5. **Image Management** - Show/hide/scale decorative elements appropriately
+
+**Implementation Strategy**:
+```
+PHASE 1: Fix existing mobile CSS (IMPROVE, don't rebuild)
+- Analyze existing mobile CSS at lines 5260-5351
+- Fix background image scaling issues
+- Improve typography and spacing
+- Fix main hero-copy image positioning
+
+PHASE 2: Enhance responsive behavior  
+- Add tablet breakpoint (768-1024px)
+- Improve background system scaling
+- Better image management for different screen sizes
+- Enhanced button and typography scaling
+
+PHASE 3: Performance and polish
+- Optimize image loading for mobile
+- Add proper responsive images
+- Smooth animations and transitions
+- Test across all devices thoroughly
+```
+
+**Complexity Assessment**: 
+- **Desktop CSS**: ~200 lines of complex positioning
+- **Mobile CSS**: ~90 lines already exist but need refinement
+- **Images**: 6 decorative images need responsive handling
+- **Background**: Complex gradient + image background system
+- **Priority**: HIGH (Hero is first thing users see)
+
+---
+
 ## Phase 2: Navigation & Header (Priority: HIGH)
 **Estimated Time**: 3-4 hours
 
