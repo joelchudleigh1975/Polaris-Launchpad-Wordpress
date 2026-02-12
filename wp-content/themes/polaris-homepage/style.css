@@ -1,3 +1,4 @@
+/* HERO BLOCK - REPOSITIONED TEXT TO LEFT - 2026-02-09 03:35 */
  :root {
     --deep-blue: rgba(44, 62, 80, 1);
     --nebula-teal: rgba(26, 188, 156, 1);
@@ -9,21 +10,21 @@
     --dark-grey: rgba(85, 85, 85, 1);
     --polaris-h1-font-family: "Montserrat", Helvetica;
     --polaris-h1-font-weight: 700;
-    --polaris-h1-font-size: 32px;
+    --polaris-h1-font-size: clamp(28px, 4vw, 40px);
     --polaris-h1-letter-spacing: 0px;
-    --polaris-h1-line-height: 40px;
+    --polaris-h1-line-height: clamp(36px, 5vw, 48px);
     --polaris-h1-font-style: normal;
     --polaris-h2-font-family: "Montserrat", Helvetica;
     --polaris-h2-font-weight: 700;
-    --polaris-h2-font-size: 28px;
+    --polaris-h2-font-size: clamp(24px, 3.5vw, 32px);
     --polaris-h2-letter-spacing: 0px;
-    --polaris-h2-line-height: 36px;
+    --polaris-h2-line-height: clamp(32px, 4.5vw, 44px);
     --polaris-h2-font-style: normal;
     --polaris-h3-font-family: "Montserrat", Helvetica;
     --polaris-h3-font-weight: 700;
-    --polaris-h3-font-size: 24px;
+    --polaris-h3-font-size: clamp(20px, 3vw, 28px);
     --polaris-h3-letter-spacing: 0px;
-    --polaris-h3-line-height: 32px;
+    --polaris-h3-line-height: clamp(28px, 4vw, 36px);
     --polaris-h3-font-style: normal;
     --polaris-h4-font-family: "Montserrat", Helvetica;
     --polaris-h4-font-weight: 700;
@@ -39,9 +40,9 @@
     --polaris-h5-font-style: normal;
     --polaris-medium-text-font-family: "Montserrat", Helvetica;
     --polaris-medium-text-font-weight: 500;
-    --polaris-medium-text-font-size: 14px;
+    --polaris-medium-text-font-size: clamp(14px, 1.6vw, 16px);
     --polaris-medium-text-letter-spacing: 0px;
-    --polaris-medium-text-line-height: 22px;
+    --polaris-medium-text-line-height: clamp(22px, 2.8vw, 26px);
     --polaris-medium-text-font-style: normal;
     --polaris-small-text-regular-font-family: "Montserrat", Helvetica;
     --polaris-small-text-regular-font-weight: 400;
@@ -54,7 +55,7 @@
 .homepage {
   display: flex;
   flex-direction: column;
-  width: 1440px;
+  width: 100%;
   align-items: flex-start;
   position: relative;
 }
@@ -70,16 +71,16 @@
 
 .homepage .overlap {
     position: relative;
-    width: 2910px;
+    width: 100%;
     height: 766px;
     top: -6px;
-    left: -735px;
+    left: 0;
     background:
       linear-gradient(180deg, rgba(44, 62, 80, 0.5) 20%, rgba(26, 188, 156,
    0.5) 50%, rgba(208, 243, 236, 0.5) 100%),
       url(./img/image-2.png);
-    background-size: 1440px 766px, 1440px 766px;
-    background-position: 50% 50%, 50% 50%;
+    background-size: cover, cover;
+    background-position: center, center;
     background-repeat: no-repeat, no-repeat;
   }
 
@@ -103,12 +104,13 @@
   width: 280px;
   height: 208px;
   top: 555px;
-  left: 1314px;
+  left: 50%;
+  transform: translateX(-50%);
   object-fit: cover;
 }
 
 .homepage .rectangle {
-  width: 2910px;
+  width: 100%;
   height: 369px;
   background: linear-gradient(180deg, rgba(26, 187, 156, 0) 24%, rgba(52, 73, 94, 1) 72%);
   position: absolute;
@@ -118,7 +120,7 @@
 
 .homepage .image {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 760px;
     top: 6px;
     left: 735px;
@@ -131,24 +133,24 @@
   width: 797px;
   height: 730px;
   top: 6px;
-  left: 1377px;
+  right: 0;
   object-fit: cover;
 }
 
-.homepage .frame {
+.homepage .hero .overlap .frame {
   display: flex;
   flex-direction: column;
-  width: 419px;
+  width: clamp(300px, 35vw, 500px);
   align-items: flex-start;
   gap: 32px;
   position: absolute;
-  top: 215px;
-  left: 815px;
+  top: 150px;
+  left: 13%;
 }
 
-.homepage .text-wrapper {
+.homepage .hero .overlap .frame .text-wrapper {
   position: relative;
-  align-self: stretch;
+  width: 100%;
   margin-top: -1px;
   font-family: var(--polaris-h1-font-family);
   font-weight: var(--polaris-h1-font-weight);
@@ -159,9 +161,9 @@
   font-style: var(--polaris-h1-font-style);
 }
 
-.homepage .polaris-launchpad-AI {
+.homepage .hero .overlap .frame .polaris-launchpad-AI {
   position: relative;
-  align-self: stretch;
+  width: 100%;
   font-family: var(--polaris-medium-text-font-family);
   font-weight: var(--polaris-medium-text-font-weight);
   color: var(--white);
@@ -171,29 +173,29 @@
   font-style: var(--polaris-medium-text-font-style);
 }
 
-.homepage .group {
+.homepage .hero .overlap .frame .group {
   position: relative;
-  width: 421px;
-  height: 75px;
-  margin-right: -2px;
+  width: 100%;
+  min-height: 75px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.homepage .large-button {
-  position: absolute;
-  width: 419px;
-  height: 45px;
-  top: 0;
-  left: 0;
+.homepage .hero .overlap .frame .large-button {
+  position: relative;
+  width: 100%;
+  min-height: 45px;
 }
 
-.homepage .overlap-group {
+.homepage .hero .overlap .frame .overlap-group {
   position: relative;
   height: 45px;
   border-radius: 6px;
 }
 
-.homepage .div {
-  width: 419px;
+.homepage .hero .overlap .frame .div {
+  width: 100%;
   height: 45px;
   background-color: var(--flare-orange);
   border-radius: 6px;
@@ -202,12 +204,13 @@
   left: 0;
 }
 
-.homepage .button {
+.homepage .hero .overlap .frame .button {
   all: unset;
   box-sizing: border-box;
   position: absolute;
-  top: 10px;
-  left: 131px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: var(--polaris-medium-text-font-size);
   line-height: var(--polaris-medium-text-line-height);
   font-family: var(--polaris-medium-text-font-family);
@@ -219,51 +222,53 @@
   font-style: var(--polaris-medium-text-font-style);
 }
 
-.homepage .p {
-  position: absolute;
-  top: 57px;
-  left: 0;
+.homepage .hero .overlap .frame .p {
+  position: relative;
+  margin-top: 10px;
   font-family: "Montserrat", Helvetica;
   font-weight: 500;
   color: var(--white);
-  font-size: 10px;
+  font-size: clamp(10px, 1.2vw, 12px);
   letter-spacing: 0;
-  line-height: 18px;
-  white-space: nowrap;
+  line-height: clamp(16px, 1.8vw, 20px);
+  text-align: center;
 }
 
 .homepage .header {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 94px;
+  justify-content: space-between;
+  gap: clamp(20px, 5vw, 94px);
   position: absolute;
   top: 30px;
-  left: 804px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96%;
+  max-width: 1440px;
   background-color: transparent;
+  padding: 0 30px;
 }
 
 .homepage .polaris-logo {
   position: relative;
-  width: 268px;
-  height: 90px;
-  object-fit: cover;
+  width: clamp(200px, 20vw, 268px);
+  height: auto;
+  object-fit: contain;
 }
 
 .homepage .group-2 {
   position: relative;
-  width: 939.8px;
-  height: 30.07px;
+  display: flex;
+  align-items: center;
+  gap: clamp(15px, 2.5vw, 30px);
+  flex-wrap: nowrap;
 }
 
 .homepage .frame-2 {
   display: flex;
-  width: 670px;
-  height: 26px;
   align-items: center;
-  gap: 40px;
-  position: absolute;
-  top: 4px;
-  left: 0;
+  gap: clamp(15px, 3vw, 50px);
+  flex-wrap: nowrap;
 }
 
 .homepage .div-wrapper {
@@ -299,11 +304,12 @@
   justify-content: center;
   gap: 10px;
   padding: 6px 24px;
-  position: absolute;
-  top: 0;
-  left: 698px;
+  position: relative;
   background-color: var(--nebula-teal);
   border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .homepage .button-2 {
@@ -328,16 +334,17 @@
   justify-content: center;
   gap: 10px;
   padding: 6px 24px;
-  position: absolute;
-  top: 0;
-  left: 782px;
+  position: relative;
   background-color: var(--nebula-teal);
   border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .homepage .img {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 219px;
   top: 547px;
   left: 735px;
@@ -345,7 +352,7 @@
 
 .homepage .group-3 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 178px;
   top: 588px;
   left: 735px;
@@ -360,12 +367,12 @@
   object-fit: cover;
 }
 
-.homepage .marketing-not-easy {
+.polaris-marketing-not-easy-section .marketing-not-easy {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 56px 104px;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+  padding: clamp(30px, 5vw, 80px) clamp(20px, 8vw, 104px);
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -374,7 +381,7 @@
   background-color: #ffffff;
 }
 
-.homepage .frame-3 {
+.polaris-marketing-not-easy-section .marketing-not-easy .frame-3 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -385,7 +392,7 @@
   flex: 0 0 auto;
 }
 
-.homepage .marketing-even-with {
+.polaris-marketing-not-easy-section .marketing-not-easy .marketing-even-with {
   position: relative;
   width: fit-content;
   margin-top: -1px;
@@ -399,23 +406,24 @@
   font-style: var(--polaris-h1-font-style);
 }
 
-.homepage .frame-4 {
-  display: flex;
-  align-items: center;
-  gap: 80px;
+.polaris-marketing-not-easy-section .marketing-not-easy .frame-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(30px, 5vw, 80px);
   position: relative;
   align-self: stretch;
   width: 100%;
-  flex: 0 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.homepage .frame-5 {
+.polaris-marketing-not-easy-section .marketing-not-easy .frame-5 {
   display: flex;
   flex-direction: column;
-  width: 357px;
   align-items: center;
-  gap: 24px;
+  gap: clamp(16px, 2.5vw, 24px);
   position: relative;
+  text-align: center;
 }
 
 .homepage .vector {
@@ -490,7 +498,7 @@
 
  .homepage .how-it-works {
     position: relative;
-    width: 1440px;
+    width: 100%;
     height: 679px;
     margin-top: -1px;
     background: linear-gradient(90deg, #2c3e50 0%, #1abc9c 100%)
@@ -501,7 +509,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1440px;
+    width: 100%;
     height: 679px;
     background: linear-gradient(90deg, #00ffcc 0%, #00ffee 100%)
   !important;
@@ -524,7 +532,7 @@
 
 .homepage .rectangle-2 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 323px;
   top: 0;
   left: 0;
@@ -532,7 +540,7 @@
 
 .homepage .image-2 {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 679px;
     top: 0;
     left: 0;
@@ -543,7 +551,7 @@
 
 .homepage .group-5 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 286px;
   top: 393px;
   left: 0;
@@ -551,9 +559,10 @@
 
 .homepage .text-wrapper-5 {
   position: absolute;
-  width: 574px;
+  width: clamp(300px, 40vw, 574px);
   top: 59px;
-  left: 433px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--polaris-h1-font-family);
   font-weight: var(--polaris-h1-font-weight);
   color: #ffffff;
@@ -566,10 +575,11 @@
 
 .homepage .group-6 {
   position: absolute;
-  width: 794px;
+  width: clamp(400px, 55vw, 794px);
   height: 70px;
   top: 477px;
-  left: 323px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .overlap-group-2 {
@@ -630,7 +640,7 @@
 .homepage .group-7 {
   position: absolute;
   width: 390px;
-  height: 310px;
+  height: 360px;
   top: 173px;
   left: 186px;
 }
@@ -669,7 +679,7 @@
   position: absolute;
   width: 2px;
   height: 76px;
-  top: 234px;
+  top: 280px;
   left: 193px;
 }
 
@@ -706,18 +716,19 @@
 
 .homepage .core-benefits {
   position: relative;
-  width: 1440px;
-  height: 810px;
+  width: 100%;
+  height: 870px;
   margin-top: -1px;
   background-color: #ffffff;
 }
 
 .homepage .group-8 {
   position: relative;
-  width: 1232px;
+  width: 100%;
+  max-width: 1232px;
   height: 690px;
   top: 60px;
-  left: 104px;
+  margin: 0 auto;
 }
 
 .homepage .frame-6 {
@@ -850,34 +861,40 @@
   object-fit: cover;
 }
 
+.polaris-fuel-section {
+  background-color: var(--off-white);
+  width: 100%;
+}
+
 .homepage .fuel {
   position: relative;
-  width: 1440px;
-  height: 606px;
-  margin-top: -1px;
-  background-color: var(--off-white);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px clamp(60px, 8vw, 120px) 60px;
+  gap: clamp(40px, 6vw, 80px);
+  min-height: 600px;
 }
 
 .homepage .group-9 {
-  position: absolute;
-  width: 440px;
-  height: 212px;
-  top: 143px;
-  left: 104px;
+  flex: 0 0 40%;
+  max-width: 600px;
+  position: relative;
+  margin-left: 40px;
 }
 
 .homepage .div-3 {
-  position: absolute;
-  width: 436px;
-  top: 0;
-  left: 0;
-  font-family: var(--polaris-h1-font-family);
-  font-weight: var(--polaris-h1-font-weight);
-  color: transparent;
-  font-size: var(--polaris-h1-font-size);
-  letter-spacing: var(--polaris-h1-letter-spacing);
-  line-height: var(--polaris-h1-line-height);
-  font-style: var(--polaris-h1-font-style);
+  position: relative;
+  width: 100%;
+  font-family: var(--polaris-h2-font-family);
+  font-weight: var(--polaris-h2-font-weight);
+  color: var(--greyish-blue);
+  font-size: var(--polaris-h2-font-size);
+  letter-spacing: var(--polaris-h2-letter-spacing);
+  line-height: var(--polaris-h2-line-height);
+  font-style: var(--polaris-h2-font-style);
+  margin-bottom: 30px;
 }
 
 .homepage .text-wrapper-11 {
@@ -901,10 +918,9 @@
 }
 
 .homepage .the-more {
-  position: absolute;
-  width: 436px;
-  top: 112px;
-  left: 0;
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
   font-family: var(--polaris-medium-text-font-family);
   font-weight: var(--polaris-medium-text-font-weight);
   color: var(--dark-grey);
@@ -915,33 +931,85 @@
 }
 
 .homepage .mask-group {
-  position: absolute;
-  width: 817px;
-  height: 606px;
-  top: 0;
-  left: 623px;
+  flex: 0 0 55%;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .homepage .fuel-tank {
   position: absolute;
-  width: 432px;
-  height: 49px;
-  top: 387px;
-  left: 104px;
+  width: clamp(280px, 25vw, 350px);
+  height: auto;
+  left: 20%;
+  transform: translateX(-50%);
+  bottom: 200px;
   object-fit: cover;
+  z-index: 10;
+}
+
+/* Responsive Fuel Section */
+@media (max-width: 1199px) {
+  .homepage .fuel {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 40px;
+    gap: 40px;
+  }
+  
+  .homepage .group-9 {
+    order: 2;
+    padding-bottom: 60px;
+    margin-left: 0;
+  }
+  
+  .homepage .mask-group {
+    order: 1;
+  }
+  
+  .homepage .fuel-tank {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .homepage .fuel {
+    padding: 40px 20px;
+  }
+  
+  .homepage .group-9 {
+    padding-bottom: 70px;
+    margin-left: 0;
+  }
+  
+  .homepage .mask-group {
+    width: 100%;
+  }
+  
+  .homepage .fuel-tank {
+    width: 280px;
+    bottom: 15px;
+  }
 }
 
 .homepage .founder {
   position: relative;
-  width: 1440px;
+  width: 100%;
   height: 695px;
   margin-top: -1px;
   background-color: var(--off-white);
 }
 
 .homepage .overlap-3 {
-  position: relative;
+  display: flex;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 80px);
   height: 695px;
+  gap: 40px;
 }
 
 .homepage .vector-4 {
@@ -949,12 +1017,13 @@
   width: 1248px;
   height: 202px;
   top: 493px;
-  left: 192px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .vector-5 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 212px;
   top: 483px;
   left: 0;
@@ -962,29 +1031,31 @@
 
 .homepage .vector-6 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 326px;
   top: 369px;
   left: 0;
 }
 
 .homepage .group-10 {
-  position: absolute;
-  width: 440px;
-  height: 403px;
-  top: 115px;
-  left: 826px;
+  flex: 1;
+  max-width: 500px;
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 0;
 }
 
 .homepage .as-someone-with {
-  position: absolute;
-  width: 436px;
-  top: 183px;
-  left: 0;
+  position: relative;
+  width: 100%;
+  margin-top: 30px;
   font-family: "Montserrat", Helvetica;
   font-weight: 400;
-  color: transparent;
-  font-size: 14px;
+  color: var(--dark-grey);
+  font-size: 16px;
+  line-height: 1.6;
   letter-spacing: 0;
   line-height: 20px;
 }
@@ -1014,26 +1085,62 @@
 }
 
 .homepage .logo-icon {
-  position: absolute;
-  width: 37px;
-  height: 37px;
-  top: 180px;
-  left: 724px;
-  object-fit: cover;
+  display: none;
 }
 
 .homepage .element {
-  position: absolute;
-  width: 802px;
+  width: 100%;
+  max-width: 600px;
   height: 695px;
-  top: 0;
-  left: 1px;
   object-fit: cover;
+  object-position: center bottom;
+  border-radius: 0;
+  order: 1;
+}
+
+/* Responsive Founder Section */
+@media (max-width: 1199px) {
+  .homepage .overlap-3 {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 40px;
+    gap: 30px;
+  }
+  
+  .homepage .element {
+    order: 1;
+    max-width: 450px;
+  }
+  
+  .homepage .group-10 {
+    order: 2;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .homepage .overlap-3 {
+    padding: 40px 20px;
+  }
+  
+  .homepage .element {
+    max-width: 320px;
+  }
+  
+  .homepage .div-3 {
+    font-size: clamp(24px, 6vw, 32px);
+    line-height: 1.3;
+  }
+  
+  .homepage .as-someone-with {
+    font-size: 14px;
+    margin-top: 20px;
+  }
 }
 
  .homepage .CTA {
     position: relative;
-    width: 1440px;
+    width: 100%;
     height: 379px;
     margin-top: -1px;
     background-color: transparent;
@@ -1045,7 +1152,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1440px;
+    width: 100%;
     height: 379px;
     background:
       linear-gradient(90deg, rgba(44, 62, 80, 0.5) 0%, rgba(26, 188, 156,
@@ -1059,10 +1166,12 @@
 
 .homepage .group-11 {
   position: relative;
-  width: 1042px;
+  width: 100%;
+  max-width: 1042px;
   height: 259px;
   top: 60px;
-  left: 201px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .text-wrapper-15 {
@@ -1100,13 +1209,15 @@
   width: 421px;
   height: 75px;
   top: 184px;
-  left: 310px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .text-wrapper-16 {
   position: absolute;
-  top: 10px;
-  left: 131px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: var(--polaris-medium-text-font-family);
   font-weight: var(--polaris-medium-text-font-weight);
   color: #ffffff;
@@ -1118,10 +1229,35 @@
   font-style: var(--polaris-medium-text-font-style);
 }
 
+.homepage .group-11 .large-button {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  min-height: 45px;
+}
+
+.homepage .group-11 .overlap-group {
+  position: relative;
+  height: 45px;
+  border-radius: 6px;
+}
+
+.homepage .group-11 .div {
+  width: 100%;
+  height: 45px;
+  background-color: var(--flare-orange);
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .homepage .text-wrapper-17 {
   position: absolute;
   top: 57px;
-  left: 88px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: "Montserrat", Helvetica;
   font-weight: 500;
   color: var(--white);
@@ -1133,7 +1269,7 @@
 
 .homepage .footer {
   position: relative;
-  width: 1440px;
+  width: 100%;
   height: 857px;
   margin-top: -1px;
   background-color: transparent;
@@ -1142,7 +1278,7 @@
   
 .homepage .overlap-5 {
     position: relative;
-    width: 1440px;
+    width: 100%;
     height: 857px;
     background:
       linear-gradient(90deg, rgba(44, 62, 80, 0.5) 0%, rgba(26, 188, 156,
@@ -1154,7 +1290,7 @@
 
 .homepage .overlap-6 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 316px;
   top: 541px;
   left: 0;
@@ -1165,31 +1301,35 @@
   width: 280px;
   height: 208px;
   top: 8px;
-  left: 580px;
+  left: 50%;
+  transform: translateX(-50%);
   object-fit: cover;
 }
 
 .homepage .group-13 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 316px;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .group-14 {
   position: absolute;
-  width: 1440px;
+  width: 100%;
   height: 275px;
   top: 41px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .logo-icon-white-4 {
   width: 36px;
   height: 36px;
   top: 17px;
-  left: 702px;
+  left: 50%;
+  transform: translateX(-50%);
   position: absolute;
   object-fit: cover;
 }
@@ -1197,7 +1337,8 @@
 .homepage .element-www-polaris {
   position: absolute;
   top: 242px;
-  left: 592px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--polaris-medium-text-font-family);
   font-weight: var(--polaris-medium-text-font-weight);
   color: transparent;
@@ -1234,7 +1375,8 @@
   width: 217px;
   height: 35px;
   top: 255px;
-  left: 613px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .overlap-group-4 {
@@ -1295,16 +1437,19 @@
   width: 266px;
   height: 90px;
   top: 60px;
-  left: 573px;
+  left: 50%;
+  transform: translateX(-50%);
   object-fit: cover;
 }
 
 .homepage .group-16 {
   position: absolute;
-  width: 1071px;
+  width: 100%;
+  max-width: 1071px;
   height: 255px;
   top: 239px;
-  left: 184px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .homepage .group-17 {
@@ -1410,18 +1555,24 @@
   width: 158px;
   height: 21px;
   top: 158px;
-  left: 642px;
+  left: 50%;
+  transform: translateX(-50%);
   object-fit: cover;
 }
  /* Header Block Styles - for use in Gutenberg blocks */
   .wp-block-polaris-header .header {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 94px;
+    justify-content: space-between;
+    gap: clamp(20px, 5vw, 94px);
     position: absolute;
     top: 30px;
-    left: 804px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
     background-color: transparent;
+    padding: 0 20px;
   }
 
   .wp-block-polaris-header .polaris-logo {
@@ -1621,12 +1772,18 @@
 }
 
 .polaris-header-standalone .header {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    padding: 30px 60px;
-    max-width: 1440px;
-    margin: 0 auto;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: clamp(20px, 5vw, 94px) !important;
+    position: absolute !important;
+    top: 30px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 96% !important;
+    max-width: 1440px !important;
+    padding: 0 30px !important;
+    margin: 0 auto !important;
     z-index: 1;
 }
 
@@ -1652,6 +1809,290 @@
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
+
+/* CTA buttons wrapper - always visible in header */
+.header-cta-buttons {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1.5vw, 15px);
+    flex-shrink: 0;
+}
+
+/* Square logo - hidden on desktop, shown on mobile */
+.polaris-logo-square {
+    display: none !important;
+}
+
+/* Burger menu - hidden on desktop, shown on smaller screens */
+.burger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.burger-bar {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger-menu.active .burger-bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+.burger-menu.active .burger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active .burger-bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* Responsive header - tablet and below */
+@media (max-width: 1100px) {
+    .burger-menu {
+        display: flex;
+    }
+
+    .homepage .header,
+    .polaris-header-standalone .header,
+    .header-innerpage .header {
+        flex-wrap: nowrap !important;
+    }
+
+    /* Nav links hidden on tablet/mobile */
+    .homepage .group-2,
+    .polaris-header-standalone .group-2,
+    .header-innerpage .group {
+        display: none;
+    }
+
+    /* White header overlay - white background with dark text */
+    .header-innerpage .group.nav-open {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        z-index: 9999;
+        padding: 60px 20px 40px;
+        overflow-y: auto;
+    }
+
+    .header-innerpage .group.nav-open .text-wrapper,
+    .header-innerpage .group.nav-open .text-wrapper a {
+        color: #2c3e50 !important;
+    }
+
+    /* Hide logo and buttons behind overlay on white header */
+    .header-innerpage .group.nav-open ~ .header-cta-buttons {
+        visibility: hidden;
+    }
+    .header-innerpage .header.nav-is-open .header-logo-link {
+        visibility: hidden;
+    }
+
+    /* Burger button sits above the white header overlay */
+    .header-innerpage .burger-menu {
+        z-index: 10000;
+    }
+
+    /* Allow overlay to escape parent overflow when nav is open */
+    .homepage .hero.nav-parent-open,
+    .polaris-header-standalone.nav-parent-open,
+    .header-background-wrapper.nav-parent-open,
+    .header-innerpage.nav-parent-open {
+        overflow: visible !important;
+    }
+
+    /* When nav opens, make the HEADER itself the full-screen overlay */
+    .header.nav-is-open {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        max-width: none !important;
+        transform: none !important;
+        background: rgba(44, 62, 80, 0.97) !important;
+        z-index: 9999 !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding-top: 80px !important;
+        overflow-y: auto !important;
+    }
+
+    /* Position burger (X) at top-right when overlay is open */
+    .header.nav-is-open .burger-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    /* Show nav links inside the full-screen header overlay */
+    .header.nav-is-open .group-2,
+    .header.nav-is-open .group {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .homepage .group-2 .frame-2,
+    .polaris-header-standalone .group-2 .frame-2,
+    .header-innerpage .group .frame {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .homepage .group-2 .text-wrapper-2,
+    .polaris-header-standalone .group-2 .text-wrapper-2,
+    .header-innerpage .group .text-wrapper {
+        font-size: 16px;
+        line-height: 24px;
+        color: #ffffff;
+    }
+
+    .header-innerpage .group .text-wrapper a {
+        color: #ffffff;
+    }
+
+    /* Push logo to the left on homepage */
+    .homepage .header-logo-link,
+    .polaris-header-standalone .header-logo-link {
+        margin-right: auto;
+    }
+
+    /* CTA buttons - stack vertically, centered */
+    .header-cta-buttons {
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    /* Hide header elements when burger nav is open */
+    .header.nav-is-open .header-logo-link,
+    .header.nav-is-open .header-cta-buttons {
+        visibility: hidden;
+    }
+
+    .header-cta-buttons .small-button,
+    .header-cta-buttons .button-wrapper {
+        padding: 6px 14px;
+        text-align: center;
+        flex-shrink: 1;
+        white-space: nowrap;
+    }
+
+    .header-cta-buttons .button-2,
+    .header-cta-buttons .button {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    /* Shrink logo on tablet */
+    .homepage .polaris-logo,
+    .polaris-header-standalone .polaris-logo,
+    .header-innerpage .polaris-logo {
+        width: clamp(120px, 18vw, 220px);
+    }
+
+    /* Dark burger bars for white header */
+    .burger-menu-dark .burger-bar {
+        background-color: #2c3e50;
+    }
+}
+
+/* Mobile header - ensure all elements fit */
+@media (max-width: 600px) {
+    .homepage .header,
+    .polaris-header-standalone .header,
+    .header-innerpage .header {
+        padding: 0 10px;
+        gap: 8px;
+    }
+
+    /* Swap to square logo on mobile */
+    .polaris-logo-wide {
+        display: none !important;
+    }
+
+    .polaris-logo-square {
+        display: block !important;
+        transform: scale(1.05);
+    }
+
+    .header-logo-link {
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .homepage .polaris-logo,
+    .polaris-header-standalone .polaris-logo {
+        width: auto;
+        height: 63px;
+        flex-shrink: 0;
+        object-fit: contain;
+    }
+
+    .header-innerpage .polaris-logo {
+        width: auto;
+        height: 120px;
+        flex-shrink: 0;
+        object-fit: contain;
+    }
+
+    .header-cta-buttons {
+        gap: 6px;
+    }
+
+    .header-cta-buttons .small-button,
+    .header-cta-buttons .button-wrapper {
+        padding: 8px 14px;
+    }
+
+    .header-cta-buttons .button-2,
+    .header-cta-buttons .button {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .burger-menu {
+        padding: 8px;
+        flex-shrink: 0;
+    }
+
+    .burger-bar {
+        width: 30px;
+        height: 4px;
+    }
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+    overflow-x: hidden;
+}
+
 /* Hero Block CSS - Copy of homepage hero styles for Gutenberg block */
   .polaris-hero-section .hero {
     position: relative;
@@ -1665,16 +2106,16 @@
 
   .polaris-hero-section .overlap {
       position: relative;
-      width: 2910px;
+      width: 100%;
       height: 766px;
       top: -6px;
-      left: -735px;
+      left: 0;
       background:
         linear-gradient(180deg, rgba(44, 62, 80, 0.5) 20%, rgba(26, 188,
   156, 0.5) 50%, rgba(208, 243, 236, 0.5) 100%),
         url(./img/image-2.png);
-      background-size: 1440px 766px, 1440px 766px;
-      background-position: 50% 50%, 50% 50%;
+      background-size: cover, cover;
+      background-position: center, center;
       background-repeat: no-repeat, no-repeat;
     }
 
@@ -1683,7 +2124,8 @@
     width: 778px;
     height: 394px;
     top: 268px;
-    left: 1367px;
+    left: auto;
+    right: -200px;
     background-color: #30f9d173;
     border-radius: 389px/197px;
     transform: rotate(-2.37deg);
@@ -1696,12 +2138,13 @@
     width: 280px;
     height: 208px;
     top: 555px;
-    left: 1314px;
+    left: 50%;
+    transform: translateX(-50%);
     object-fit: cover;
   }
 
   .polaris-hero-section .rectangle {
-    width: 2910px;
+    width: 100%;
     height: 369px;
     background: linear-gradient(180deg, rgba(26, 187, 156, 0) 24%, rgba(52,
    73, 94, 1) 72%);
@@ -1712,37 +2155,38 @@
 
   .polaris-hero-section .image {
       position: absolute;
-      width: 1440px;
+      width: 100%;
       height: 760px;
       top: 6px;
-      left: 735px;
+      left: 0;
       background-blend-mode: screen;
       object-fit: cover;
     }
 
   .polaris-hero-section .hero-copy {
     position: absolute;
-    width: 797px;
-    height: 730px;
-    top: 6px;
-    left: 1377px;
+    width: clamp(500px, 55vw, 797px);
+    height: auto;
+    max-height: 730px;
+    top: -20px;
+    right: 5%;
     object-fit: cover;
   }
 
   .polaris-hero-section .frame {
     display: flex;
     flex-direction: column;
-    width: 419px;
+    width: clamp(300px, 35vw, 500px);
     align-items: flex-start;
     gap: 32px;
     position: absolute;
-    top: 215px;
-    left: 815px;
+    top: 150px;
+    left: 13%;
   }
 
   .polaris-hero-section .text-wrapper {
     position: relative;
-    align-self: stretch;
+    width: 100%;
     margin-top: -1px;
     font-family: var(--polaris-h1-font-family);
     font-weight: var(--polaris-h1-font-weight);
@@ -1755,7 +2199,7 @@
 
   .polaris-hero-section .polaris-launchpad-AI {
     position: relative;
-    align-self: stretch;
+    width: 100%;
     font-family: var(--polaris-medium-text-font-family);
     font-weight: var(--polaris-medium-text-font-weight);
     color: var(--white);
@@ -1767,17 +2211,17 @@
 
   .polaris-hero-section .group {
     position: relative;
-    width: 421px;
-    height: 75px;
-    margin-right: -2px;
+    width: 100%;
+    min-height: 75px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .polaris-hero-section .large-button {
-    position: absolute;
-    width: 419px;
-    height: 45px;
-    top: 0;
-    left: 0;
+    position: relative;
+    width: 100%;
+    min-height: 45px;
   }
 
   .polaris-hero-section .overlap-group {
@@ -1787,7 +2231,7 @@
   }
 
   .polaris-hero-section .div {
-    width: 419px;
+    width: 100%;
     height: 45px;
     background-color: var(--flare-orange);
     border-radius: 6px;
@@ -1800,8 +2244,9 @@
     all: unset;
     box-sizing: border-box;
     position: absolute;
-    top: 10px;
-    left: 131px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: var(--polaris-medium-text-font-size);
     line-height: var(--polaris-medium-text-line-height);
     font-family: var(--polaris-medium-text-font-family);
@@ -1816,39 +2261,37 @@
   }
 
   .polaris-hero-section .p {
-    position: absolute;
-    top: 57px;
-    left: 0;
+    position: relative;
     font-family: "Montserrat", Helvetica;
     font-weight: 500;
     color: var(--white);
-    font-size: 10px;
+    font-size: clamp(10px, 1.2vw, 12px);
     letter-spacing: 0;
-    line-height: 18px;
-    white-space: nowrap;
+    line-height: clamp(16px, 1.8vw, 20px);
   }
 
   .polaris-hero-section .img {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 219px;
     top: 547px;
-    left: 735px;
+    left: 0;
   }
 
   .polaris-hero-section .group-3 {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 178px;
     top: 588px;
-    left: 735px;
+    left: 0;
   }
 
   .polaris-hero-section .logo-icon-white {
     width: 36px;
     height: 36px;
-    top: 564px;
-    left: 1437px;
+    top: 568px;
+    left: 50%;
+    transform: translateX(-50%);
     position: absolute;
     object-fit: cover;
   }
@@ -1856,44 +2299,43 @@
  /* Header Block White - Inner Pages */
   .header-innerpage {
     position: relative;
-    width: 1440px;
-    height: 138px;
+    width: 100%;
+    min-height: 138px;
     background-color: #ffffff;
   }
 
   .header-innerpage .header {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 94px;
+    justify-content: space-between;
+    gap: clamp(20px, 5vw, 94px);
     position: relative;
     top: 24px;
-    left: 69px;
+    width: 96%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 30px;
     background-color: transparent;
   }
 
   .header-innerpage .polaris-logo {
     position: relative;
-    width: 268px;
-    height: 90px;
-    aspect-ratio: 2.96;
-    object-fit: cover;
+    width: clamp(200px, 20vw, 268px);
+    height: auto;
+    object-fit: contain;
   }
 
   .header-innerpage .group {
     position: relative;
-    width: 939.8px;
-    height: 30.07px;
+    display: flex;
+    align-items: center;
   }
 
   .header-innerpage .frame {
     display: flex;
-    width: 670px;
-    height: 26px;
     align-items: center;
-    gap: 40px;
-    position: absolute;
-    top: 4px;
-    left: 0;
+    gap: clamp(15px, 3vw, 50px);
+    flex-wrap: nowrap;
   }
 
   .header-innerpage .div-wrapper {
@@ -1938,11 +2380,12 @@
     justify-content: center;
     gap: 10px;
     padding: 6px 24px;
-    position: absolute;
-    top: 0;
-    left: 698px;
+    position: relative;
     background-color: var(--nebula-teal);
     border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .header-innerpage .button {
@@ -1967,12 +2410,88 @@
     justify-content: center;
     gap: 10px;
     padding: 6px 24px;
-    position: absolute;
-    top: 0;
-    left: 782px;
+    position: relative;
     background-color: var(--nebula-teal);
     border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
+
+/* Responsive white header - must come after base .header-innerpage styles */
+@media (max-width: 1100px) {
+    .header-innerpage .group {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 30px;
+        z-index: 1000;
+        padding: 60px 20px 40px;
+        overflow-y: auto;
+    }
+
+    .header-innerpage .group.nav-open {
+        display: flex;
+    }
+
+    .header-innerpage .group .frame {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .header-innerpage .group .text-wrapper {
+        font-size: 16px;
+        line-height: 24px;
+        color: var(--dark-grey);
+    }
+
+    .header-innerpage .group .text-wrapper a {
+        color: var(--dark-grey);
+    }
+
+    /* White header buttons - match default header mobile behavior */
+    .header-innerpage .small-button,
+    .header-innerpage .button-wrapper {
+        flex-shrink: 1;
+        padding: 6px 14px;
+    }
+
+    .header-innerpage .button {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}
+
+/* White header - mobile */
+@media (max-width: 600px) {
+    .header-innerpage .header {
+        padding: 0 10px;
+        gap: 8px;
+    }
+
+    .header-innerpage .polaris-logo {
+        width: auto;
+        height: 120px;
+    }
+
+    .header-innerpage .small-button,
+    .header-innerpage .button-wrapper {
+        padding: 8px 14px;
+    }
+
+    .header-innerpage .button {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}
 
 /* ========================================
      PRICING PAGE BLOCKS
@@ -1982,7 +2501,7 @@
 /* Pricing Plans Block - Correctly Scoped Anima CSS */
   .wp-block-polaris-pricing-plans .pricing-page {
     position: relative;
-    width: 1440px;
+    width: 100%;
     height: 972px;
     background-color: var(--off-white);
   }
@@ -1995,7 +2514,7 @@
 
   .wp-block-polaris-pricing-plans .pricing-page .vector {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 375px;
     top: 79px;
     left: 0;
@@ -2003,7 +2522,7 @@
 
   .wp-block-polaris-pricing-plans .pricing-page .img {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 449px;
     top: 386px;
     left: 0;
@@ -2011,10 +2530,11 @@
 
   .wp-block-polaris-pricing-plans .pricing-page .vector-2 {
     position: absolute;
-    width: 1253px;
+    width: 90%;
+    max-width: 1253px;
     height: 141px;
     top: 374px;
-    left: 50px;
+    left: 5%;
   }
 
   .wp-block-polaris-pricing-plans .pricing-page .logo-icon {
@@ -2022,7 +2542,8 @@
     width: 63px;
     height: 63px;
     top: 352px;
-    left: 1287px;
+    right: 5%;
+    left: auto;
     aspect-ratio: 1;
     object-fit: cover;
   }
@@ -2032,16 +2553,19 @@
     width: 813px;
     height: 852px;
     top: 0;
-    left: 316px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .wp-block-polaris-pricing-plans .pricing-page .frame {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: flex-start;
     gap: 26px;
     position: absolute;
     top: 229px;
     left: 0;
+    right: 0;
   }
 
   .wp-block-polaris-pricing-plans .pricing-page .div {
@@ -2446,7 +2970,8 @@
     width: 492px;
     height: 67px;
     top: 72px;
-    left: 158px;
+    left: 50%;
+    transform: translateX(-50%);
     border-radius: 50px;
     background: linear-gradient(
       111deg,
@@ -2556,7 +3081,9 @@
   .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-10 {
     position: absolute;
     top: 0;
-    left: 52px;
+    left: 0;
+    right: 0;
+    text-align: center;
     font-family: var(--polaris-h1-font-family);
     font-weight: var(--polaris-h1-font-weight);
     color: var(--deep-blue);
@@ -2571,7 +3098,8 @@
   .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-11 {
     position: absolute;
     top: 151px;
-    left: 292px;
+    left: 0;
+    right: 0;
     font-family: var(--polaris-small-text-regular-font-family);
     font-weight: bold;
     color: var(--dark-grey);
@@ -2678,13 +3206,137 @@
   }
 
 
+  /* Pricing Plans Block - Tablet */
+  @media (max-width: 1199px) {
+    .wp-block-polaris-pricing-plans .pricing-page {
+      height: auto;
+      min-height: 900px;
+      padding-bottom: 60px;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .overlap {
+      height: auto;
+      min-height: 852px;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .group {
+      position: relative;
+      width: 90%;
+      max-width: 813px;
+      height: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-10 {
+      position: relative;
+      top: 0;
+      margin-bottom: 10px;
+      white-space: normal;
+      order: 1;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-11 {
+      position: relative;
+      top: 0;
+      margin-bottom: 10px;
+      order: 2;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .plan {
+      position: relative;
+      top: 0;
+      left: auto;
+      transform: none;
+      margin-bottom: 30px;
+      order: 3;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .frame {
+      position: relative;
+      top: 0;
+      flex-wrap: wrap;
+      order: 4;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .div {
+      width: 391px;
+      flex-shrink: 0;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .vector-2,
+    .wp-block-polaris-pricing-plans .pricing-page .logo-icon {
+      display: none;
+    }
+  }
+
+  /* Pricing Plans Block - Mobile */
+  @media (max-width: 767px) {
+    .wp-block-polaris-pricing-plans .pricing-page {
+      min-height: auto;
+      padding-bottom: 40px;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .overlap {
+      top: 30px;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .vector,
+    .wp-block-polaris-pricing-plans .pricing-page .img {
+      display: none;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .group {
+      width: 95%;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .text-wrapper-10 {
+      font-size: 28px !important;
+      line-height: 36px !important;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .plan {
+      width: 492px;
+      transform: scale(0.7);
+      transform-origin: center center;
+      margin-bottom: 10px;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .frame {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .div {
+      width: 100%;
+      max-width: 391px;
+    }
+
+    /* Mobile card toggle: default shows monthly, hides annual */
+    .wp-block-polaris-pricing-plans .pricing-page .group .frame .div:last-child {
+      display: none;
+    }
+
+    /* When annual toggled: hide monthly, show annual */
+    .wp-block-polaris-pricing-plans .pricing-page .group.pricing-plans-annual .frame .div:first-child {
+      display: none;
+    }
+
+    .wp-block-polaris-pricing-plans .pricing-page .group.pricing-plans-annual .frame .div:last-child {
+      display: block;
+    }
+  }
+
   /* ===== END PRICING PLANS BLOCK CSS ===== */
 
 
  /* Pricing Fuel Block */
   .pricing-page-section {
     position: relative;
-    width: 1440px;
+    width: 100%;
     height: 668px;
     background-color: #ffffff;
     overflow: hidden;
@@ -2692,22 +3344,16 @@
 
   .pricing-page-section .overlap-group {
     position: relative;
-    width: 1314px;
+    width: 90%;
+    max-width: 1314px;
     height: 824px;
     top: -65px;
-    left: 126px;
+    left: 0;
+    margin: 0 auto;
   }
 
   .pricing-page-section .element-month-paid {
-    position: absolute;
-    top: 426px;
-    left: 0;
-    font-family: "Montserrat", Helvetica;
-    font-weight: 400;
-    color: transparent;
-    font-size: 24px;
-    letter-spacing: 0;
-    line-height: 24px;
+    display: none;
   }
 
   .pricing-page-section .text-wrapper {
@@ -2732,17 +3378,21 @@
 
   .pricing-page-section .group {
     position: absolute;
-    width: 442px;
-    height: 355px;
+    width: 38%;
+    max-width: 442px;
     top: 191px;
     left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .pricing-page-section .fuel-your-launchpad {
-    position: absolute;
-    width: 436px;
-    top: 0;
-    left: 0;
+    position: relative;
+    width: 100%;
+    max-width: 436px;
+    top: auto;
+    left: auto;
     font-family: var(--polaris-h1-font-family);
     font-weight: var(--polaris-h1-font-weight);
     color: transparent;
@@ -2773,10 +3423,11 @@
   }
 
   .pricing-page-section .the-more {
-    position: absolute;
-    width: 436px;
-    top: 112px;
-    left: 0;
+    position: relative;
+    width: 100%;
+    max-width: 436px;
+    top: auto;
+    left: auto;
     font-family: var(--polaris-medium-text-font-family);
     font-weight: var(--polaris-medium-text-font-weight);
     color: var(--dark-grey);
@@ -2787,19 +3438,21 @@
   }
 
   .pricing-page-section .large-button {
-    position: absolute;
-    width: 419px;
+    position: relative;
+    width: 100%;
+    max-width: 419px;
     height: 45px;
-    top: 310px;
-    left: 0;
+    top: auto;
+    left: auto;
     background-color: var(--flare-orange);
     border-radius: 6px;
+    order: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .pricing-page-section .div {
-    position: absolute;
-    top: 10px;
-    left: 160px;
     font-family: var(--polaris-medium-text-font-family);
     font-weight: var(--polaris-medium-text-font-weight);
     color: #ffffff;
@@ -2812,23 +3465,25 @@
   }
 
   .pricing-page-section .p {
-    position: absolute;
-    top: 236px;
-    left: 0;
+    position: relative;
+    top: auto;
+    left: auto;
     font-family: "Montserrat", Helvetica;
     font-weight: 400;
     color: transparent;
     font-size: 24px;
     letter-spacing: 0;
     line-height: 24px;
+    order: 3;
   }
 
   .pricing-page-section .rectangle {
     position: absolute;
-    width: 550px;
+    width: 42%;
     height: 824px;
     top: 0;
-    left: 764px;
+    right: 0;
+    left: auto;
     background: linear-gradient(
       180deg,
       rgba(44, 62, 80, 1) 0%,
@@ -2838,20 +3493,182 @@
 
   .pricing-page-section .mask-group {
     position: absolute;
-    width: 550px;
+    width: 42%;
     height: 668px;
     top: 65px;
-    left: 764px;
+    right: 0;
+    left: auto;
+    object-fit: cover;
   }
 
   .pricing-page-section .mockup {
     position: absolute;
-    width: 892px;
-    height: 631px;
+    width: 68%;
+    max-width: 892px;
+    height: auto;
     top: 102px;
-    left: 422px;
+    left: 32%;
     aspect-ratio: 1.68;
     object-fit: cover;
+  }
+
+  /* Pricing Fuel Block - Tablet */
+  @media (max-width: 1199px) {
+    .pricing-page-section {
+      height: auto;
+      min-height: 668px;
+      padding-bottom: 40px;
+    }
+
+    .pricing-page-section .overlap-group {
+      width: 92%;
+      height: auto;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+    }
+
+    .pricing-page-section .group {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      top: 0;
+      text-align: center;
+    }
+
+    .pricing-page-section .fuel-your-launchpad,
+    .pricing-page-section .the-more,
+    .pricing-page-section .p,
+    .pricing-page-section .element-month-paid {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      top: auto;
+      left: auto;
+    }
+
+    .pricing-page-section .the-more {
+      margin-top: 16px;
+    }
+
+    .pricing-page-section .p {
+      margin-top: 24px;
+    }
+
+    .pricing-page-section .large-button {
+      position: relative;
+      top: auto;
+      margin-top: 24px;
+      max-width: 419px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-page-section .large-button .div {
+      position: relative;
+      top: auto;
+      left: auto;
+      width: 100%;
+      text-align: center;
+      line-height: 45px;
+    }
+
+    .pricing-page-section .element-month-paid {
+      margin-top: 16px;
+      display: none;
+    }
+
+    .pricing-page-section .overlap-group {
+      padding-bottom: 50vw;
+    }
+
+    .pricing-page-section .rectangle {
+      position: absolute;
+      width: 90%;
+      left: 5%;
+      bottom: 0;
+      height: 45vw;
+      right: auto;
+      top: auto;
+      border-radius: 12px;
+    }
+
+    .pricing-page-section .mask-group {
+      position: absolute;
+      width: 90%;
+      left: 5%;
+      bottom: 0;
+      height: 45vw;
+      right: auto;
+      top: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      z-index: 1;
+    }
+
+    .pricing-page-section .mockup {
+      position: absolute;
+      width: 80%;
+      max-width: 700px;
+      left: 10%;
+      bottom: 2vw;
+      height: auto;
+      top: auto;
+      right: auto;
+      z-index: 2;
+    }
+  }
+
+  /* Pricing Fuel Block - Mobile */
+  @media (max-width: 767px) {
+    .pricing-page-section {
+      min-height: auto;
+      padding-bottom: 30px;
+    }
+
+    .pricing-page-section .overlap-group {
+      width: 90%;
+      padding-top: 30px;
+    }
+
+    .pricing-page-section .fuel-your-launchpad {
+      font-size: 28px !important;
+      line-height: 36px !important;
+    }
+
+    .pricing-page-section .fuel-your-launchpad .text-wrapper-2,
+    .pricing-page-section .fuel-your-launchpad .text-wrapper-3 {
+      font-size: 28px !important;
+      line-height: 36px !important;
+    }
+
+    .pricing-page-section .the-more {
+      font-size: 14px;
+    }
+
+    .pricing-page-section .large-button {
+      width: 100%;
+    }
+
+    .pricing-page-section .overlap-group {
+      padding-bottom: 60vw;
+    }
+
+    .pricing-page-section .rectangle {
+      height: 55vw;
+    }
+
+    .pricing-page-section .mask-group {
+      height: 55vw;
+    }
+
+    .pricing-page-section .mockup {
+      width: 85%;
+      left: 7.5%;
+    }
   }
 
   /* End Pricing Fuel Block */
@@ -2860,10 +3677,14 @@
 /* Pricing FAQ Block */
   .FAQ {
     position: relative;
-    width: 1440px;
-    height: 454px;
+    width: 100%;
+    height: auto;
+    min-height: 454px;
+    padding: 0 20px;
+    padding-bottom: 40px;
     background-color: #ffffff;
     text-align: center;
+    box-sizing: border-box;
   }
 
   .FAQ .text-wrapper-2 {
@@ -2893,6 +3714,7 @@
     position: relative;
     width: 100%;
     max-width: 982px;
+    margin: 0 auto;
     height: 48px;
     text-align: left;
   }
@@ -2960,80 +3782,149 @@
       line-height: 1.6;
   }
 
+  /* Pricing FAQ Block - Tablet */
+  @media (max-width: 1199px) {
+    .FAQ {
+      padding: 0 40px 40px;
+    }
+
+    .FAQ .text-wrapper-2 {
+      font-size: 28px;
+      line-height: 36px;
+      margin-top: 40px;
+      margin-bottom: 30px;
+    }
+
+    .FAQ .group {
+      max-width: 100%;
+    }
+
+    .FAQ .text-wrapper {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  /* Pricing FAQ Block - Mobile */
+  @media (max-width: 767px) {
+    .FAQ {
+      padding: 0 20px 30px;
+      min-height: auto;
+    }
+
+    .FAQ .text-wrapper-2 {
+      font-size: 22px;
+      line-height: 30px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .FAQ .text-wrapper {
+      font-size: 14px;
+      line-height: 20px;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+
+    .FAQ .div {
+      height: auto;
+      min-height: 48px;
+    }
+
+    .FAQ .faq-answer p {
+      font-size: 14px;
+    }
+  }
+
   /* End Pricing FAQ Block */
 
  /* Contact Us Form Block */
   .contact {
     position: relative;
-    width: 1440px;
-    height: 541px;
+    width: 100%;
     background-color: #ffffff;
     overflow: hidden;
   }
 
   .contact .overlap {
     position: relative;
-    width: 1466px;
-    height: 533px;
-    top: 8px;
-    left: -26px;
+    width: 100%;
   }
 
   .contact .vector {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 375px;
     top: 0;
-    left: 26px;
+    left: 0;
   }
 
   .contact .img {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 328px;
     top: 205px;
-    left: 26px;
+    left: 0;
   }
 
   .contact .group {
-    position: absolute;
-    width: 1270px;
-    height: 435px;
-    top: 52px;
-    left: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 20px 60px;
+    width: 90%;
+    max-width: 1270px;
+    margin: 0 auto;
+    padding: 60px 0;
+    z-index: 1;
   }
 
+  /* Heading - top left */
+  .contact .contact-us-about {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: var(--polaris-h1-font-family);
+    font-weight: var(--polaris-h1-font-weight);
+    color: transparent;
+    font-size: var(--polaris-h1-font-size);
+    letter-spacing: var(--polaris-h1-letter-spacing);
+    line-height: var(--polaris-h1-line-height);
+    font-style: var(--polaris-h1-font-style);
+  }
+
+  /* Text + astronaut - bottom left */
   .contact .overlap-group {
-    position: absolute;
-    width: 699px;
-    height: 315px;
-    top: 121px;
-    left: 26px;
+    grid-column: 1;
+    grid-row: 2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .contact .astronaut {
-    position: absolute;
-    width: 225px;
-    height: 223px;
-    top: 73px;
-    left: 475px;
+    order: 2;
+    width: 200px;
+    height: auto;
+    align-self: flex-end;
+    margin-right: 40px;
+    margin-top: 20px;
     aspect-ratio: 1.01;
     object-fit: cover;
+    z-index: 2;
   }
 
   .contact .vector-2 {
-    position: absolute;
-    width: 581px;
-    height: 127px;
-    top: 188px;
-    left: 0;
+    order: 3;
+    width: 100%;
+    max-width: 581px;
+    height: auto;
+    margin-top: -100px;
+    margin-left: -120px;
   }
 
   .contact .we-re-here-to-help {
-    position: absolute;
-    width: 436px;
-    top: 0;
-    left: 200px;
+    order: 1;
     font-family: var(--polaris-medium-text-font-family);
     font-weight: var(--polaris-medium-text-font-weight);
     color: var(--dark-grey);
@@ -3043,29 +3934,16 @@
     font-style: var(--polaris-medium-text-font-style);
   }
 
+  /* Form - right side, spanning both rows */
   .contact .frame {
+    grid-column: 2;
+    grid-row: 1 / 3;
     display: flex;
     flex-direction: column;
-    width: 439px;
+    width: 100%;
+    max-width: 439px;
     align-items: flex-start;
     gap: 12px;
-    position: absolute;
-    top: 0;
-    left: 828px;
-  }
-
-  .contact .contact-us-about {
-    position: absolute;
-    width: 436px;
-    top: 9px;
-    left: 226px;
-    font-family: var(--polaris-h1-font-family);
-    font-weight: var(--polaris-h1-font-weight);
-    color: transparent;
-    font-size: var(--polaris-h1-font-size);
-    letter-spacing: var(--polaris-h1-letter-spacing);
-    line-height: var(--polaris-h1-line-height);
-    font-style: var(--polaris-h1-font-style);
   }
 
   .contact .span {
@@ -3092,19 +3970,17 @@
   .contact .wpcf7-form {
     display: flex;
     flex-direction: column;
-    width: 439px;
-    align-items: flex-start;
+    width: 100%;
+    max-width: 439px;
+    align-items: stretch;
     gap: 12px;
-    position: relative;
-    top: 0;
-    left: 0;
   }
 
   .contact .wpcf7-form input[type="text"],
   .contact .wpcf7-form input[type="email"],
   .contact .wpcf7-form input[type="tel"],
   .contact .wpcf7-form textarea {
-    width: 439px;
+    width: 100%;
     border-radius: 6px;
     border: 1px solid var(--grey);
     padding: 8px 12px;
@@ -3131,7 +4007,7 @@
   }
 
   .contact .wpcf7-form input[type="submit"] {
-    width: 439px;
+    width: 100%;
     height: 45px;
     background-color: var(--flare-orange);
     border-radius: 6px;
@@ -3139,7 +4015,6 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
     margin-top: 20px;
-
     font-family: var(--polaris-medium-text-font-family);
     font-weight: var(--polaris-medium-text-font-weight);
     color: #ffffff;
@@ -3158,236 +4033,213 @@
     background-color: #d35400;
   }
 
+  /* Contact Us - Mobile */
+  @media (max-width: 767px) {
+    .contact .group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 40px;
+      gap: 24px;
+    }
+
+    .contact .contact-us-about {
+      text-align: center;
+      order: 1;
+    }
+
+    .contact .overlap-group {
+      width: 100%;
+      text-align: center;
+      order: 2;
+    }
+
+    .contact .astronaut {
+      align-self: center;
+      margin: 20px auto 0;
+      margin-right: auto;
+      order: 3;
+    }
+
+    .contact .frame {
+      width: 100%;
+      max-width: 439px;
+      align-items: center;
+      order: 3;
+    }
+
+    .contact .vector,
+    .contact .img,
+    .contact .vector-2 {
+      display: none;
+    }
+  }
+
   /* End Contact Us Form Block */
 
 /* About Us Block Styles */
   .about {
     position: relative;
-    width: 1440px;
-    height: 1029px;
+    width: 100%;
     background-color: #ffffff;
-    overflow: hidden;
   }
 
-  .about .overlap {
-    position: absolute;
-    width: 1523px;
-    height: 728px;
-    top: 531px;
-    left: -31px;
-    background-color: var(--off-white);
-  }
-
-  .about .group {
-    position: relative;
-    width: 1336px;
-    height: 498px;
-    left: 135px;
-  }
-
-  .about .div {
-    position: absolute;
-    width: 589px;
-    height: 304px;
-    top: 87px;
-    left: 0;
-  }
-
-  .about .we-re-on-a-mission {
-    position: absolute;
-    width: 585px;
-    top: 64px;
-    left: 0;
-    font-family: var(--polaris-medium-text-font-family);
-    font-weight: var(--polaris-medium-text-font-weight);
-    color: var(--dark-grey);
-    font-size: var(--polaris-medium-text-font-size);
-    letter-spacing: var(--polaris-medium-text-letter-spacing);
-    line-height: var(--polaris-medium-text-line-height);
-    font-style: var(--polaris-medium-text-font-style);
-  }
-
-  .about .text-wrapper {
-    font-size: var(--polaris-h3-font-size);
-    line-height: var(--polaris-h3-line-height);
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-family: var(--polaris-h3-font-family);
-    font-weight: var(--polaris-h3-font-weight);
-    color: var(--deep-blue);
-    letter-spacing: var(--polaris-h3-letter-spacing);
-    white-space: nowrap;
-    font-style: var(--polaris-h3-font-style);
-  }
-
-  .about .mission-dashboard-img {
-    position: absolute;
-    width: 689px;
-    height: 498px;
-    top: 0;
-    left: 647px;
-  }
-
+  /* === Our Background Section === */
   .about .overlap-group {
-    position: absolute;
-    width: 1395px;
-    height: 531px;
-    top: 0;
-    left: -59px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 0;
   }
 
   .about .background-analytics-img {
-    position: absolute;
-    width: 650px;
-    height: 463px;
-    top: 0;
-    left: 100px;
+    width: 48%;
+    max-width: 650px;
+    height: auto;
+    flex-shrink: 0;
     object-fit: contain;
   }
 
   .about .group-2 {
-    position: absolute;
-    width: 1395px;
-    height: 463px;
-    top: 60px;
-    left: 0;
+    width: 48%;
+    flex-shrink: 0;
   }
 
   .about .group-3 {
-    position: absolute;
-    width: 589px;
-    height: 292px;
-    top: 64px;
-    left: 810px;
-  }
-
-  .about .we-ve-spent-over-two {
-    position: absolute;
-    width: 585px;
-    top: 72px;
-    left: 0;
-    font-family: var(--polaris-medium-text-font-family);
-    font-weight: var(--polaris-medium-text-font-weight);
-    color: var(--dark-grey);
-    font-size: var(--polaris-medium-text-font-size);
-    letter-spacing: var(--polaris-medium-text-letter-spacing);
-    line-height: var(--polaris-medium-text-line-height);
-    font-style: var(--polaris-medium-text-font-style);
+    width: 100%;
   }
 
   .about .text-wrapper-2 {
     font-size: var(--polaris-h1-font-size);
     line-height: var(--polaris-h1-line-height);
-    position: absolute;
-    top: 0;
-    left: 0;
     font-family: var(--polaris-h1-font-family);
     font-weight: var(--polaris-h1-font-weight);
     color: var(--deep-blue);
     letter-spacing: var(--polaris-h1-letter-spacing);
     white-space: nowrap;
     font-style: var(--polaris-h1-font-style);
+    margin-bottom: 20px;
   }
 
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .about {
-      width: 100%;
-      height: auto;
-    }
+  .about .we-ve-spent-over-two {
+    font-family: var(--polaris-medium-text-font-family);
+    font-weight: var(--polaris-medium-text-font-weight);
+    color: var(--dark-grey);
+    font-size: var(--polaris-medium-text-font-size);
+    letter-spacing: var(--polaris-medium-text-letter-spacing);
+    line-height: var(--polaris-medium-text-line-height);
+    font-style: var(--polaris-medium-text-font-style);
+  }
 
-    .about .overlap {
-      position: relative;
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-      padding: 2rem 1rem;
-    }
+  /* === Our Mission Section === */
+  .about .overlap {
+    width: 100%;
+    background-color: var(--off-white);
+    padding: 60px 0;
+  }
 
-    .about .group {
-      width: 100%;
-      height: auto;
-      left: 0;
-      display: flex;
-      flex-direction: column-reverse;
-      gap: 2rem;
-    }
+  .about .group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
 
-    .about .div {
-      position: relative;
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-    }
+  .about .div {
+    width: 48%;
+    flex-shrink: 0;
+  }
 
-    .about .mission-dashboard-img {
-      position: relative;
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-      max-width: 400px;
-      margin: 0 auto;
-    }
+  .about .text-wrapper {
+    font-size: var(--polaris-h1-font-size);
+    line-height: var(--polaris-h1-line-height);
+    font-family: var(--polaris-h1-font-family);
+    font-weight: var(--polaris-h1-font-weight);
+    color: var(--deep-blue);
+    letter-spacing: var(--polaris-h1-letter-spacing);
+    white-space: nowrap;
+    font-style: var(--polaris-h1-font-style);
+    margin-bottom: 20px;
+  }
 
+  .about .we-re-on-a-mission {
+    font-family: var(--polaris-medium-text-font-family);
+    font-weight: var(--polaris-medium-text-font-weight);
+    color: var(--dark-grey);
+    font-size: var(--polaris-medium-text-font-size);
+    letter-spacing: var(--polaris-medium-text-letter-spacing);
+    line-height: var(--polaris-medium-text-line-height);
+    font-style: var(--polaris-medium-text-font-style);
+  }
+
+  .about .mission-dashboard-img {
+    width: 48%;
+    max-width: 689px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  /* About Us - Mobile */
+  @media (max-width: 767px) {
+    /* Our Background - stack vertically: image then text */
     .about .overlap-group {
-      position: relative;
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-      padding: 2rem 1rem;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 40px;
+      gap: 24px;
     }
 
     .about .background-analytics-img {
-      position: relative;
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
+      width: 80%;
       max-width: 400px;
-      margin: 0 auto 2rem;
     }
 
     .about .group-2 {
-      position: relative;
       width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
+      text-align: center;
     }
 
-    .about .group-3 {
-      position: relative;
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-    }
-
-    .about .we-re-on-a-mission,
-    .about .we-ve-spent-over-two {
-      width: 100%;
-      position: relative;
-      top: 0;
-      left: 0;
-    }
-
-    .about .text-wrapper,
     .about .text-wrapper-2 {
-      position: relative;
-      top: 0;
-      left: 0;
-      margin-bottom: 1rem;
+      white-space: normal;
+    }
+
+    /* Our Mission - stack vertically: text then image */
+    .about .overlap {
+      padding: 30px 0 40px;
+    }
+
+    .about .group {
+      width: 90%;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .about .div {
+      width: 100%;
+      text-align: center;
+    }
+
+    .about .text-wrapper {
+      white-space: normal;
+    }
+
+    .about .mission-dashboard-img {
+      width: 80%;
+      max-width: 400px;
     }
   }
  /* Features Section 1 Block Styles */
   .features-section {
     position: relative;
-    width: 1440px;
+    width: 100%;
     height: 647px;
     background-color: #ffffff;
   }
@@ -3399,14 +4251,14 @@
 
   .features-section .vector {
     position: absolute;
-    width: 1440px;
+    width: 100%;
     height: 273px;
     top: 0;
     left: 0;
   }
 
   .features-section .img {
-    width: 1440px;
+    width: 100%;
     height: 449px;
     top: 103px;
     position: absolute;
@@ -3415,27 +4267,36 @@
 
   .features-section .hero-copy {
     position: absolute;
-    width: 738px;
-    height: 629px;
+    width: 52%;
+    max-width: 738px;
+    height: auto;
+    max-height: 629px;
     top: 0;
-    left: 702px;
+    right: 0;
     aspect-ratio: 1.07;
     object-fit: cover;
   }
 
+  .features-section .overlap-group {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
   .features-section .group {
     position: absolute;
-    width: 532px;
-    height: 192px;
+    width: 38%;
+    max-width: 532px;
+    height: auto;
     top: 189px;
-    left: 100px;
+    left: 7%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 
   .features-section .your-business-hub {
-    position: absolute;
-    width: 479px;
-    top: 0;
-    left: 0;
+    position: relative;
+    width: 100%;
     font-family: var(--polaris-h1-font-family);
     font-weight: var(--polaris-h1-font-weight);
     color: transparent;
@@ -3466,10 +4327,8 @@
   }
 
   .features-section .think-of-your {
-    position: absolute;
-    width: 532px;
-    top: 108px;
-    left: 0;
+    position: relative;
+    width: 100%;
     font-family: var(--polaris-medium-text-font-family);
     font-weight: var(--polaris-medium-text-font-weight);
     color: var(--dark-grey);
@@ -3479,20 +4338,12 @@
     font-style: var(--polaris-medium-text-font-style);
   }
 
-  .features-section .vector-2 {
-    position: absolute;
-    width: 148px;
-    height: 148px;
-    top: 481px;
-    left: 1292px;
+  .wp-block-polaris-features-section1 .features-section .vector-2 {
+    display: none;
   }
 
-  .features-section .logo-icon {
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    top: 523px;
-    left: 1334px;
+  .wp-block-polaris-features-section1 .features-section .logo-icon {
+    display: none;
   }
 
   /* Responsive Design */
@@ -3541,8 +4392,8 @@
       left: 0;
     }
 
-    .features-section .vector-2,
-    .features-section .logo-icon {
+    .wp-block-polaris-features-section1 .features-section .vector-2,
+    .wp-block-polaris-features-section1 .features-section .logo-icon {
       display: none;
     }
   }
@@ -3553,29 +4404,34 @@
 
   .wp-block-polaris-features-section2 .features-section {
     position: relative;
-    width: 1440px;
+    width: 100%;
     height: 1287px;
-    background-color: #ffffff;
+    background-image: url(img/features-2-mask-group.png);
+    background-size: cover;
+    background-position: center;
   }
 
   .wp-block-polaris-features-section2 .features-section .overlap-group {
     position: relative;
     height: 1287px;
-    background-image: url(img/features-2-mask-group.png);
-    background-size: 100% 100%;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 
   .wp-block-polaris-features-section2 .features-section .overlap {
     position: absolute;
-    width: 1274px;
+    width: 90%;
+    max-width: 1274px;
     height: 1200px;
     top: 87px;
-    left: 78px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .wp-block-polaris-features-section2 .features-section .div {
     position: absolute;
-    width: 1274px;
+    width: 100%;
+    max-width: 1274px;
     height: 1156px;
     top: 44px;
     left: 0;
@@ -3583,23 +4439,29 @@
 
   .wp-block-polaris-features-section2 .features-section .vector {
     position: absolute;
-    width: 1133px;
-    height: 1134px;
+    width: 90%;
+    max-width: 1133px;
+    height: auto;
     top: 22px;
-    left: 74px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .wp-block-polaris-features-section2 .features-section .group {
     position: absolute;
-    width: 402px;
-    height: 116px;
+    width: 40%;
+    max-width: 450px;
+    height: auto;
+    min-height: 116px;
     top: 117px;
-    left: 671px;
+    left: 53%;
+    right: auto;
+    z-index: 2;
   }
 
   .wp-block-polaris-features-section2 .features-section .group-2 {
     position: relative;
-    width: 406px;
+    width: 100%;
     height: 116px;
   }
 
@@ -3619,7 +4481,8 @@
 
   .wp-block-polaris-features-section2 .features-section .p {
     position: absolute;
-    width: 402px;
+    width: 100%;
+    max-width: 402px;
     top: 56px;
     left: 0;
     font-family: var(--polaris-medium-text-font-family);
@@ -3633,29 +4496,37 @@
 
   .wp-block-polaris-features-section2 .features-section .group-wrapper {
     position: absolute;
-    width: 403px;
-    height: 156px;
+    width: 40%;
+    max-width: 450px;
+    height: auto;
+    min-height: 156px;
     top: 866px;
-    left: 671px;
+    left: 53%;
+    right: auto;
+    z-index: 2;
   }
 
   .wp-block-polaris-features-section2 .features-section .group-3 {
     position: relative;
-    width: 407px;
+    width: 100%;
     height: 156px;
   }
 
   .wp-block-polaris-features-section2 .features-section .div-wrapper {
     position: absolute;
-    width: 603px;
-    height: 346px;
+    width: 45%;
+    max-width: 603px;
+    height: auto;
+    min-height: 346px;
     top: 387px;
-    left: 671px;
+    left: 53%;
+    right: auto;
+    z-index: 2;
   }
 
   .wp-block-polaris-features-section2 .features-section .group-4 {
     position: relative;
-    width: 611px;
+    width: 100%;
     height: 346px;
   }
 
@@ -3780,42 +4651,45 @@
 
   .wp-block-polaris-features-section2 .features-section .mask-group {
     position: absolute;
-    width: 603px;
-    height: 351px;
+    width: 48%;
+    max-width: 603px;
+    height: auto;
     top: 0;
     left: 0;
   }
 
   .wp-block-polaris-features-section2 .features-section .group-10 {
     position: absolute;
-    width: 603px;
-    height: 351px;
+    width: 48%;
+    max-width: 603px;
+    height: auto;
     top: 374px;
     left: 0;
   }
 
   .wp-block-polaris-features-section2 .features-section .mask-group-2 {
     position: absolute;
-    width: 566px;
-    height: 327px;
+    width: 45%;
+    max-width: 566px;
+    height: auto;
     top: 793px;
     left: 24px;
   }
 
   .wp-block-polaris-features-section2 .features-section .logo-icon {
     position: absolute;
-    width: 66px;
-    height: 66px;
-    top: 0;
-    left: 1175px;
-    aspect-ratio: 1;
-    object-fit: cover;
+    top: 40px;
+    right: 35px;
+    width: 70px;
+    height: auto;
+    z-index: 3;
   }
 
   .wp-block-polaris-features-section2 .features-section .text-wrapper-3 {
     position: absolute;
     top: 59px;
-    left: 608px;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: var(--polaris-h1-font-family);
     font-weight: var(--polaris-h1-font-weight);
     color: var(--deep-blue);
@@ -3845,12 +4719,7 @@
     margin-bottom: 0;
   }
 
-  The key fix: I removed this problematic rule:
-  .wp-block-polaris-features-section2 .features-section img {
-    max-width: 100%;
-    height: auto;
-  }
- /* Fix bullet point text sizing */
+  /* Fix bullet point text sizing */
   .wp-block-polaris-features-section2 .features-section .business-profile
   .span,
   .wp-block-polaris-features-section2 .features-section .competitors-what
@@ -3878,7 +4747,7 @@
 
     .wp-block-polaris-features-section3 .features-section {
       position: relative;
-      width: 1440px;
+      width: 100%;
       height: 1885px;
       background-color: #ffffff;
       overflow: hidden;
@@ -3886,39 +4755,52 @@
 
     .wp-block-polaris-features-section3 .features-section .overlap {
       position: relative;
-      width: 1959px;
+      width: 100%;
       height: 1923px;
-      left: -276px;
+      left: 0;
     }
 
     .wp-block-polaris-features-section3 .features-section .group {
       position: absolute;
-      width: 1579px;
+      width: 95%;
+      max-width: 1440px;
       height: 670px;
       top: 0;
-      left: 380px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .wp-block-polaris-features-section3 .features-section .overlap-group {
       position: relative;
-      width: 1336px;
+      width: 100%;
+      max-width: 1336px;
       height: 670px;
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
     }
 
     .wp-block-polaris-features-section3 .features-section .img {
-      position: absolute;
-      width: 837px;
-      height: 670px;
+      position: relative;
+      width: 50%;
+      max-width: 737px;
+      height: auto;
       top: 0;
-      left: 499px;
+      right: auto;
+      order: 2;
+      flex-shrink: 0;
     }
 
     .wp-block-polaris-features-section3 .features-section .div {
-      position: absolute;
-      width: 606px;
-      height: 352px;
+      position: relative;
+      width: 45%;
+      max-width: 606px;
+      height: auto;
+      min-height: 352px;
       top: 140px;
       left: 0;
+      order: 1;
+      flex-shrink: 0;
     }
 
     .wp-block-polaris-features-section3 .features-section .text-wrapper {
@@ -3951,7 +4833,8 @@
 
     .wp-block-polaris-features-section3 .features-section .text-wrapper-2 {
       position: absolute;
-      width: 554px;
+      width: 100%;
+      max-width: 554px;
       top: 100px;
       left: 0;
       font-family: var(--polaris-medium-text-font-family);
@@ -3965,7 +4848,8 @@
 
     .wp-block-polaris-features-section3 .features-section .perfect-for {
       position: absolute;
-      width: 554px;
+      width: 100%;
+      max-width: 554px;
       top: 312px;
       left: 0;
       font-family: var(--polaris-medium-text-font-family);
@@ -3979,7 +4863,8 @@
 
     .wp-block-polaris-features-section3 .features-section .group-2 {
       position: absolute;
-      width: 289px;
+      width: 48%;
+      max-width: 289px;
       height: 80px;
       top: 200px;
       left: 0;
@@ -3987,10 +4872,11 @@
 
     .wp-block-polaris-features-section3 .features-section .group-3 {
       position: absolute;
-      width: 289px;
+      width: 48%;
+      max-width: 289px;
       height: 80px;
       top: 200px;
-      left: 311px;
+      left: 52%;
     }
 
     /* BRAND GUIDELINES SECTION - New bullet-point structure */
@@ -4049,7 +4935,7 @@
 
     .wp-block-polaris-features-section3 .features-section .overlap-wrapper {
       position: absolute;
-      width: 1853px;
+      width: 100%;
       height: 683px;
       top: 621px;
       left: 0;
@@ -4057,13 +4943,15 @@
 
     .wp-block-polaris-features-section3 .features-section .overlap-2 {
       position: relative;
-      width: 1642px;
+      width: 95%;
+      max-width: 1440px;
       height: 683px;
-      left: 211px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .wp-block-polaris-features-section3 .features-section .rectangle {
-      width: 1642px;
+      width: 100%;
       left: 0;
       background-color: var(--nebula-teal);
       position: absolute;
@@ -4073,16 +4961,17 @@
 
     .wp-block-polaris-features-section3 .features-section .mask-group {
       position: absolute;
-      width: 1440px;
+      width: 100%;
       height: 632px;
       top: 0;
       left: 65px;
     }
 
     .wp-block-polaris-features-section3 .features-section .group-4 {
-      left: 803px;
+      right: 0;
       position: absolute;
-      width: 606px;
+      width: 45%;
+      max-width: 606px;
       height: 364px;
       top: 134px;
     }
@@ -4184,8 +5073,9 @@
     }
 
     .wp-block-polaris-features-section3 .features-section .rectangle-2 {
-      width: 550px;
-      left: 65px;
+      width: 40%;
+      max-width: 550px;
+      left: 4%;
       background-color: #f39c12;
       position: absolute;
       height: 632px;
@@ -4194,49 +5084,56 @@
 
     .wp-block-polaris-features-section3 .features-section .mockup {
       position: absolute;
-      width: 804px;
-      height: 642px;
+      width: 55%;
+      max-width: 804px;
+      height: auto;
       top: 41px;
-      left: 65px;
+      left: 4%;
       aspect-ratio: 1.68;
       object-fit: cover;
     }
 
     .wp-block-polaris-features-section3 .features-section .mask-group-2 {
       position: absolute;
-      width: 606px;
-      height: 426px;
+      width: 42%;
+      max-width: 606px;
+      height: auto;
       top: 103px;
-      left: 65px;
+      left: 4%;
     }
 
     .wp-block-polaris-features-section3 .features-section
     .overlap-group-wrapper {
       position: absolute;
-      width: 1579px;
+      width: 95%;
+      max-width: 1440px;
       height: 670px;
       top: 1253px;
-      left: 380px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .wp-block-polaris-features-section3 .features-section .overlap-3 {
       position: relative;
-      width: 1336px;
+      width: 100%;
+      max-width: 1336px;
       height: 632px;
     }
 
     .wp-block-polaris-features-section3 .features-section .group-7 {
       position: absolute;
-      width: 837px;
-      height: 632px;
+      width: 58%;
+      max-width: 837px;
+      height: auto;
       top: 0;
-      left: 499px;
+      right: 0;
     }
 
     .wp-block-polaris-features-section3 .features-section .group-8 {
       left: 0;
       position: absolute;
-      width: 606px;
+      width: 45%;
+      max-width: 606px;
       height: 364px;
       top: 134px;
     }
@@ -4449,7 +5346,7 @@
 
     .wp-block-polaris-features-section4 .features-section {
       position: relative;
-      width: 1440px;
+      width: 100%;
       height: 533px;
       background-color: #ffffff;
     }
@@ -4461,7 +5358,7 @@
 
     .wp-block-polaris-features-section4 .features-section .vector {
       position: absolute;
-      width: 1440px;
+      width: 100%;
       height: 273px;
       top: 0;
       left: 0;
@@ -4469,25 +5366,33 @@
 
     .wp-block-polaris-features-section4 .features-section .img {
       position: absolute;
-      width: 1440px;
+      width: 100%;
       height: 430px;
       top: 103px;
       left: 0;
     }
 
+    .wp-block-polaris-features-section4 .features-section .overlap-group {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
     .wp-block-polaris-features-section4 .features-section .group {
       position: absolute;
-      width: 1290px;
+      width: 90%;
+      max-width: 1290px;
       height: 413px;
       top: 60px;
-      left: 76px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .wp-block-polaris-features-section4 .features-section .the-polaris {
       position: absolute;
       width: 479px;
       top: 0;
-      left: 404px;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: var(--polaris-h1-font-family);
       font-weight: var(--polaris-h1-font-weight);
       color: transparent;
@@ -4520,33 +5425,40 @@
 
     .wp-block-polaris-features-section4 .features-section .frame {
       position: absolute;
-      width: 1288px;
+      width: 100%;
+      max-width: 1288px;
       top: 140px;
       left: 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 26px;
     }
 
     .wp-block-polaris-features-section4 .features-section .div {
-      position: absolute;
-      width: 412px;
+      position: relative;
+      width: 32%;
+      max-width: 412px;
       height: 232px;
       top: 0;
-      left: 0;
+      left: auto;
     }
 
     .wp-block-polaris-features-section4 .features-section .group-2 {
-      position: absolute;
-      width: 412px;
+      position: relative;
+      width: 32%;
+      max-width: 412px;
       height: 253px;
       top: 0;
-      left: 438px;
+      left: auto;
     }
 
     .wp-block-polaris-features-section4 .features-section .group-3 {
-      position: absolute;
-      width: 412px;
+      position: relative;
+      width: 32%;
+      max-width: 412px;
       height: 273px;
       top: 0;
-      left: 876px;
+      left: auto;
     }
 
     .wp-block-polaris-features-section4 .features-section .p {
@@ -4663,14 +5575,790 @@
     }
 
  /* ================================================
+   FEATURES PAGE - RESPONSIVE CSS
+   ================================================ */
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 1 - "Your Business Hub" - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .wp-block-polaris-features-section1 .features-section {
+    height: auto;
+    padding: 40px 30px 50px;
+    overflow: hidden;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .overlap-group {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .vector,
+  .wp-block-polaris-features-section1 .features-section .img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .group {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 30px;
+    z-index: 2;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .your-business-hub {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .think-of-your {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .hero-copy {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    z-index: 2;
+  }
+}
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 1 - "Your Business Hub" - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .wp-block-polaris-features-section1 .features-section {
+    padding: 30px 20px 40px;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .your-business-hub {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section1 .features-section .text-wrapper {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section1 .features-section .span {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section1 .features-section .think-of-your {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .wp-block-polaris-features-section1 .features-section .hero-copy {
+    max-width: 100%;
+  }
+}
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 2 - "How It Works" - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .wp-block-polaris-features-section2 .features-section {
+    height: auto;
+    padding: 40px 30px 50px;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .overlap-group {
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .text-wrapper-3 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    white-space: normal;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+    order: -1;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .overlap {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .div {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .vector {
+    display: none;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .logo-icon {
+    display: none;
+  }
+
+  /* Step 1: Start Simple */
+  .wp-block-polaris-features-section2 .features-section .group {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: auto;
+    order: 1;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .group-2 {
+    width: 100%;
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .text-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    margin-bottom: 8px;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .p {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+  }
+
+  /* Screenshot images - responsive, interleaved with text using order */
+  .wp-block-polaris-features-section2 .features-section .mask-group {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    order: 2;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .mask-group-2 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    order: 4;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .group-10 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    order: 6;
+  }
+
+  /* Step 2: Watch Your AI Get Smarter */
+  .wp-block-polaris-features-section2 .features-section .group-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    z-index: auto;
+    order: 3;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .group-3 {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Step 3: Build Over Time */
+  .wp-block-polaris-features-section2 .features-section .div-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    z-index: auto;
+    order: 5;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .group-4 {
+    width: 100%;
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .business-profile {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .competitors-what {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Bullet point indicators - hide since text already has bold labels */
+  .wp-block-polaris-features-section2 .features-section .vector-wrapper,
+  .wp-block-polaris-features-section2 .features-section .img-wrapper,
+  .wp-block-polaris-features-section2 .features-section .group-5,
+  .wp-block-polaris-features-section2 .features-section .group-6,
+  .wp-block-polaris-features-section2 .features-section .group-7,
+  .wp-block-polaris-features-section2 .features-section .group-8,
+  .wp-block-polaris-features-section2 .features-section .group-9 {
+    display: none;
+  }
+}
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 2 - "How It Works" - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .wp-block-polaris-features-section2 .features-section {
+    padding: 30px 20px 40px;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .text-wrapper-3 {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section2 .features-section .text-wrapper {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section2 .features-section .p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .wp-block-polaris-features-section2 .features-section .mask-group,
+  .wp-block-polaris-features-section2 .features-section .mask-group-2,
+  .wp-block-polaris-features-section2 .features-section .group-10 {
+    max-width: 100%;
+  }
+}
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 3 - AI Marketing Tools - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .wp-block-polaris-features-section3 .features-section {
+    height: auto;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .overlap {
+    width: 100%;
+    height: auto;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* --- Brand Guidelines Generator --- */
+  .wp-block-polaris-features-section3 .features-section .group {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    padding: 40px 30px 50px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .overlap-group {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .img {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto 30px;
+    order: -1;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .div {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .text-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    margin-bottom: 8px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .p {
+    position: relative;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    margin-bottom: 15px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .text-wrapper-2 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .perfect-for {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-2 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-3 {
+    position: relative;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  /* --- LinkedIn Post Generator --- */
+  .wp-block-polaris-features-section3 .features-section .overlap-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .overlap-2 {
+    width: 100%;
+    height: auto;
+    left: 0;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--nebula-teal);
+    padding: 40px 30px 50px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .rectangle {
+    display: none;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .mask-group {
+    display: none;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .rectangle-2 {
+    display: none;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .mockup {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto 30px;
+    order: -1;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .mask-group-2 {
+    display: none;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-4 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .text-wrapper-4 {
+    position: relative;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    margin-bottom: 8px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .text-wrapper-5 {
+    position: relative;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    margin-bottom: 15px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .text-wrapper-6 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .simply-provide-a {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-5 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-6 {
+    position: relative;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  /* --- Meta Ads Builder --- */
+  .wp-block-polaris-features-section3 .features-section .overlap-group-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    padding: 40px 30px 50px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .overlap-3 {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-7 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto 30px;
+    order: -1;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-8 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .text-wrapper-8 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-9 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .group-11 {
+    position: relative;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 3 - AI Marketing Tools - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .wp-block-polaris-features-section3 .features-section .group {
+    padding: 30px 20px 40px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .overlap-2 {
+    padding: 30px 20px 40px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .overlap-group-wrapper {
+    padding: 30px 20px 40px;
+  }
+
+  .wp-block-polaris-features-section3 .features-section .text-wrapper,
+  .wp-block-polaris-features-section3 .features-section .text-wrapper-4 {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section3 .features-section .img,
+  .wp-block-polaris-features-section3 .features-section .mockup,
+  .wp-block-polaris-features-section3 .features-section .group-7 {
+    max-width: 100%;
+  }
+}
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 4 - "Polaris Advantage" - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .wp-block-polaris-features-section4 .features-section {
+    height: auto;
+    padding: 40px 30px 50px;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .overlap-group {
+    height: auto;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .group {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .the-polaris {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .frame {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .div,
+  .wp-block-polaris-features-section4 .features-section .group-2,
+  .wp-block-polaris-features-section4 .features-section .group-3 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    min-height: 220px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .img-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 15px;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .text-wrapper-2,
+  .wp-block-polaris-features-section4 .features-section .text-wrapper-4,
+  .wp-block-polaris-features-section4 .features-section .ready-for-what-s {
+    position: relative;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .p,
+  .wp-block-polaris-features-section4 .features-section .text-wrapper-3 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .vector-2,
+  .wp-block-polaris-features-section4 .features-section .learningn,
+  .wp-block-polaris-features-section4 .features-section .logo-icon-white {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 0 auto 15px;
+  }
+}
+
+/* ----------------------------------------------------------
+   FEATURES SECTION 4 - "Polaris Advantage" - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .wp-block-polaris-features-section4 .features-section {
+    padding: 30px 20px 40px;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .the-polaris {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section4 .features-section .text-wrapper {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section4 .features-section .span {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section4 .features-section .frame {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .div,
+  .wp-block-polaris-features-section4 .features-section .group-2,
+  .wp-block-polaris-features-section4 .features-section .group-3 {
+    max-width: 100%;
+  }
+
+  .wp-block-polaris-features-section4 .features-section .text-wrapper-2,
+  .wp-block-polaris-features-section4 .features-section .text-wrapper-4,
+  .wp-block-polaris-features-section4 .features-section .ready-for-what-s {
+    font-size: var(--polaris-h3-mobile-font-size);
+    line-height: var(--polaris-h3-mobile-line-height);
+  }
+
+  .wp-block-polaris-features-section4 .features-section .p,
+  .wp-block-polaris-features-section4 .features-section .text-wrapper-3 {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+ /* ================================================
          BLOG LISTING PAGE
          ================================================ */
 
     .wp-block-polaris-blog-listing .blog {
         position: relative;
-        width: 1440px;
-        height: auto;
-        min-height: 2101px;
+        width: 100%;
         background-color: #ffffff;
         margin: 0;
     }
@@ -4678,12 +6366,12 @@
     .wp-block-polaris-blog-listing .blog .frame {
         display: flex;
         flex-direction: column;
-        width: 1228px;
+        width: 90%;
+        max-width: 1228px;
+        margin: 0 auto;
         align-items: flex-start;
         gap: 40px;
-        position: absolute;
-        top: 140px;
-        left: 106px;
+        padding: 40px 0 60px;
     }
 
     .wp-block-polaris-blog-listing .blog .div {
@@ -4693,21 +6381,22 @@
         position: relative;
         align-self: stretch;
         width: 100%;
-        flex: 0 0 auto;
     }
 
     .wp-block-polaris-blog-listing .blog .rectangle {
         position: relative;
-        width: 630px;
+        width: 50%;
+        min-width: 300px;
         height: 424px;
         object-fit: cover;
         border-radius: 8px;
+        flex-shrink: 0;
     }
 
     .wp-block-polaris-blog-listing .blog .frame-2 {
         display: flex;
         flex-direction: column;
-        width: 538px;
+        flex: 1;
         align-items: flex-start;
         gap: 40px;
         position: relative;
@@ -4721,17 +6410,15 @@
         position: relative;
         align-self: stretch;
         width: 100%;
-        flex: 0 0 auto;
     }
 
     .wp-block-polaris-blog-listing .blog .frame-4 {
         display: flex;
         flex-direction: column;
-        width: 528px;
+        width: 100%;
         align-items: flex-start;
         gap: 12px;
         position: relative;
-        flex: 0 0 auto;
     }
 
     .wp-block-polaris-blog-listing .blog .AI-tech-wrapper {
@@ -4854,7 +6541,7 @@
     .wp-block-polaris-blog-listing .blog .div-wrapper {
         all: unset;
         box-sizing: border-box;
-        width: 1224px;
+        width: 100%;
         border-radius: 6px;
         border: 1px solid;
         border-color: var(--grey);
@@ -4862,15 +6549,13 @@
         height: 45px;
         cursor: pointer;
         background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .wp-block-polaris-blog-listing .blog .button-2 {
-        width: 6.21%;
-        left: 46.61%;
         color: var(--dark-grey);
-        position: absolute;
-        height: 44.44%;
-        top: 24.44%;
         font-family: var(--polaris-medium-text-font-family);
         font-weight: var(--polaris-medium-text-font-weight);
         font-size: var(--polaris-medium-text-font-size);
@@ -4882,18 +6567,17 @@
     }
 
     .wp-block-polaris-blog-listing .blog .text-wrapper-3 {
-        position: absolute;
-        top: 60px;
-        left: 106px;
+        width: 90%;
+        max-width: 1228px;
+        margin: 0 auto;
+        padding: 60px 0 0;
         font-family: var(--polaris-h1-font-family);
         font-weight: var(--polaris-h1-font-weight);
         color: #000000;
         font-size: var(--polaris-h1-font-size);
         letter-spacing: var(--polaris-h1-letter-spacing);
         line-height: var(--polaris-h1-line-height);
-        white-space: nowrap;
         font-style: var(--polaris-h1-font-style);
-        margin: 0;
     }
 
     .wp-block-polaris-blog-listing .blog .no-posts {
@@ -4903,7 +6587,8 @@
     }
 
     .wp-block-polaris-blog-listing .blog .placeholder-image {
-        width: 630px;
+        width: 50%;
+        min-width: 300px;
         height: 424px;
         border-radius: 8px;
     }
@@ -4921,6 +6606,58 @@
         transition: all 0.2s ease;
     }
 
+    /* Blog Listing - Tablet */
+    @media (max-width: 1199px) {
+        .wp-block-polaris-blog-listing .blog .div {
+            gap: 30px;
+        }
+
+        .wp-block-polaris-blog-listing .blog .rectangle,
+        .wp-block-polaris-blog-listing .blog .placeholder-image {
+            height: 300px;
+            min-width: 250px;
+        }
+
+        .wp-block-polaris-blog-listing .blog .frame-2 {
+            gap: 24px;
+        }
+    }
+
+    /* Blog Listing - Mobile */
+    @media (max-width: 767px) {
+        .wp-block-polaris-blog-listing .blog .text-wrapper-3 {
+            padding: 40px 0 0;
+            font-size: var(--polaris-h2-font-size);
+            line-height: var(--polaris-h2-line-height);
+        }
+
+        .wp-block-polaris-blog-listing .blog .frame {
+            gap: 30px;
+            padding: 30px 0 40px;
+        }
+
+        .wp-block-polaris-blog-listing .blog .div {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .wp-block-polaris-blog-listing .blog .rectangle,
+        .wp-block-polaris-blog-listing .blog .placeholder-image {
+            width: 100%;
+            min-width: unset;
+            height: 250px;
+        }
+
+        .wp-block-polaris-blog-listing .blog .frame-2 {
+            width: 100%;
+            gap: 20px;
+        }
+
+        .wp-block-polaris-blog-listing .blog .button-wrapper {
+            width: 100%;
+        }
+    }
+
     /* End Blog Listing */
 
  /* Blog Post Content Block Styles */
@@ -4936,11 +6673,14 @@
     height: 424px;
     object-fit: cover;
     display: block;
-    margin: 0 104px;
+    margin: 0 auto;
   }
 
   .blog-detail .group {
-    padding: 40px 104px;
+    width: 90%;
+    max-width: 1232px;
+    margin: 0 auto;
+    padding: 40px 0;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -4989,8 +6729,11 @@
   }
 
   .blog-detail .post-content-wrapper {
-    padding: 20px 104px 40px 104px;
-	max-width: 1440px;
+    width: 90%;
+    max-width: 1232px;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+    box-sizing: border-box;
     font-family: var(--polaris-medium-text-font-family);
     font-weight: var(--polaris-medium-text-font-weight);
     color: var(--dark-grey);
@@ -5040,33 +6783,41 @@
 
   /* Related Articles Block Styles */
   .related-articles-section {
-    padding: 40px 104px;
+    width: 90%;
+    max-width: 1232px;
+    margin: 0 auto;
+    padding: 40px 0;
     background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 
   .related-articles-section .text-wrapper-4 {
+    width: 100%;
     font-family: var(--polaris-h2-font-family);
     font-weight: var(--polaris-h2-font-weight);
     color: var(--deep-blue);
     font-size: var(--polaris-h2-font-size);
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .related-articles-section .frame-3,
+  .related-articles-section .frame-4,
+  .related-articles-section .frame-5,
   .related-articles-section .frame-6,
   .related-articles-section .frame-7 {
-    display: inline-block;
-    width: 405px;
-    margin-right: 20px;
+    flex: 1 1 calc(33.333% - 14px);
+    min-width: 280px;
     margin-bottom: 32px;
-    vertical-align: top;
   }
 
   .related-articles-section .rectangle-2 {
-    width: 405px;
+    width: 100%;
     height: 264px;
     object-fit: cover;
     margin-bottom: 20px;
+    border-radius: 8px;
   }
 
   .related-articles-section .frame-4 {
@@ -5116,6 +6867,38 @@
     text-align: center;
   }
 
+  /* Blog Post Detail - Mobile */
+  @media (max-width: 767px) {
+    .blog-detail .rectangle {
+      height: 250px;
+    }
+
+    .blog-detail .group {
+      padding: 24px 0;
+    }
+
+    .blog-detail .text-wrapper {
+      font-size: var(--polaris-h3-font-size);
+      line-height: var(--polaris-h3-line-height);
+    }
+
+    .blog-detail .post-content-wrapper {
+      padding: 16px 0 30px;
+    }
+
+    .related-articles-section {
+      padding: 30px 0;
+    }
+
+    .related-articles-section .text-wrapper-4 {
+      font-size: var(--polaris-h3-font-size);
+    }
+
+    .related-articles-section .rectangle-2 {
+      height: 200px;
+    }
+  }
+
   /* End Blog Post Listing */
 
   /* Universal Policy Pages Styling - Works on Any Page */
@@ -5134,7 +6917,7 @@
       font-weight: var(--polaris-h2-font-weight);
       color: var(--deep-blue);
       font-size: var(--polaris-h2-font-size);
-      margin: 32px 106px 20px 106px;
+      margin: 32px auto 20px auto;
       max-width: 1229px;
   }
 
@@ -5150,7 +6933,7 @@
       font-weight: var(--polaris-h2-font-weight);
       color: var(--deep-blue);
       font-size: var(--polaris-h2-font-size);
-      margin: 32px 106px 20px 106px;
+      margin: 32px auto 20px auto;
       max-width: 1229px;
   }
 
@@ -5160,7 +6943,7 @@
       color: var(--dark-grey);
       font-size: var(--polaris-medium-text-font-size);
       line-height: var(--polaris-medium-text-line-height);
-      margin: 0 106px 20px 106px;
+      margin: 0 auto 20px auto;
       max-width: 1229px;
   }
 
@@ -5180,7 +6963,7 @@
       color: var(--dark-grey);
       font-size: var(--polaris-medium-text-font-size);
       line-height: var(--polaris-medium-text-line-height);
-      margin: 0 106px 20px 106px;
+      margin: 0 auto 20px auto;
       max-width: 1229px;
       padding-left: 20px;
   }
@@ -5220,4 +7003,978 @@
   color: white !important;
   font-weight: bold !important;
   font-size: 12px !important;
+}
+
+/* ============================================================
+   HOMEPAGE RESPONSIVE - TABLET & MOBILE
+   Breakpoints: Tablet ≤1199px, Mobile ≤767px
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. HERO BLOCK - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .homepage .hero,
+  .polaris-hero-section .hero {
+    height: auto;
+    min-height: 600px;
+  }
+
+  .homepage .overlap,
+  .polaris-hero-section .overlap {
+    height: auto;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px 40px 60px;
+  }
+
+  .homepage .hero .overlap .frame,
+  .polaris-hero-section .frame {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 500px;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .homepage .hero .overlap .frame .text-wrapper,
+  .polaris-hero-section .text-wrapper {
+    text-align: center;
+  }
+
+  .homepage .hero .overlap .frame .polaris-launchpad-AI,
+  .polaris-hero-section .polaris-launchpad-AI {
+    text-align: center;
+  }
+
+  .homepage .hero-copy,
+  .polaris-hero-section .hero-copy {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 30px auto 0;
+    z-index: 5;
+  }
+
+  .homepage .ellipse,
+  .polaris-hero-section .ellipse {
+    display: none;
+  }
+
+  .homepage .rocket-smoke,
+  .polaris-hero-section .rocket-smoke {
+    display: none;
+  }
+
+  .homepage .logo-icon-white,
+  .polaris-hero-section .logo-icon-white {
+    display: none;
+  }
+
+  .homepage .img,
+  .polaris-hero-section .img,
+  .homepage .group-3,
+  .polaris-hero-section .group-3 {
+    display: none;
+  }
+}
+
+/* ----------------------------------------------------------
+   1. HERO BLOCK - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .hero,
+  .polaris-hero-section .hero {
+    min-height: 500px;
+  }
+
+  .homepage .overlap,
+  .polaris-hero-section .overlap {
+    padding: 100px 20px 40px;
+    min-height: 500px;
+  }
+
+  .homepage .hero .overlap .frame,
+  .polaris-hero-section .frame {
+    max-width: 100%;
+    gap: 20px;
+  }
+
+  .homepage .hero .overlap .frame .text-wrapper,
+  .polaris-hero-section .text-wrapper {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .homepage .hero .overlap .frame .polaris-launchpad-AI,
+  .polaris-hero-section .polaris-launchpad-AI {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .homepage .hero-copy,
+  .polaris-hero-section .hero-copy {
+    max-width: 90%;
+  }
+
+  .homepage .hero .overlap .frame .p,
+  .polaris-hero-section .p {
+    font-size: 11px;
+  }
+}
+
+/* ----------------------------------------------------------
+   2. MARKETING NOT EASY BLOCK - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .polaris-marketing-not-easy-section .marketing-not-easy .frame-4 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 600px;
+  }
+
+  .polaris-marketing-not-easy-section .marketing-not-easy .frame-3 {
+    gap: 35px;
+  }
+}
+
+/* ----------------------------------------------------------
+   2. MARKETING NOT EASY BLOCK - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .polaris-marketing-not-easy-section .marketing-not-easy {
+    padding: 40px 20px;
+  }
+
+  .polaris-marketing-not-easy-section .marketing-not-easy .marketing-even-with {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+  }
+
+  .polaris-marketing-not-easy-section .marketing-not-easy .frame-4 {
+    gap: 30px;
+  }
+
+  .homepage .text-wrapper-3 {
+    font-size: var(--polaris-h3-mobile-font-size);
+    line-height: var(--polaris-h3-mobile-line-height);
+  }
+
+  .homepage .text-wrapper-4 {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* ----------------------------------------------------------
+   3. HOW IT WORKS BLOCK - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .homepage .how-it-works {
+    height: auto;
+    min-height: auto;
+    padding-bottom: 0;
+  }
+
+  .homepage .overlap-2 {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 30px 30px;
+  }
+
+  /* Hide all decorative/background elements */
+  .homepage .group-6,
+  .homepage .ellipse-2,
+  .homepage .rectangle-2,
+  .homepage .group-5,
+  .homepage .ellipse-3,
+  .homepage .ellipse-4,
+  .homepage .ellipse-5,
+  .homepage .logo-icon-white-2,
+  .homepage .line {
+    display: none;
+  }
+
+  .homepage .image-2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .homepage .text-wrapper-5 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 25px;
+    order: 0;
+  }
+
+  /* Disable animation - show all 3 steps at once */
+  .polaris-how-it-works-section .step-content,
+  .polaris-how-it-works-section .step-image {
+    opacity: 1 !important;
+    transform: none !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transition: none !important;
+  }
+
+  /* Hide astronaut/fuel-tank image-only steps */
+  .polaris-how-it-works-section .step-content.step-2,
+  .polaris-how-it-works-section .step-content.step-3 {
+    display: none !important;
+  }
+
+  /* Hide empty step placeholders */
+  .animated-step-images .step-1-img,
+  .animated-step-images .step-3-img,
+  .animated-right-images .step-1-img,
+  .animated-right-images .step-2-img {
+    display: none !important;
+  }
+
+  /* Show only the text content steps */
+  .animated-step-images .step-2-img,
+  .animated-right-images .step-3-img {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Step 1 container - comes first visually despite being last in HTML */
+  .homepage .group-7 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    min-height: auto;
+    margin-bottom: 25px;
+    order: 1;
+  }
+
+  .polaris-how-it-works-section .animated-step-content {
+    min-height: auto !important;
+  }
+
+  /* Step 1: flex column with number on top */
+  .polaris-how-it-works-section .step-content.step-1 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Number circle comes first in every step */
+  .polaris-how-it-works-section .step-content .overlap-group-wrapper,
+  .step-image .overlap-group-wrapper {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    order: -1;
+    margin: 0 auto 10px !important;
+  }
+
+  .homepage .text-wrapper-6 {
+    position: relative;
+    top: auto;
+    left: auto;
+    white-space: normal;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .homepage .text-wrapper-7 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  /* Step containers - ordered: Step 1 (group-7)=1, Step 2 (animated-step-images)=2, Step 3 (animated-right-images)=3 */
+  .animated-step-images {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    height: auto !important;
+    margin: 0 auto 25px !important;
+    order: 2;
+  }
+
+  .animated-right-images {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    order: 3;
+  }
+
+  .step-image {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 400px !important;
+  }
+
+  .astronaut-image,
+  .fuel-tank-image {
+    display: none !important;
+  }
+
+  /* Hide decorative line separators inside steps on tablet */
+  .polaris-how-it-works-section .step-content .line,
+  .animated-step-images .line,
+  .animated-right-images .line {
+    display: none !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   3. HOW IT WORKS BLOCK - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .overlap-2 {
+    padding: 30px 20px 25px;
+  }
+
+  .homepage .text-wrapper-5 {
+    font-size: var(--polaris-h1-mobile-font-size);
+    line-height: var(--polaris-h1-mobile-line-height);
+    margin-bottom: 20px;
+  }
+
+  .homepage .text-wrapper-6 {
+    font-size: var(--polaris-h3-mobile-font-size);
+    line-height: var(--polaris-h3-mobile-line-height);
+  }
+
+  .homepage .text-wrapper-7 {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ----------------------------------------------------------
+   4. CORE BENEFITS BLOCK - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .homepage .core-benefits {
+    height: auto;
+    padding: 60px 0;
+  }
+
+  .homepage .group-8 {
+    position: relative;
+    height: auto;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 40px;
+  }
+
+  /* Make frame-6/frame-8 invisible to layout so their children become flex items of group-8 */
+  .homepage .frame-6,
+  .homepage .frame-8 {
+    display: contents;
+  }
+
+  .homepage .frame-7 {
+    width: 100%;
+  }
+
+  .homepage .div-2 {
+    width: 100%;
+  }
+
+  /* Interleave icons with their benefit text using order */
+  .homepage .market-knowledge-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 1;
+    margin-bottom: 0;
+  }
+  .homepage .frame-6 > .frame-7:first-child {
+    order: 2;
+  }
+  .homepage .crawler-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 3;
+    margin-bottom: 0;
+  }
+  .homepage .frame-6 > .frame-7:last-child {
+    order: 4;
+  }
+  .homepage .voice-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 5;
+    margin-bottom: 0;
+  }
+  .homepage .frame-8 > .frame-7:first-child {
+    order: 6;
+  }
+  .homepage .logo-icon-white-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    order: 7;
+    margin-bottom: 0;
+  }
+  .homepage .frame-8 > .frame-7:last-child {
+    order: 8;
+  }
+}
+
+/* ----------------------------------------------------------
+   4. CORE BENEFITS BLOCK - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .core-benefits {
+    padding: 40px 0;
+  }
+
+  .homepage .group-8 {
+    padding: 0 20px;
+    gap: 25px;
+  }
+
+  .homepage .frame-7 {
+    width: 100%;
+  }
+
+  .homepage .div-2 {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .homepage .span {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .homepage .text-wrapper-9 {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .homepage .market-knowledge-wrapper,
+  .homepage .voice-wrapper,
+  .homepage .crawler-wrapper,
+  .homepage .logo-icon-white-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .homepage .img-2 {
+    width: 46px;
+    height: 46px;
+    top: 12px;
+    left: 12px;
+  }
+
+  .homepage .logo-icon-white-3 {
+    width: 34px;
+    height: 34px;
+    top: 18px;
+    left: 18px;
+  }
+}
+
+/* ----------------------------------------------------------
+   5. FUEL BLOCK - Tablet adjustments
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .homepage .group-9 {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .homepage .mask-group {
+    flex: none;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .homepage .div-3 {
+    font-size: var(--polaris-h2-tablet-font-size);
+    line-height: var(--polaris-h2-tablet-line-height);
+  }
+
+  .homepage .text-wrapper-11,
+  .homepage .text-wrapper-12 {
+    font-size: var(--polaris-h2-tablet-font-size);
+    line-height: var(--polaris-h2-tablet-line-height);
+  }
+}
+
+/* ----------------------------------------------------------
+   5. FUEL BLOCK - Mobile adjustments
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .div-3 {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .homepage .text-wrapper-11,
+  .homepage .text-wrapper-12 {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .homepage .the-more {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ----------------------------------------------------------
+   6. FOUNDER BLOCK - Tablet adjustments
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .homepage .founder {
+    height: auto;
+  }
+
+  .homepage .overlap-3 {
+    height: auto;
+    align-items: center;
+    padding-bottom: 60px;
+  }
+
+  .homepage .element {
+    margin: 0 auto;
+    height: auto;
+    max-height: 450px;
+    object-position: center top;
+    border-radius: 12px;
+  }
+
+  .homepage .group-10 {
+    padding: 20px 0;
+    align-items: center;
+  }
+
+  .homepage .vector-4,
+  .homepage .vector-5,
+  .homepage .vector-6,
+  .homepage .vector-7 {
+    display: none;
+  }
+}
+
+/* ----------------------------------------------------------
+   6. FOUNDER BLOCK - Mobile adjustments
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .overlap-3 {
+    padding: 30px 20px 40px;
+    gap: 20px;
+  }
+
+  .homepage .element {
+    max-width: 280px;
+    max-height: 350px;
+    border-radius: 12px;
+  }
+
+  .homepage .group-10 {
+    padding: 10px 0;
+  }
+
+  .homepage .as-someone-with {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ----------------------------------------------------------
+   7. CTA BLOCK - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .homepage .CTA {
+    height: auto;
+    min-height: 350px;
+  }
+
+  .homepage .overlap-4 {
+    height: auto;
+    min-height: 350px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+  }
+
+  .homepage .group-11 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .homepage .text-wrapper-15 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    font-size: var(--polaris-h2-tablet-font-size);
+    line-height: var(--polaris-h2-tablet-line-height);
+  }
+
+  .homepage .stop-getting-generic {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+  }
+
+  .homepage .group-12 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .homepage .text-wrapper-17 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 10px;
+  }
+}
+
+/* ----------------------------------------------------------
+   7. CTA BLOCK - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .CTA {
+    min-height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .homepage .overlap-4 {
+    padding: 40px 20px;
+    min-height: auto;
+  }
+
+  .homepage .text-wrapper-15 {
+    font-size: var(--polaris-h2-mobile-font-size);
+    line-height: var(--polaris-h2-mobile-line-height);
+  }
+
+  .homepage .stop-getting-generic {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Eliminate any gap between CTA and Footer on mobile */
+  .polaris-cta-section,
+  .polaris-footer-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .homepage .footer {
+    margin-top: -2px;
+  }
+}
+
+/* Eliminate gaps between all homepage block wrappers at all sizes */
+.polaris-cta-section,
+.polaris-footer-section,
+[class*="wp-block-polaris-cta"],
+[class*="wp-block-polaris-footer"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* ----------------------------------------------------------
+   8. FOOTER BLOCK - Tablet
+   ---------------------------------------------------------- */
+@media (max-width: 1199px) {
+  .polaris-cta-section {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .polaris-footer-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .homepage .footer {
+    height: auto;
+    margin-top: -1px;
+  }
+
+  .homepage .overlap-5 {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px 40px;
+  }
+
+  .homepage .polaris-logo-2 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 220px;
+    height: auto;
+    margin-bottom: 40px;
+    order: 1;
+  }
+
+  .homepage .group-16 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 40px;
+    order: 2;
+  }
+
+  .homepage .group-17,
+  .homepage .group-19,
+  .homepage .group-21 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .homepage .text-wrapper-22 {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 15px;
+  }
+
+  .homepage .group-18,
+  .homepage .group-20,
+  .homepage .pricing-customer-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .homepage .text-wrapper-23 {
+    position: relative;
+    top: auto;
+    left: auto;
+  }
+
+  .homepage .fitness-life-coaches,
+  .homepage .produce-great-ads {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 10px;
+  }
+
+  .homepage .socmed {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 30px;
+    order: 3;
+  }
+
+  .homepage .overlap-6 {
+    position: relative;
+    top: auto;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    order: 4;
+  }
+
+  .homepage .rocket-smoke-2 {
+    display: none;
+  }
+
+  .homepage .group-13,
+  .homepage .group-14 {
+    display: none;
+  }
+
+  .homepage .logo-icon-white-4 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 15px;
+  }
+
+  .homepage .element-www-polaris {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 10px;
+  }
+
+  .homepage .group-15 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: auto;
+  }
+}
+
+/* ----------------------------------------------------------
+   8. FOOTER BLOCK - Mobile
+   ---------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .overlap-5 {
+    padding: 40px 20px 30px;
+  }
+
+  .homepage .polaris-logo-2 {
+    width: 180px;
+    margin-bottom: 30px;
+  }
+
+  .homepage .group-16 {
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .homepage .group-17,
+  .homepage .group-19,
+  .homepage .group-21 {
+    min-width: 100%;
+  }
+
+  .homepage .text-wrapper-22 {
+    text-align: center;
+    font-size: var(--polaris-h4-mobile-font-size);
+    line-height: var(--polaris-h4-mobile-line-height);
+  }
+
+  .homepage .group-18 {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .homepage .group-20 {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .homepage .text-wrapper-23,
+  .homepage .fitness-life-coaches,
+  .homepage .produce-great-ads {
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .homepage .element-www-polaris {
+    font-size: 12px;
+  }
+
+  .homepage .overlap-group-4 {
+    width: auto;
+  }
+
+  .homepage .frame-9,
+  .homepage .frame-10 {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: inline-flex;
+  }
+
+  .homepage .text-wrapper-21 {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 0 5px;
+  }
+
+  .homepage .overlap-group-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
 }

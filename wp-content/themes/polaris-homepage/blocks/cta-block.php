@@ -36,8 +36,7 @@
               ),
               'ctaSubtext' => array(
                   'type' => 'string',
-                  'default' => 'No payment details required. Set up in
-  minutes.'
+                  'default' => 'Set up in minutes to start scaling your business'
               ),
               'ctaUrl' => array(
                   'type' => 'string',
@@ -66,8 +65,7 @@
       $ctaText = !empty($attributes['ctaText']) ?
   sanitize_text_field($attributes['ctaText']) : 'Start 14-Day Free Trial';
       $ctaSubtext = !empty($attributes['ctaSubtext']) ?
-  sanitize_text_field($attributes['ctaSubtext']) : 'No payment details
-  required. Set up in minutes.';
+  sanitize_text_field($attributes['ctaSubtext']) : 'Set up in minutes to start scaling your business';
       $ctaUrl = !empty($attributes['ctaUrl']) ?
   sanitize_text_field($attributes['ctaUrl']) : '/signup';
 

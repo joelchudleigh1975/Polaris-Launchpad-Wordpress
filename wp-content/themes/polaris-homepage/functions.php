@@ -19,14 +19,14 @@ if (!defined('ABSPATH')) {
  * Loads all theme stylesheets in the correct order
  */
 function polaris_enqueue_styles() {
-    $theme_version = wp_get_theme()->get('Version');
+    $theme_dir = get_template_directory();
 
     // Global styles
     wp_enqueue_style(
         'polaris-globals',
         get_template_directory_uri() . '/globals.css',
         array(),
-        $theme_version
+        filemtime($theme_dir . '/globals.css')
     );
 
     // Styleguide
@@ -34,7 +34,7 @@ function polaris_enqueue_styles() {
         'polaris-styleguide',
         get_template_directory_uri() . '/styleguide.css',
         array('polaris-globals'),
-        $theme_version
+        filemtime($theme_dir . '/styleguide.css')
     );
 
     // Main theme styles
@@ -42,7 +42,7 @@ function polaris_enqueue_styles() {
         'polaris-theme-style',
         get_stylesheet_uri(),
         array('polaris-globals', 'polaris-styleguide'),
-        $theme_version
+        filemtime($theme_dir . '/style.css')
     );
 }
 add_action('wp_enqueue_scripts', 'polaris_enqueue_styles');
@@ -220,24 +220,27 @@ add_action('init', 'polaris_debug_blocks');
   document.querySelector('.wp-block-polaris-pricing-plans .group-17');
           const pricingPlansAnnual =
   document.querySelector('.wp-block-polaris-pricing-plans .group-18');
+          const pricingPlansGroup =
+  document.querySelector('.wp-block-polaris-pricing-plans .pricing-page .group');
 
           if (pricingPlansToggle && pricingPlansMonthly &&
-  pricingPlansAnnual) {
+  pricingPlansAnnual && pricingPlansGroup) {
               // Click on pricing plans toggle capsule itself
               pricingPlansToggle.addEventListener('click', function() {
-
-  pricingPlansToggle.classList.toggle('pricing-plans-annual');
+                  pricingPlansToggle.classList.toggle('pricing-plans-annual');
+                  pricingPlansGroup.classList.toggle('pricing-plans-annual');
               });
 
               // Click on Monthly Pro Plan text
               pricingPlansMonthly.addEventListener('click', function() {
-
-  pricingPlansToggle.classList.remove('pricing-plans-annual');
+                  pricingPlansToggle.classList.remove('pricing-plans-annual');
+                  pricingPlansGroup.classList.remove('pricing-plans-annual');
               });
 
-              // Click on Annual Pro Plan text  
+              // Click on Annual Pro Plan text
               pricingPlansAnnual.addEventListener('click', function() {
                   pricingPlansToggle.classList.add('pricing-plans-annual');
+                  pricingPlansGroup.classList.add('pricing-plans-annual');
               });
           }
       });

@@ -40,10 +40,9 @@
    */
   function polaris_header_block_render($attributes) {
       $logo_url = get_template_directory_uri() . '/img/polaris-logo-1-1.png';
-      $custom_class = isset($attributes['className']) ?
-  $attributes['className'] : '';
-      $is_standalone = isset($attributes['isStandalone']) ?
-  $attributes['isStandalone'] : true;
+      $logo_square_url = get_template_directory_uri() . '/img/polaris-logo-square-white.png';
+      $custom_class = isset($attributes['className']) ? $attributes['className'] : '';
+      $is_standalone = isset($attributes['isStandalone']) ? $attributes['isStandalone'] : true;
 
       // Navigation items
       $nav_items = array(
@@ -59,33 +58,37 @@
 
       // If standalone, wrap with homepage class and hero-like background
       if ($is_standalone) : ?>
-          <div class="homepage polaris-header-standalone <?php echo
-  esc_attr($custom_class); ?>">
+          <div class="homepage polaris-header-standalone <?php echo esc_attr($custom_class); ?>">
               <div class="header-background-wrapper">
       <?php endif; ?>
 
       <header class="header">
-          <img class="polaris-logo"
-               src="<?php echo esc_url($logo_url); ?>"
-               alt="Polaris Launchpad" />
+          <a href="<?php echo esc_url(home_url('/')); ?>" class="header-logo-link">
+              <img class="polaris-logo polaris-logo-wide"
+                   src="<?php echo esc_url($logo_url); ?>"
+                   alt="Polaris Launchpad" />
+              <img class="polaris-logo polaris-logo-square"
+                   src="<?php echo esc_url($logo_square_url); ?>"
+                   alt="Polaris Launchpad" />
+          </a>
 
           <div class="group-2">
               <div class="frame-2">
                   <?php foreach ($nav_items as $label => $path) : ?>
                       <div class="div-wrapper">
                           <div class="text-wrapper-2">
-                              <a href="<?php echo esc_url(home_url($path));
-   ?>">
+                              <a href="<?php echo esc_url(home_url($path)); ?>">
                                   <?php echo esc_html($label); ?>
                               </a>
                           </div>
                       </div>
                   <?php endforeach; ?>
               </div>
+          </div>
 
+          <div class="header-cta-buttons">
               <div class="small-button">
-                  <a href="https://app.polaris-launchpad.com/login"
-  class="button-2">
+                  <a href="https://app.polaris-launchpad.com/login" class="button-2">
                       Login
                   </a>
               </div>
@@ -96,6 +99,12 @@
                   </button>
               </div>
           </div>
+
+          <button class="burger-menu" aria-label="Toggle navigation" aria-expanded="false">
+              <span class="burger-bar"></span>
+              <span class="burger-bar"></span>
+              <span class="burger-bar"></span>
+          </button>
       </header>
 
       <?php if ($is_standalone) : ?>
@@ -104,6 +113,31 @@
       <?php endif; ?>
 
       <script>
+      // Burger menu toggle
+      document.addEventListener('DOMContentLoaded', function() {
+          var burger = document.querySelector('.burger-menu');
+          var nav = document.querySelector('.group-2');
+          var headerEl = document.querySelector('.homepage .header, .polaris-header-standalone .header');
+          if (burger && nav) {
+              burger.addEventListener('click', function() {
+                  var expanded = burger.getAttribute('aria-expanded') === 'true';
+                  burger.setAttribute('aria-expanded', !expanded);
+                  burger.classList.toggle('active');
+                  nav.classList.toggle('nav-open');
+                  if (headerEl) {
+                      headerEl.classList.toggle('nav-is-open');
+                      // Toggle overflow on parent containers so fixed overlay isn't clipped
+                      var hero = document.querySelector('.homepage .hero');
+                      var standalone = document.querySelector('.polaris-header-standalone');
+                      var bgWrapper = document.querySelector('.header-background-wrapper');
+                      if (hero) hero.classList.toggle('nav-parent-open');
+                      if (standalone) standalone.classList.toggle('nav-parent-open');
+                      if (bgWrapper) bgWrapper.classList.toggle('nav-parent-open');
+                  }
+              });
+          }
+      });
+
       async function startTrial() {
           try {
               // Show loading state
@@ -111,7 +145,7 @@
               const originalText = button.textContent;
               button.textContent = 'Starting Trial...';
               button.disabled = true;
-              
+
               // Get user email (you may want to collect this with a modal)
               const email = prompt('Please enter your email address to start your free trial:');
               if (!email || !email.includes('@')) {
@@ -120,7 +154,7 @@
                   button.disabled = false;
                   return;
               }
-              
+
               // Create checkout session
               const response = await fetch('https://app.polaris-launchpad.com/stripe/create-checkout-session', {
                   method: 'POST',
@@ -132,20 +166,20 @@
                       email: email
                   })
               });
-              
+
               const data = await response.json();
-              
+
               if (data.status === 'success' && data.checkout_url) {
                   // Redirect to Stripe Checkout
                   window.location.href = data.checkout_url;
               } else {
                   throw new Error(data.message || 'Failed to create checkout session');
               }
-              
+
           } catch (error) {
               console.error('Error starting trial:', error);
               alert('Sorry, there was an error starting your trial. Please try again or contact support.');
-              
+
               // Restore button state
               const button = document.getElementById('start-trial-btn');
               button.textContent = originalText;
