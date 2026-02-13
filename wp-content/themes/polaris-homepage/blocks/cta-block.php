@@ -40,7 +40,7 @@
               ),
               'ctaUrl' => array(
                   'type' => 'string',
-                  'default' => '/signup'
+                  'default' => 'https://app.polaris-launchpad.com/register'
               )
           )
       ));
@@ -67,7 +67,7 @@
       $ctaSubtext = !empty($attributes['ctaSubtext']) ?
   sanitize_text_field($attributes['ctaSubtext']) : 'Set up in minutes to start scaling your business';
       $ctaUrl = !empty($attributes['ctaUrl']) ?
-  sanitize_text_field($attributes['ctaUrl']) : '/signup';
+  sanitize_text_field($attributes['ctaUrl']) : 'https://app.polaris-launchpad.com/register';
 
       ob_start();
       ?>
@@ -84,7 +84,7 @@
                               <div class="overlap-group">
                                   <div class="div"></div>
                                   <a href="<?php echo
-  esc_url(home_url($ctaUrl)); ?>"
+  esc_url($ctaUrl); ?>"
                                      class="text-wrapper-16"
                                      aria-describedby="cta-description">
                                       <?php echo esc_html($ctaText); ?>

@@ -37,7 +37,7 @@ function polaris_hero_block_init() {
             ),
             'ctaUrl' => array(
                 'type' => 'string',
-                'default' => '/signup'
+                'default' => 'https://app.polaris-launchpad.com/register'
             )
         )
     ));
@@ -56,7 +56,7 @@ function polaris_hero_block_render($attributes) {
     $subtitle = !empty($attributes['subtitle']) ? sanitize_textarea_field($attributes['subtitle']) : 'Polaris Launchpad AI centralises your unique business data to create a \'Base Camp\' that fuels every AI tool for more effective, on-brand content and strategies.';
     $ctaText = !empty($attributes['ctaText']) ? sanitize_text_field($attributes['ctaText']) : 'Start 14-Day Free Trial';
     $ctaSubtext = !empty($attributes['ctaSubtext']) ? sanitize_text_field($attributes['ctaSubtext']) : 'No payment details required. Set up in minutes.';
-    $ctaUrl = !empty($attributes['ctaUrl']) ? sanitize_text_field($attributes['ctaUrl']) : '/signup';
+    $ctaUrl = !empty($attributes['ctaUrl']) ? sanitize_text_field($attributes['ctaUrl']) : 'https://app.polaris-launchpad.com/register';
 
     ob_start();
     ?>
@@ -80,7 +80,7 @@ function polaris_hero_block_render($attributes) {
                         <div class="large-button">
                             <div class="overlap-group">
                                 <div class="div"></div>
-                                <a href="<?php echo esc_url(home_url($ctaUrl)); ?>" 
+                                <a href="<?php echo esc_url($ctaUrl); ?>"
                                    class="button"
                                    aria-describedby="cta-description">
                                     <?php echo esc_html($ctaText); ?>
