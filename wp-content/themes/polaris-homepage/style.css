@@ -7978,3 +7978,18 @@ html, body {
     height: auto;
   }
 }
+
+/* Footer Company section links — match surrounding white text, no browser default blue */
+.homepage .text-wrapper-23 a.footer-link,
+.homepage .text-wrapper-23 a.footer-link:visited {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Montserrat", Helvetica;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: -0.7px;
+}
+.homepage .text-wrapper-23 a.footer-link:hover {
+    color: var(--nebula-teal);
+    text-decoration: underline;
+}

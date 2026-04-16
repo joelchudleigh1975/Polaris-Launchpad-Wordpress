@@ -48,6 +48,30 @@ function polaris_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'polaris_enqueue_styles');
 
 /**
+ * Fix company name on legal pages
+ *
+ * Replaces bare "Polaris Launchpad" (not already followed by " Ltd") with
+ * "Polaris Launchpad Ltd" on the Privacy Policy and Terms pages, so the
+ * legal name shown to visitors matches the registered company name on
+ * Companies House (Company No. 16538085).
+ *
+ * @param string $content Post content.
+ * @return string Modified content.
+ */
+function polaris_fix_legal_company_name( $content ) {
+    $legal_slugs = array( 'privacy-policy', 'terms', 'terms-of-service', 'terms-and-conditions' );
+    $post        = get_post();
+
+    if ( ! $post || ! in_array( $post->post_name, $legal_slugs, true ) ) {
+        return $content;
+    }
+
+    // Replace "Polaris Launchpad" not already followed by " Ltd"
+    return preg_replace( '/Polaris Launchpad(?! Ltd)/', 'Polaris Launchpad Ltd', $content );
+}
+add_filter( 'the_content', 'polaris_fix_legal_company_name' );
+
+/**
  * Enqueue block editor assets
  *
  * Loads JavaScript for block editor functionality

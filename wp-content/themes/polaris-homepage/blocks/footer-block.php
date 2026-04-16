@@ -21,7 +21,7 @@
           'attributes' => array(
               'copyrightText' => array(
                   'type' => 'string',
-                  'default' => '© 2025 www.polaris-launchpad.com'
+                  'default' => '© 2026 Polaris Launchpad Ltd'
               )
           )
       ));
@@ -36,8 +36,7 @@
    */
   function polaris_footer_block_render($attributes) {
       $copyrightText = !empty($attributes['copyrightText']) ?
-  sanitize_text_field($attributes['copyrightText']) : '© 2025
-  www.polaris-launchpad.com';
+  sanitize_text_field($attributes['copyrightText']) : '© 2026 Polaris Launchpad Ltd';
 
       ob_start();
       ?>
@@ -66,10 +65,9 @@
                            alt="Polaris logo"
                            loading="lazy" />
                       <p class="element-www-polaris">
-                          <span class="text-wrapper-18">© 2025</span>
-                          <span class="text-wrapper-19">&nbsp;</span>
-                          <span
-  class="text-wrapper-18">www.polaris-launchpad.com</span>
+                          <span class="text-wrapper-18">© 2026 Polaris Launchpad Ltd</span>
+                          <span class="text-wrapper-19">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                          <span class="text-wrapper-18">www.polaris-launchpad.com</span>
                       </p>
                       <div class="group-15">
                           <div class="overlap-group-4">
@@ -128,8 +126,10 @@
                           <div class="text-wrapper-22">Company</div>
                           <div class="pricing-customer-wrapper">
                               <p class="text-wrapper-23">
-                                  Pricing <br />Customer Stories <br
-  />About Polaris Launchpad <br />Polaris Launchpad&#39;s Team
+                                  <a href="<?php echo esc_url(home_url('/pricing')); ?>" class="footer-link">Pricing</a>
+                                  <br /><a href="<?php echo esc_url(home_url('/about')); ?>" class="footer-link">About Polaris Launchpad Ltd</a>
+                                  <br /><a href="<?php echo esc_url(home_url('/contact')); ?>" class="footer-link">Contact Us</a>
+                                  <br /><a href="<?php echo esc_url(home_url('/blog')); ?>" class="footer-link">News &amp; Updates</a>
                               </p>
                           </div>
                       </div>
