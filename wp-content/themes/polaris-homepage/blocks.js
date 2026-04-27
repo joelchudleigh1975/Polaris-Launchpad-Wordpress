@@ -97,7 +97,7 @@ console.log('WordPress blockEditor available:', typeof window.wp.blockEditor);
             },
             ctaSubtext: {
                 type: 'string',
-                default: 'No payment details required. Set up in minutes.'
+                default: '14-day free trial. Set up in minutes.'
             },
             ctaUrl: {
                 type: 'string',

@@ -33,7 +33,7 @@ function polaris_hero_block_init() {
             ),
             'ctaSubtext' => array(
                 'type' => 'string',
-                'default' => 'No payment details required. Set up in minutes.'
+                'default' => '14-day free trial. Set up in minutes.'
             ),
             'ctaUrl' => array(
                 'type' => 'string',
@@ -55,7 +55,7 @@ function polaris_hero_block_render($attributes) {
     $title = !empty($attributes['title']) ? sanitize_text_field($attributes['title']) : 'Launch AI Marketing That Truly Understands Your Business.';
     $subtitle = !empty($attributes['subtitle']) ? sanitize_textarea_field($attributes['subtitle']) : 'Polaris Launchpad AI centralises your unique business data to create a \'Base Camp\' that fuels every AI tool for more effective, on-brand content and strategies.';
     $ctaText = !empty($attributes['ctaText']) ? sanitize_text_field($attributes['ctaText']) : 'Start 14-Day Free Trial';
-    $ctaSubtext = !empty($attributes['ctaSubtext']) ? sanitize_text_field($attributes['ctaSubtext']) : 'No payment details required. Set up in minutes.';
+    $ctaSubtext = !empty($attributes['ctaSubtext']) ? sanitize_text_field($attributes['ctaSubtext']) : '14-day free trial. Set up in minutes.';
     $ctaUrl = !empty($attributes['ctaUrl']) ? sanitize_text_field($attributes['ctaUrl']) : 'https://app.polaris-launchpad.com/register';
 
     ob_start();
