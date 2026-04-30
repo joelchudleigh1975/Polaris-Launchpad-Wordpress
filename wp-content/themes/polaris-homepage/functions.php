@@ -341,3 +341,13 @@ require_once get_template_directory() .
   '/blocks/blog-post-content-block.php';
   require_once get_template_directory() .
   '/blocks/related-articles-block.php';
+
+/**
+ * Rewrite /sitemap.xml to sitemap.php in the WordPress root.
+ * This serves a dynamic sitemap that auto-includes all published
+ * posts and pages without any manual updates.
+ */
+function polaris_sitemap_rewrite() {
+    add_rewrite_rule( '^sitemap\.xml$', 'sitemap.php', 'top' );
+}
+add_action( 'init', 'polaris_sitemap_rewrite' );
