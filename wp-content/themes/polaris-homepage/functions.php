@@ -152,6 +152,9 @@ function polaris_theme_setup() {
     // Add support for custom spacing
     add_theme_support('custom-spacing');
 
+    // Let WordPress manage the <title> tag (prevents "homepage" / blank titles)
+    add_theme_support('title-tag');
+
     // Add support for post thumbnails (useful for blocks)
     add_theme_support('post-thumbnails');
 
@@ -341,6 +344,206 @@ require_once get_template_directory() .
   '/blocks/blog-post-content-block.php';
   require_once get_template_directory() .
   '/blocks/related-articles-block.php';
+
+/**
+ * Open Graph, Twitter Card, and Schema.org meta tags
+ *
+ * Outputs social sharing and structured data tags for all page types.
+ * Hooked into wp_head so it applies to every template automatically.
+ * Blog posts use their featured image and excerpt; pages and the homepage
+ * fall back to the Polaris Launchpad logo.
+ */
+function polaris_meta_tags() {
+    // Never output on admin pages
+    if ( is_admin() ) {
+        return;
+    }
+
+    $site_name    = 'Polaris Launchpad';
+    $site_url     = home_url();
+    $default_desc = 'The AI-powered marketing platform built for small businesses. Generate content, build your brand, and launch to market faster.';
+    $logo_url     = get_template_directory_uri() . '/img/polaris-logo-square.png';
+
+    // --- Resolve title, description, image, URL and type per page context ---
+
+    if ( is_front_page() || is_home() && ! is_singular() ) {
+        // Homepage
+        $og_title   = $site_name . ' - AI Marketing Tools for Small Businesses';
+        $og_desc    = $default_desc;
+        $og_image   = $logo_url;
+        $og_url     = $site_url . '/';
+        $og_type    = 'website';
+        $schema_type = 'homepage';
+
+    } elseif ( is_singular( 'post' ) ) {
+        // Blog post
+        global $post;
+        setup_postdata( $post );
+        $og_title = get_the_title();
+        $og_desc  = get_the_excerpt();
+        if ( ! $og_desc ) {
+            $og_desc = wp_trim_words( strip_tags( get_the_content() ), 30 );
+        }
+        $og_desc  = wp_strip_all_tags( $og_desc );
+
+        // Featured image or fall back to logo
+        if ( has_post_thumbnail() ) {
+            $img_data = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' );
+            $og_image = $img_data ? $img_data[0] : $logo_url;
+        } else {
+            $og_image = $logo_url;
+        }
+
+        $og_url   = get_permalink();
+        $og_type  = 'article';
+        $schema_type = 'post';
+
+    } else {
+        // All other pages (About, Features, Pricing, Blog index, etc.)
+        $og_title = get_the_title() . ' - ' . $site_name;
+        if ( is_archive() || is_home() ) {
+            $og_title = 'Blog - ' . $site_name;
+        }
+        $og_desc = '';
+        if ( is_singular() ) {
+            global $post;
+            setup_postdata( $post );
+            $og_desc = get_the_excerpt();
+            if ( ! $og_desc ) {
+                $og_desc = wp_trim_words( strip_tags( get_the_content() ), 30 );
+            }
+            $og_desc = wp_strip_all_tags( $og_desc );
+        }
+        if ( ! $og_desc ) {
+            $og_desc = $default_desc;
+        }
+
+        if ( is_singular() && has_post_thumbnail() ) {
+            $img_data = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' );
+            $og_image = $img_data ? $img_data[0] : $logo_url;
+        } else {
+            $og_image = $logo_url;
+        }
+
+        $og_url      = is_singular() ? get_permalink() : ( is_home() ? get_post_type_archive_link( 'post' ) : get_the_permalink() );
+        $og_url      = $og_url ?: home_url( $_SERVER['REQUEST_URI'] );
+        $og_type     = 'website';
+        $schema_type = 'page';
+    }
+
+    // Sanitise for output
+    $og_title = esc_attr( $og_title );
+    $og_desc  = esc_attr( wp_trim_words( $og_desc, 35 ) ); // ~160 chars
+    $og_image = esc_url( $og_image );
+    $og_url   = esc_url( $og_url );
+    $og_type  = esc_attr( $og_type );
+
+    ?>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type"        content="<?php echo $og_type; ?>">
+    <meta property="og:url"         content="<?php echo $og_url; ?>">
+    <meta property="og:site_name"   content="<?php echo esc_attr( $site_name ); ?>">
+    <meta property="og:title"       content="<?php echo $og_title; ?>">
+    <meta property="og:description" content="<?php echo $og_desc; ?>">
+    <meta property="og:image"       content="<?php echo $og_image; ?>">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"      content="en_GB">
+
+    <?php if ( $og_type === 'article' && isset( $post ) ) : ?>
+    <meta property="article:published_time" content="<?php echo esc_attr( get_the_date( 'c', $post ) ); ?>">
+    <meta property="article:modified_time"  content="<?php echo esc_attr( get_the_modified_date( 'c', $post ) ); ?>">
+    <meta property="article:section"        content="Business &amp; Marketing">
+    <?php endif; ?>
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="<?php echo $og_title; ?>">
+    <meta name="twitter:description" content="<?php echo $og_desc; ?>">
+    <meta name="twitter:image"       content="<?php echo $og_image; ?>">
+
+    <?php
+    // --- Schema.org JSON-LD ---
+    $org_schema = array(
+        '@type'  => 'Organization',
+        'name'   => 'Polaris Launchpad',
+        'url'    => $site_url,
+        'logo'   => array(
+            '@type' => 'ImageObject',
+            'url'   => $logo_url,
+        ),
+        'sameAs' => array(
+            'https://www.linkedin.com/company/polaris-launchpad',
+        ),
+    );
+
+    if ( $schema_type === 'homepage' ) {
+        $schema = array(
+            '@context' => 'https://schema.org',
+            '@graph'   => array(
+                array(
+                    '@type'           => 'WebSite',
+                    '@id'             => $site_url . '/#website',
+                    'url'             => $site_url . '/',
+                    'name'            => $site_name,
+                    'description'     => $default_desc,
+                    'inLanguage'      => 'en-GB',
+                    'potentialAction' => array(
+                        '@type'       => 'SearchAction',
+                        'target'      => array(
+                            '@type'       => 'EntryPoint',
+                            'urlTemplate' => $site_url . '/?s={search_term_string}',
+                        ),
+                        'query-input' => 'required name=search_term_string',
+                    ),
+                ),
+                $org_schema,
+            ),
+        );
+
+    } elseif ( $schema_type === 'post' && isset( $post ) ) {
+        $author_name = get_the_author_meta( 'display_name', $post->post_author );
+        $schema = array(
+            '@context'         => 'https://schema.org',
+            '@type'            => 'BlogPosting',
+            'headline'         => get_the_title( $post ),
+            'description'      => wp_strip_all_tags( get_the_excerpt() ),
+            'url'              => get_permalink( $post ),
+            'datePublished'    => get_the_date( 'c', $post ),
+            'dateModified'     => get_the_modified_date( 'c', $post ),
+            'author'           => array(
+                '@type' => 'Organization',
+                'name'  => 'Polaris Launchpad',
+            ),
+            'publisher'        => $org_schema,
+            'mainEntityOfPage' => array(
+                '@type' => 'WebPage',
+                '@id'   => get_permalink( $post ),
+            ),
+            'image'            => array(
+                '@type' => 'ImageObject',
+                'url'   => $og_image,
+            ),
+            'inLanguage'       => 'en-GB',
+        );
+
+    } else {
+        // Generic WebPage
+        $schema = array(
+            '@context'  => 'https://schema.org',
+            '@type'     => 'WebPage',
+            'name'      => html_entity_decode( $og_title ),
+            'url'       => $og_url,
+            'description' => html_entity_decode( $og_desc ),
+            'publisher' => $org_schema,
+            'inLanguage' => 'en-GB',
+        );
+    }
+
+    echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
+}
+add_action( 'wp_head', 'polaris_meta_tags', 5 );
 
 /**
  * Rewrite /sitemap.xml to sitemap.php in the WordPress root.
