@@ -440,6 +440,9 @@ function polaris_meta_tags() {
 
     ?>
 
+    <!-- Standard meta description (used by Google for indexing quality signals) -->
+    <meta name="description" content="<?php echo $og_desc; ?>">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type"        content="<?php echo $og_type; ?>">
     <meta property="og:url"         content="<?php echo $og_url; ?>">
