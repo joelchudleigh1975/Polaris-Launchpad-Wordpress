@@ -431,9 +431,9 @@ function polaris_meta_tags() {
         $schema_type = 'page';
     }
 
-    // Sanitise for output
-    $og_title = esc_attr( $og_title );
-    $og_desc  = esc_attr( wp_trim_words( $og_desc, 35 ) ); // ~160 chars
+    // Sanitise for output - decode HTML entities first so &hellip; etc become real characters
+    $og_title = esc_attr( html_entity_decode( $og_title, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+    $og_desc  = esc_attr( html_entity_decode( wp_trim_words( $og_desc, 35 ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
     $og_image = esc_url( $og_image );
     $og_url   = esc_url( $og_url );
     $og_type  = esc_attr( $og_type );
@@ -547,6 +547,10 @@ function polaris_meta_tags() {
     echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";
 }
 add_action( 'wp_head', 'polaris_meta_tags', 5 );
+
+// Use a plain hyphen as the document title separator so the <title> tag
+// outputs "Post Title - Site Name" instead of "Post Title &#8211; Site Name".
+add_filter( 'document_title_separator', function() { return '-'; } );
 
 /**
  * Rewrite /sitemap.xml to sitemap.php in the WordPress root.
