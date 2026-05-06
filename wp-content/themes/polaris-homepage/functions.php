@@ -548,9 +548,27 @@ function polaris_meta_tags() {
 }
 add_action( 'wp_head', 'polaris_meta_tags', 5 );
 
-// Use a plain hyphen as the document title separator so the <title> tag
-// outputs "Post Title - Site Name" instead of "Post Title &#8211; Site Name".
-add_filter( 'document_title_separator', function() { return '-'; } );
+// Build the <title> tag ourselves via pre_get_document_title so it runs BEFORE
+// wptexturize, which would otherwise convert ' - ' into the &#8211; en-dash entity.
+// Returning a non-empty string here bypasses WordPress's own title assembly.
+add_filter( 'pre_get_document_title', function() {
+    $sep = ' - ';
+
+    if ( is_singular() ) {
+        $post     = get_queried_object();
+        $title    = esc_html( html_entity_decode( get_the_title( $post ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+        $sitename = esc_html( get_bloginfo( 'name', 'raw' ) );
+        return $title . $sep . $sitename;
+    }
+
+    if ( is_front_page() ) {
+        $sitename = esc_html( get_bloginfo( 'name', 'raw' ) );
+        $tagline  = esc_html( get_bloginfo( 'description', 'raw' ) );
+        return $tagline ? $sitename . $sep . $tagline : $sitename;
+    }
+
+    return ''; // Let WordPress handle archives, search, 404 etc.
+}, 10 );
 
 /**
  * Rewrite /sitemap.xml to sitemap.php in the WordPress root.
