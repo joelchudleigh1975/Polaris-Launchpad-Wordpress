@@ -346,6 +346,59 @@ require_once get_template_directory() .
   '/blocks/related-articles-block.php';
 
 /**
+ * Trim a meta description to approximately 155 characters without cutting
+ * mid-sentence. Looks for a sentence boundary (. ! ?) within 30 chars either
+ * side of the target. If one exists it uses that end point; otherwise it falls
+ * back to the nearest word boundary and appends an ellipsis.
+ *
+ * @param string $text   Plain text (no HTML).
+ * @param int    $target Ideal character count (default 155).
+ * @return string
+ */
+function polaris_trim_to_sentence( $text, $target = 155 ) {
+    $text = trim( $text );
+    if ( mb_strlen( $text ) <= $target ) {
+        return $text;
+    }
+
+    // Search window: target ± 30 chars
+    $window_end   = min( mb_strlen( $text ), $target + 30 );
+    $window_start = max( 0, $target - 30 );
+    $search_chunk = mb_substr( $text, 0, $window_end );
+
+    // Find sentence endings (. ! ?) followed by whitespace or end of string
+    preg_match_all( '/[.!?](?=\s|$)/', $search_chunk, $matches, PREG_OFFSET_CAPTURE );
+
+    if ( ! empty( $matches[0] ) ) {
+        $best_pos  = null;
+        $best_diff = PHP_INT_MAX;
+        foreach ( $matches[0] as $match ) {
+            $pos = $match[1] + 1; // position right after the punctuation mark
+            if ( $pos < $window_start ) {
+                continue; // too far before target — skip
+            }
+            $diff = abs( $pos - $target );
+            if ( $diff < $best_diff ) {
+                $best_diff = $diff;
+                $best_pos  = $pos;
+            }
+        }
+        if ( null !== $best_pos ) {
+            return trim( mb_substr( $text, 0, $best_pos ) );
+        }
+    }
+
+    // No sentence boundary found — trim to last word before target
+    $truncated  = mb_substr( $text, 0, $target );
+    $last_space = mb_strrpos( $truncated, ' ' );
+    if ( false !== $last_space ) {
+        return mb_substr( $truncated, 0, $last_space ) . '…';
+    }
+
+    return $truncated . '…';
+}
+
+/**
  * Open Graph, Twitter Card, and Schema.org meta tags
  *
  * Outputs social sharing and structured data tags for all page types.
@@ -433,7 +486,7 @@ function polaris_meta_tags() {
 
     // Sanitise for output - decode HTML entities first so &hellip; etc become real characters
     $og_title = esc_attr( html_entity_decode( $og_title, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
-    $og_desc  = esc_attr( html_entity_decode( wp_trim_words( $og_desc, 35 ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+    $og_desc  = esc_attr( polaris_trim_to_sentence( html_entity_decode( $og_desc, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
     $og_image = esc_url( $og_image );
     $og_url   = esc_url( $og_url );
     $og_type  = esc_attr( $og_type );
