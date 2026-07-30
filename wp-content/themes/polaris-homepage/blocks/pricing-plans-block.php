@@ -52,7 +52,7 @@
                                       <div
   class="text-wrapper">Monthly</div>
                                       <div
-  class="text-wrapper-2">£99.99/month</div>
+  class="text-wrapper-2">£99/month +VAT</div>
                                   </div>
                               </div>
                               <div class="features-list">
@@ -118,7 +118,7 @@
                                       <div
   class="text-wrapper">Annually</div>
                                       <div
-  class="text-wrapper-2">£999/year</div>
+  class="text-wrapper-2">£999/year +VAT</div>
                                   </div>
                               </div>
                               <div class="features-list">
@@ -182,14 +182,14 @@
                                   <div class="text-wrapper-6">Monthly Pro
   Plan</div>
                                   <div
-  class="text-wrapper-7">£99.99/month</div>
+  class="text-wrapper-7">£99/month +VAT</div>
                               </div>
                           </div>
                           <div class="group-18">
                               <div class="overlap-5">
                                   <div class="text-wrapper-8">Annual Pro
   Plan</div>
-                                  <div class="text-wrapper-9">£999/year</div>
+                                  <div class="text-wrapper-9">£999/year +VAT</div>
                               </div>
                           </div>
                       </div>

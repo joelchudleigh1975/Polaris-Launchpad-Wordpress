@@ -43,7 +43,7 @@ $attributes['className'] : '';
     <div class="pricing-page-section">
         <div class="overlap-group">
             <p class="element-month-paid">
-                <span class="text-wrapper">£99.99/month<br /></span>
+                <span class="text-wrapper">£99/month +VAT<br /></span>
                 <span class="span">paid annually</span>
             </p>
             <div class="group">
@@ -63,7 +63,7 @@ possible marketing results.
                 </p>
                 <a class="large-button" href="/contact-us" style="text-decoration:none;"><div class="div">Book a Demo</div></a>
                 <p class="p">
-                    <span class="text-wrapper">£99.99/month<br /></span>
+                    <span class="text-wrapper">£99/month +VAT<br /></span>
                     <span class="span">paid annually</span>
                 </p>
             </div>
