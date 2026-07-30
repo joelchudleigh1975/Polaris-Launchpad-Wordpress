@@ -71,14 +71,12 @@
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-8-1.svg'); ?>" />
-                                      <span class="feature-text">30
-  scheduled posts</span>
+                                      <span class="feature-text">Unlimited text generation (blog, LinkedIn, email, social)</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-2.svg'); ?>" />
-                                      <span class="feature-text">3 free
-  plagiarism scans</span>
+                                      <span class="feature-text">12 X (Twitter) posts per month</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
@@ -89,14 +87,12 @@
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-3.svg'); ?>" />
-                                      <span class="feature-text">Unlimited
-  use of all AI applications</span>
+                                      <span class="feature-text">100 AI image generations per month</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-4.svg'); ?>" />
-                                      <span class="feature-text">Unlimited
-  AI image generation</span>
+                                      <span class="feature-text">20 AI video generations per month</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
@@ -141,14 +137,12 @@
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-8-2.svg'); ?>" />
-                                      <span class="feature-text">30
-  scheduled posts</span>
+                                      <span class="feature-text">Unlimited text generation (blog, LinkedIn, email, social)</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-5.svg'); ?>" />
-                                      <span class="feature-text">3 free
-  plagiarism scans</span>
+                                      <span class="feature-text">12 X (Twitter) posts per month</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
@@ -159,14 +153,12 @@
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-6.svg'); ?>" />
-                                      <span class="feature-text">Unlimited
-  use of all AI applications</span>
+                                      <span class="feature-text">100 AI image generations per month</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
   echo esc_url($img_uri . 'pricing-plans-block-vector-11.svg'); ?>" />
-                                      <span class="feature-text">Unlimited
-  AI image generation</span>
+                                      <span class="feature-text">20 AI video generations per month</span>
                                   </div>
                                   <div class="feature-item">
                                       <img class="feature-icon" src="<?php
